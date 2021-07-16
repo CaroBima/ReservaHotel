@@ -1,14 +1,16 @@
-
-
 package Logica;
 
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
 
 
-
+@Entity(name = "Huesped")
 public class Huesped extends Persona {
     //pk
-    int idHuesped;
+    //int idHuesped;
+    
+    @Basic
     String profesion;
 
     
@@ -16,14 +18,23 @@ public class Huesped extends Persona {
     public Huesped() {
     }
 
+    public Huesped(String profesion, int dni, String nombre, String apellido, Date fechaNac, String direccion) {
+        super(dni, nombre, apellido, fechaNac, direccion);
+        this.profesion = profesion;
+    }
+
+    
+    
+    /*constructor con el idHuesped aca
     public Huesped(int idHuesped, String profesion, int dni, String nombre, String apellido, Date fechaNac, String direccion) {
         super(dni, nombre, apellido, fechaNac, direccion);
         this.idHuesped = idHuesped;
         this.profesion = profesion;
-    }
+    }*/
 
     //getters y setters
-
+    
+    /*getter y setter con idHuesped 
     public int getIdHuesped() {
         return idHuesped;
     }
@@ -31,7 +42,8 @@ public class Huesped extends Persona {
     public void setIdHuesped(int idHuesped) {
         this.idHuesped = idHuesped;
     }
-
+    */
+    
     public String getProfesion() {
         return profesion;
     }

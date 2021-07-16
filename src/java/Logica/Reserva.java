@@ -1,19 +1,35 @@
 package Logica;
 
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
 public class Reserva {
     
-    //pk
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idReserva;
     
-    //basic
-    private Date fechaCheckIn;
-    private Date fechaCheckOut;
+    @Basic
     private int cantPersonas;
+    private int montoTotalReserva;
+    @Temporal(TemporalType.DATE)
+    private Date fechaCheckIn;
+    @Temporal(TemporalType.DATE)
+    private Date fechaCheckOut;
     
-    //FK
+    
+    @OneToOne
     private int idHabitación;
+    
+    @OneToOne
     private int idEmpleado;
     
     
@@ -22,14 +38,17 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(int idReserva, Date fechaCheckIn, Date fechaCheckOut, int cantPersonas, int idHabitación, int idEmpleado) {
+    public Reserva(int idReserva, Date fechaCheckIn, Date fechaCheckOut, int cantPersonas, int montoTotalReserva, int idHabitación, int idEmpleado) {
         this.idReserva = idReserva;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
         this.cantPersonas = cantPersonas;
+        this.montoTotalReserva = montoTotalReserva;
         this.idHabitación = idHabitación;
         this.idEmpleado = idEmpleado;
     }
+
+
     
      
     //getters y setters
@@ -66,6 +85,14 @@ public class Reserva {
         this.cantPersonas = cantPersonas;
     }
 
+    public int getMontoTotalReserva() {
+        return montoTotalReserva;
+    }
+
+    public void setMontoTotalReserva(int montoTotalReserva) {
+        this.montoTotalReserva = montoTotalReserva;
+    }
+
     public int getIdHabitación() {
         return idHabitación;
     }
@@ -81,5 +108,6 @@ public class Reserva {
     public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-    
+
+   
 }

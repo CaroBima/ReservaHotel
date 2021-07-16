@@ -1,11 +1,19 @@
 
 package Logica;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class TipoHabitacion {
-//    @Id
-//    @GeneratedValue (strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private int idTipoHabitacion;
     
+    @Basic
     private String NombreTipo; //single, doble, triple, multiple
     private int cantidadPersonas; //8 como máximo
 
