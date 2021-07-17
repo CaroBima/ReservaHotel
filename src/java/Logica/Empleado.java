@@ -4,11 +4,15 @@ package Logica;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+//import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity(name = "Empleado")
-public class Empleado extends Persona{
-    //pk
-    //private int idEmpleado;
+@PrimaryKeyJoinColumn( referencedColumnName = "idEmpleado")
+public class Empleado extends Persona {
+    
+//    @OneToOne
+//    private int idEmpleado;
     
     @Basic
     private String cargo;

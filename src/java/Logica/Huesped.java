@@ -3,12 +3,16 @@ package Logica;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+//import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 
-@Entity(name = "Huesped")
+@Entity(name = "huesped")
+@PrimaryKeyJoinColumn( referencedColumnName = "idHuesped")
 public class Huesped extends Persona {
-    //pk
-    //int idHuesped;
+    
+//    @OneToOne
+//    int idHuesped;
     
     @Basic
     String profesion;

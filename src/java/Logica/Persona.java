@@ -12,7 +12,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Persona {
     
     @Id

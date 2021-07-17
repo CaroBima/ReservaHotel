@@ -1,15 +1,25 @@
 package Logica;
 
-public class Habitacion {
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Habitacion  {
     
-    //pk
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private int idHabitacion;
     
-    //basic
+    @Basic
     private int piso;
     private String nombreTematica;
     private Double precioHabitacion;
     
+    @OneToOne
     private int idTipoHab; //fk de tipoHabitacion
 
     
