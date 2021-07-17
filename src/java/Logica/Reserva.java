@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Reserva {
+public class Reserva implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class TipoHabitacion  {
+public class TipoHabitacion implements Serializable  {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int idTipoHabitacion;

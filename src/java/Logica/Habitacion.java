@@ -1,5 +1,6 @@
 package Logica;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Habitacion  {
+public class Habitacion implements Serializable  {
     
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)

@@ -1,70 +1,44 @@
 
 package Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
-//import javax.persistence.OneToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity(name = "Empleado")
-@PrimaryKeyJoinColumn( referencedColumnName = "idEmpleado")
-public class Empleado extends Persona {
-    
-//    @OneToOne
-//    private int idEmpleado;
+@Entity(name = "empleado")
+@PrimaryKeyJoinColumn(referencedColumnName = "idEmpleado")
+public class Empleado extends Persona implements Serializable{
     
     @Basic
-    private String cargo;
-    private String nombreUsuario;
-    private String contrasenia; //ver esto 
+    private String usuario;
+    private String contrasenia; //ver como tratar contraseña
+
+    @OneToOne
+    private int idCargo; 
 
     //constructores
     public Empleado() {
     }
 
-    public Empleado(String cargo, String nombreUsuario, String contrasenia, int dni, String nombre, String apellido, Date fechaNac, String direccion) {
-        super(dni, nombre, apellido, fechaNac, direccion);
-        this.cargo = cargo;
-        this.nombreUsuario = nombreUsuario;
+    public Empleado(String usuario, String contrasenia, int idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+        super(idPersona, dni, nombre, apellido, direccion, fechaNac);
+        this.usuario = usuario;
         this.contrasenia = contrasenia;
+        this.idCargo = idCargo;
     }
 
-    
-   /*  constructo con pk idEmpleado
-    public Empleado(int idEmpleado, String cargo, String nombreUsuario, String contrasenia, int dni, String nombre, String apellido, Date fechaNac, String direccion) {
-        super(dni, nombre, apellido, fechaNac, direccion);
-        this.idEmpleado = idEmpleado;
-        this.cargo = cargo;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasenia = contrasenia;
-    }*/
-    
+   
     //getters y setters
 
-    /*getters y setters con pk idEmpleado
-    public int getIdEmpleado() {
-        return idEmpleado;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-*/
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getContrasenia() {
@@ -74,5 +48,14 @@ public class Empleado extends Persona {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
+
+    public int getIdCargo() {
+        return idCargo;
+    }
+
+    public void setIdCargo(int idCargo) {
+        this.idCargo = idCargo;
+    }
+ 
+
 }
