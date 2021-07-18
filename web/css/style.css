@@ -1,0 +1,124 @@
+
+
+@charset "utf-8";
+body{
+  height:100%; /*ocupa el 100% de la pag*/
+  min-height:500px;/*esto lo modifica a gusto*/
+/*
+  text-align:center;
+	font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+	color: #CCC;*/
+  font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+  color: #222222;
+	margin: 0px;
+	border: 0px;
+  /* comienzo degradado*/
+  	background-color: #222222;
+  	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
+    	background-image: -webkit-linear-gradient(top, #444444, #222222);
+    	background-image: -o-linear-gradient(top, #444444, #222222);
+    	background-image: linear-gradient(to bottom, #444444, #222222);
+    	background-image: -moz-linear-gradient(top, #444444, #222222);
+    	background-repeat: repeat-x;
+    	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+    	filter: progid:dximagetransform.microsoft.gradient(enabled=false); /*fin degradado*/
+
+}
+
+/* alineacion del título h1*/
+h1 {
+  text-align: center;
+}
+
+/* centrado de la imagen del titulo de menu */
+p.centrado {
+  float: center;
+  text-align: center;
+}
+
+
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form {
+  width: 450px;
+}
+
+*{box-sizing:border-box;}
+
+form{
+  width:450px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+  background-color:#f0b966;
+	/*background-color:#ccc;*/
+}
+
+#resultado{
+    width:450px;
+    padding:16px;
+    border-radius:10px;
+    margin:auto;
+    background-color:#f0b966;
+}
+form label{
+	width:200px;
+	font-weight:bold;
+	display:inline-block;
+}
+
+form input[type="text"],
+form input[type="email"]{
+	width:180px;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+
+form input[type="submit"]{
+	width:100%;
+	padding:8px 16px;
+        margin-top:32px;
+        display:inline-block;
+	border:1px solid #000;
+	border-radius:5px;
+	display:block;
+	color:#fff;
+	background-color:#000;
+}
+
+form input[type="submit"]:hover{
+	cursor:pointer;
+}
+
+form input[type="button"]{
+  float: right;
+  font-size: 17px;
+  /*border:1px solid #000;
+  border-radius:5px;
+  color:#000;
+  background-color:#000;
+  display:block;*/
+}
+
+textarea{
+	width:100%;
+	height:250px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	/*resize: vertical | horizontal | none | both*/
+	resize:none;
+	display:block;
+}
+
+

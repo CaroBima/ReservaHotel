@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Persistencia;
 
-/**
- *
- * @author Caro
- */
+import Logica.Habitacion;
+
 public class ControladoraPersistencia {
+    
+    
+    //metodos para la Habitación
+    public void altaHabitacion(Habitacion cuarto){
+        HabitacionJpaController controlHabitacion = new HabitacionJpaController();
+        controlHabitacion.create(cuarto);
+    }
     
 }
