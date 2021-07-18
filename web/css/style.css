@@ -45,13 +45,13 @@ p.centrado {
 }
 
 .form {
-  width: 450px;
+  width: 500px;
 }
 
 *{box-sizing:border-box;}
 
 form{
-  width:450px;
+  width:500px;
 	padding:16px;
 	border-radius:10px;
 	margin:auto;
@@ -60,7 +60,7 @@ form{
 }
 
 #resultado{
-    width:450px;
+    width:500px;
     padding:16px;
     border-radius:10px;
     margin:auto;
@@ -72,15 +72,27 @@ form label{
 	display:inline-block;
 }
 
+form select{
+  	width:250px;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;  
+   
+}
+
 form input[type="text"],
 form input[type="email"]{
-	width:180px;
+	width:250px;
 	padding:3px 10px;
 	border:1px solid #f6f6f6;
 	border-radius:3px;
 	background-color:#f6f6f6;
 	margin:8px 0;
 	display:inline-block;
+         
 }
 
 form input[type="submit"]{

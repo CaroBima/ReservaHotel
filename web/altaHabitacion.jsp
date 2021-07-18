@@ -24,7 +24,7 @@
             <p>Tipo:<input type="radio" name="TipoHabitacion" value="Single">Single
                     <input type="radio" name="TipoHabitacion" value="Doble">Doble
                     <input type="radio" name="TipoHabitacion" value="Triple">Triple
-                    <input type="radio" name="TipoHabitacion" value="Multiple">Múltiple
+                    <input type="radio" name="TipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
             </p>
             <br>
 
