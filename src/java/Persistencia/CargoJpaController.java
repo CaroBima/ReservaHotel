@@ -26,13 +26,12 @@ public class CargoJpaController implements Serializable {
     public CargoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
     private EntityManagerFactory emf = null;
 
-     public CargoJpaController() {
+    public CargoJpaController() {
         emf = Persistence.createEntityManagerFactory("HotelPU");
     }
-     
+      
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }

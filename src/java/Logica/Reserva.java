@@ -28,10 +28,10 @@ public class Reserva implements Serializable {
     
     
     @OneToOne
-    private int idHabitación;
+    private Habitacion idHabitación;
     
     @OneToOne
-    private int idEmpleado;
+    private Empleado idEmpleado;
     
     
     //constructores
@@ -39,18 +39,16 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(int idReserva, Date fechaCheckIn, Date fechaCheckOut, int cantPersonas, int montoTotalReserva, int idHabitación, int idEmpleado) {
+    public Reserva(int idReserva, int cantPersonas, int montoTotalReserva, Date fechaCheckIn, Date fechaCheckOut, Habitacion idHabitación, Empleado idEmpleado) {
         this.idReserva = idReserva;
-        this.fechaCheckIn = fechaCheckIn;
-        this.fechaCheckOut = fechaCheckOut;
         this.cantPersonas = cantPersonas;
         this.montoTotalReserva = montoTotalReserva;
+        this.fechaCheckIn = fechaCheckIn;
+        this.fechaCheckOut = fechaCheckOut;
         this.idHabitación = idHabitación;
         this.idEmpleado = idEmpleado;
     }
 
-
-    
      
     //getters y setters
 
@@ -60,22 +58,6 @@ public class Reserva implements Serializable {
 
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
-    }
-
-    public Date getFechaCheckIn() {
-        return fechaCheckIn;
-    }
-
-    public void setFechaCheckIn(Date fechaCheckIn) {
-        this.fechaCheckIn = fechaCheckIn;
-    }
-
-    public Date getFechaCheckOut() {
-        return fechaCheckOut;
-    }
-
-    public void setFechaCheckOut(Date fechaCheckOut) {
-        this.fechaCheckOut = fechaCheckOut;
     }
 
     public int getCantPersonas() {
@@ -94,21 +76,39 @@ public class Reserva implements Serializable {
         this.montoTotalReserva = montoTotalReserva;
     }
 
-    public int getIdHabitación() {
+    public Date getFechaCheckIn() {
+        return fechaCheckIn;
+    }
+
+    public void setFechaCheckIn(Date fechaCheckIn) {
+        this.fechaCheckIn = fechaCheckIn;
+    }
+
+    public Date getFechaCheckOut() {
+        return fechaCheckOut;
+    }
+
+    public void setFechaCheckOut(Date fechaCheckOut) {
+        this.fechaCheckOut = fechaCheckOut;
+    }
+
+    public Habitacion getIdHabitación() {
         return idHabitación;
     }
 
-    public void setIdHabitación(int idHabitación) {
+    public void setIdHabitación(Habitacion idHabitación) {
         this.idHabitación = idHabitación;
     }
 
-    public int getIdEmpleado() {
+    public Empleado getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
+    public void setIdEmpleado(Empleado idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
+
+   
 
    
 }

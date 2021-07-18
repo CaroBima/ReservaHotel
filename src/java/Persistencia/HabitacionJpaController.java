@@ -18,10 +18,12 @@ public class HabitacionJpaController implements Serializable {
     public HabitacionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
     private EntityManagerFactory emf = null;
 
      public HabitacionJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("HotelPU");
+        EntityManagerFactory Persitence;
+        emf = Persistence.createEntityManagerFactory("HotelPU");
     }
      
     public EntityManager getEntityManager() {

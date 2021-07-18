@@ -15,7 +15,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 
-
 public class EmpleadoJpaController implements Serializable {
 
     public EmpleadoJpaController(EntityManagerFactory emf) {
@@ -23,8 +22,8 @@ public class EmpleadoJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
-    public EmpleadoJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("HotelPU");
+     public EmpleadoJpaController() {
+        emf = Persistence.createEntityManagerFactory("HotelPU");
     }
      
     public EntityManager getEntityManager() {

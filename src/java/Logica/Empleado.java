@@ -17,18 +17,20 @@ public class Empleado extends Persona implements Serializable{
     private String contrasenia; //ver como tratar contraseña
 
     @OneToOne
-    private int idCargo; 
+    private Cargo idCargo; 
 
     //constructores
     public Empleado() {
     }
 
-    public Empleado(String usuario, String contrasenia, int idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+    public Empleado(String usuario, String contrasenia, Cargo idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
         super(idPersona, dni, nombre, apellido, direccion, fechaNac);
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.idCargo = idCargo;
     }
+
+   
 
    
     //getters y setters
@@ -49,13 +51,14 @@ public class Empleado extends Persona implements Serializable{
         this.contrasenia = contrasenia;
     }
 
-    public int getIdCargo() {
+    public Cargo getIdCargo() {
         return idCargo;
     }
 
-    public void setIdCargo(int idCargo) {
+    public void setIdCargo(Cargo idCargo) {
         this.idCargo = idCargo;
     }
- 
+
+   
 
 }

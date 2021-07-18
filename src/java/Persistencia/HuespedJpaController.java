@@ -28,8 +28,8 @@ public class HuespedJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
-    public HuespedJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("HotelPu");
+     public HuespedJpaController() {
+        emf = Persistence.createEntityManagerFactory("HotelPU");
     }
      
     public EntityManager getEntityManager() {

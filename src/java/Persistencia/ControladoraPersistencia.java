@@ -7,9 +7,11 @@ public class ControladoraPersistencia {
     
     
     //metodos para la Habitación
-    public void altaHabitacion(Habitacion cuarto){
+    public void crearHabitacion(Habitacion cuarto){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
         controlHabitacion.create(cuarto);
+        
+        
     }
     
 }

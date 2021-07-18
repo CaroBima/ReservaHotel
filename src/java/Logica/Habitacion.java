@@ -16,25 +16,27 @@ public class Habitacion implements Serializable  {
     private int idHabitacion;
     
     @Basic
-    private int piso;
     private String nombreTematica;
+    private int piso; //8 pisos como maximo
+    private int nroHabitacion; // 4 habitaciones por piso
     private Double precioHabitacion;
-    
-    @OneToOne
-    private int idTipoHab; //fk de tipoHabitacion
+    private String tipoHab; //fk de tipoHabitacion, si es single, doble
 
     
     //constructores
     public Habitacion() {
     }
 
-    public Habitacion(int idHabitacion, int piso, String nombreTematica, Double precioHabitacion, int idTipoHab) {
+    public Habitacion(int idHabitacion, String nombreTematica, int piso, int nroHabitacion, Double precioHabitacion, String tipoHab) {
         this.idHabitacion = idHabitacion;
-        this.piso = piso;
         this.nombreTematica = nombreTematica;
+        this.piso = piso;
+        this.nroHabitacion = nroHabitacion;
         this.precioHabitacion = precioHabitacion;
-        this.idTipoHab = idTipoHab;
+        this.tipoHab = tipoHab;
     }
+
+
     
     //getters y setters
 
@@ -46,6 +48,14 @@ public class Habitacion implements Serializable  {
         this.idHabitacion = idHabitacion;
     }
 
+    public String getNombreTematica() {
+        return nombreTematica;
+    }
+
+    public void setNombreTematica(String nombreTematica) {
+        this.nombreTematica = nombreTematica;
+    }
+
     public int getPiso() {
         return piso;
     }
@@ -54,12 +64,12 @@ public class Habitacion implements Serializable  {
         this.piso = piso;
     }
 
-    public String getNombreTematica() {
-        return nombreTematica;
+    public int getNroHabitacion() {
+        return nroHabitacion;
     }
 
-    public void setNombreTematica(String nombreTematica) {
-        this.nombreTematica = nombreTematica;
+    public void setNroHabitacion(int nroHabitacion) {
+        this.nroHabitacion = nroHabitacion;
     }
 
     public Double getPrecioHabitacion() {
@@ -70,12 +80,15 @@ public class Habitacion implements Serializable  {
         this.precioHabitacion = precioHabitacion;
     }
 
-    public int getIdTipoHab() {
-        return idTipoHab;
+    public String getTipoHab() {
+        return tipoHab;
     }
 
-    public void setIdTipoHab(int idTipoHab) {
-        this.idTipoHab = idTipoHab;
+    public void setTipoHab(String tipoHab) {
+        this.tipoHab = tipoHab;
     }
+
     
+
+   
 }

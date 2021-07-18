@@ -29,9 +29,9 @@ public class ReservaJpaController implements Serializable {
     private EntityManagerFactory emf = null;
 
     public ReservaJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("HotelPu");
+        emf = Persistence.createEntityManagerFactory("HotelPU");
     }
-     
+    
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
