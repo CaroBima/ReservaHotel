@@ -18,4 +18,10 @@ public class Controladora {
         System.out.println("llega a controladora");
     }
     
+    //métodos para la gestion de cargos
+    public void crearCargo(String cargoEmpleado){
+       Cargo cargo = new Cargo();
+        cargo.setNombreCargo(cargoEmpleado);
+        controlPersis.crearCargo(cargo);
+    }
 }

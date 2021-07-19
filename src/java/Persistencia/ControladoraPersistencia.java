@@ -1,6 +1,7 @@
 
 package Persistencia;
 
+import Logica.Cargo;
 import Logica.Empleado;
 import Logica.Habitacion;
 
@@ -17,5 +18,12 @@ public class ControladoraPersistencia {
     public void crearEmpleado(Empleado empleado){
         EmpleadoJpaController controlEmple = new EmpleadoJpaController();
         controlEmple.create(empleado);
+    }
+    
+    
+    //metodos para el cargo
+    public void crearCargo(Cargo cargo){
+        CargoJpaController controlCargo = new CargoJpaController();
+        controlCargo.create(cargo);
     }
 }
