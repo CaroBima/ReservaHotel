@@ -2,9 +2,7 @@ package Logica;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -12,7 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(referencedColumnName = "idEmpleado")
 public class Empleado extends Persona implements Serializable{
     
-    @OneToMany
+    @OneToOne
     private Usuario usuario;
     
 

@@ -11,7 +11,7 @@
         <title>Alta de Nuevo Empleado</title>
     </head>
     <body>
-        <form>
+        <form action="SvAltaEmpleado" method="POST">
             <h1>Alta de empleado</h1>
             <br>
             
