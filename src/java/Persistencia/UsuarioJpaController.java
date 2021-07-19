@@ -5,7 +5,7 @@
  */
 package Persistencia;
 
-import Logica.Cargo;
+import Logica.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -20,23 +21,27 @@ import javax.persistence.criteria.Root;
  *
  * @author Caro
  */
-public class CargoJpaController1 implements Serializable {
+public class UsuarioJpaController implements Serializable {
 
-    public CargoJpaController1(EntityManagerFactory emf) {
+    public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    public UsuarioJpaController() {
+        emf = Persistence.createEntityManagerFactory("HotelPU");
+    }
+    
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Cargo cargo) {
+    public void create(Usuario usuario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(cargo);
+            em.persist(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +50,19 @@ public class CargoJpaController1 implements Serializable {
         }
     }
 
-    public void edit(Cargo cargo) throws NonexistentEntityException, Exception {
+    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            cargo = em.merge(cargo);
+            usuario = em.merge(usuario);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = cargo.getIdCargo();
-                if (findCargo(id) == null) {
-                    throw new NonexistentEntityException("The cargo with id " + id + " no longer exists.");
+                int id = usuario.getIdUsuario();
+                if (findUsuario(id) == null) {
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +78,14 @@ public class CargoJpaController1 implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cargo cargo;
+            Usuario usuario;
             try {
-                cargo = em.getReference(Cargo.class, id);
-                cargo.getIdCargo();
+                usuario = em.getReference(Usuario.class, id);
+                usuario.getIdUsuario();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cargo with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(cargo);
+            em.remove(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +94,19 @@ public class CargoJpaController1 implements Serializable {
         }
     }
 
-    public List<Cargo> findCargoEntities() {
-        return findCargoEntities(true, -1, -1);
+    public List<Usuario> findUsuarioEntities() {
+        return findUsuarioEntities(true, -1, -1);
     }
 
-    public List<Cargo> findCargoEntities(int maxResults, int firstResult) {
-        return findCargoEntities(false, maxResults, firstResult);
+    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult) {
+        return findUsuarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Cargo> findCargoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Cargo.class));
+            cq.select(cq.from(Usuario.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +118,20 @@ public class CargoJpaController1 implements Serializable {
         }
     }
 
-    public Cargo findCargo(int id) {
+    public Usuario findUsuario(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Cargo.class, id);
+            return em.find(Usuario.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCargoCount() {
+    public int getUsuarioCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Cargo> rt = cq.from(Cargo.class);
+            Root<Usuario> rt = cq.from(Usuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

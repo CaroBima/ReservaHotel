@@ -1,10 +1,10 @@
-
 package Logica;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -12,9 +12,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(referencedColumnName = "idEmpleado")
 public class Empleado extends Persona implements Serializable{
     
-    @Basic
-    private String usuario;
-    private String contrasenia; //ver como tratar contraseña
+    @OneToMany
+    private Usuario usuario;
+    
 
     @OneToOne
     private Cargo idCargo; 
@@ -23,32 +23,21 @@ public class Empleado extends Persona implements Serializable{
     public Empleado() {
     }
 
-    public Empleado(String usuario, String contrasenia, Cargo idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+    public Empleado(Usuario usuario, Cargo idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
         super(idPersona, dni, nombre, apellido, direccion, fechaNac);
         this.usuario = usuario;
-        this.contrasenia = contrasenia;
         this.idCargo = idCargo;
     }
 
-   
-
-   
+    
     //getters y setters
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
     }
 
     public Cargo getIdCargo() {
@@ -58,7 +47,5 @@ public class Empleado extends Persona implements Serializable{
     public void setIdCargo(Cargo idCargo) {
         this.idCargo = idCargo;
     }
-
-   
 
 }

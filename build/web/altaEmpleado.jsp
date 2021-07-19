@@ -15,14 +15,44 @@
             <h1>Alta de empleado</h1>
             <br>
             
-            <p>Nombre de usuario:<input type="text" name="usuarioEmpleado"></p>
-            <p>Contraseña:<input type="password" name="contraseniaEmpleado"></p>
-            <p>Nombre: <input type="text" name="nombreEmpleado"></p>
-            <p>Apellido: <input type="text" name="apellidoEmpleado"></p>
-            <p>Dni: <input type="text" name="dniEmpleado"></p>
-            <p>Dirección: <input type="text" name="direccionEmpleado"></p>
-            <p>Fecha de naciemiento: <input type="date" name="fechaNacEmpleado"></p>
-            <p>Cargo: <select name ="cargoEmpleado">
+                <p>
+                   <label for = "usuarioEmpleado" >Nombre de usuario:</label> 
+                   <input type="text" name="usuarioEmpleado">
+                </p>
+            
+                <p>
+                    <label for = "contraseniaEmpleado" >Contraseña:</label> 
+                    <input type="password" name="contraseniaEmpleado">
+                </p>
+            
+            
+                <p>
+                    <label for = "nombreEmpleado" >Nombre:</label> 
+                    <input type="text" name="nombreEmpleado">
+                </p>
+            
+                <p>
+                   <label for = "apellidoEmpleado" >Apellido:</label> 
+                   <input type="text" name="apellidoEmpleado">
+                </p>
+            
+                <p>  
+                    <label for = "dniEmpleado" >Dni: </label>
+                    <input type="text" name="dniEmpleado">
+                </p>
+            
+                <p>
+                    <label for = "direccionEmpleado" >Dirección: </label>
+                    <input type="text" name="direccionEmpleado">
+                </p>
+                <p>
+                    <label for = "fechaNacEmpleado" >Fecha de nacimiento: </label>
+                    <input type="date" name="fechaNacEmpleado">
+                </p>
+                
+                <p>
+                    <label for = "cargoEmpleado" >Cargo: </label>
+                     <select name ="cargoEmpleado">
                         <option value="-" selected>-</option>
                         <option value="Recepcionista">Recepcionista</option>
                         <option value="Concerje">Concerje</option>
@@ -34,13 +64,9 @@
                         <option value="Mantenimiento">Mantenimiento</option>
                         <option value="Gerencia">Gerencia</option>
                       </select>
-            </p>
+                </p>
             <br>
-            
-            
-            
-            <input type="submit" value="Enviar"> 
-            
+            <input type="submit" name="btnGuardar" value="Guardar"> 
             
         </form>
         

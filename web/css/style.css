@@ -83,7 +83,8 @@ form select{
    
 }
 
-form input[type="text"],
+form input[type="text"], 
+form input[type="password"],
 form input[type="email"]{
 	width:250px;
 	padding:3px 10px;
@@ -94,6 +95,7 @@ form input[type="email"]{
 	display:inline-block;
          
 }
+
 
 form input[type="submit"]{
 	width:100%;
@@ -114,11 +116,7 @@ form input[type="submit"]:hover{
 form input[type="button"]{
   float: right;
   font-size: 17px;
-  /*border:1px solid #000;
-  border-radius:5px;
-  color:#000;
-  background-color:#000;
-  display:block;*/
+
 }
 
 textarea{
