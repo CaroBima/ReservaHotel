@@ -8,6 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
+        <script src="js/scripts.js"></script>
         <title>Alta de Nuevo Empleado</title>
     </head>
     <body>
@@ -45,6 +46,7 @@
                     <label for = "direccionEmpleado" >Dirección: </label>
                     <input type="text" name="direccionEmpleado">
                 </p>
+                
                 <p>
                     <label for = "fechaNacEmpleado" >Fecha de nacimiento: </label>
                     <input type="date" name="fechaNacEmpleado">
@@ -64,9 +66,14 @@
                         <option value="Mantenimiento">Mantenimiento</option>
                         <option value="Gerencia">Gerencia</option>
                       </select>
+                     <input type="button" name="btnNuevoCargo" value="+" onclick='abrirVentana("altaCargo.jsp", "_blank",550, 250)'> 
+                     
                 </p>
             <br>
-            <input type="submit" name="btnGuardar" value="Guardar"> 
+            <p>
+                <input type="submit" name="btnGuardar" value="Guardar"> 
+            </p>
+            
             
         </form>
         
