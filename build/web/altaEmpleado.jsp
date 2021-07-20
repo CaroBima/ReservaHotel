@@ -2,6 +2,10 @@
   Formulario de alta de un nuevo empleado
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Logica.Cargo"%>
+<%@page import="Logica.Controladora"%>
+<%@page import ="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -55,16 +59,30 @@
                 <p>
                     <label for = "cargoEmpleado" >Cargo: </label>
                      <select name ="cargoEmpleado">
-                        <option value="-" selected>-</option>
-                        <option value="Recepcionista">Recepcionista</option>
-                        <option value="Concerje">Concerje</option>
-                        <option value="Gobernante">Gobernante</option>
-                        <option value="Camarero de Piso">Camarero/a de piso</option>
-                        <option value="Mozo">Mozo/a</option>
-                        <option value="Personal de cocina">Personal de cocina</option>
-                        <option value="Seguridad">Seguridad</option>
-                        <option value="Mantenimiento">Mantenimiento</option>
-                        <option value="Gerencia">Gerencia</option>
+                         <option value="-" selected>-</option>
+                        <%
+                            //Cargo los valores de la tabla de cargos en el combobox
+                            Controladora control = new Controladora();
+                            List<Cargo> listaCargos = new ArrayList();
+                            Cargo cargo = new Cargo();
+                            listaCargos = control.recuperarCargos();
+                            for (int i = 0; i < listaCargos.size(); i++) {
+                                cargo = listaCargos.get(i);
+                                out.println("<option>" + cargo.getNombreCargo() + "</option>");
+                            }
+                        %>
+                        
+                        <!--
+                            <option value="Recepcionista">Recepcionista</option>
+                            <option value="Concerje">Concerje</option>
+                            <option value="Gobernante">Gobernante</option>
+                            <option value="Camarero de Piso">Camarero/a de piso</option>
+                            <option value="Mozo">Mozo/a</option>
+                            <option value="Personal de cocina">Personal de cocina</option>
+                            <option value="Seguridad">Seguridad</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Gerencia">Gerencia</option>
+                        -->
                       </select>
                      <input type="button" name="btnNuevoCargo" value="+" onclick='abrirVentana("altaCargo.jsp", "_blank",550, 250)'> 
                      

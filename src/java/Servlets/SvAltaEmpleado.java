@@ -2,7 +2,13 @@
 
 package Servlets;
 
+import Logica.Controladora;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,6 +61,44 @@ public class SvAltaEmpleado extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        //traigo los datos del JSP
+        String usuarioEmpleado = request.getParameter("usuarioEmpleado");
+        String contraseniaEmpleado = request.getParameter("contraseniaEmpleado");
+        String nombreEmpleado = request.getParameter("nombreEmpleado");
+        String apellidoEmpleado = request.getParameter("apellidoEmpleado");
+        String dniEmpleado = request.getParameter("dniEmpleado");
+        String direccionEmpleado = request.getParameter("direccionEmpleado");
+        String fechaNacEmpleado = request.getParameter("fechaNacEmpleado");  //ver como hacer con date
+        String cargoEmpleado = request.getParameter("cargoEmpleado");
+       
+       
+        
+//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+//        Date fechaNacimiento = new Date();
+//        
+//        try {
+//            Date fechaNacimiento = formato.parse(fechaNacEmpleado);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(SvAltaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
+        //traigo la sesion y asigno  los atributos para abrir en cualquier JSP
+        request.getSession().setAttribute("usuarioEmpleado", usuarioEmpleado);
+        request.getSession().setAttribute("contraseniaEmpleado", contraseniaEmpleado);
+        request.getSession().setAttribute("nombreEmpleado", nombreEmpleado);
+        request.getSession().setAttribute("apellidoEmpleado", apellidoEmpleado);
+        request.getSession().setAttribute("dniEmpleado", dniEmpleado);
+        request.getSession().setAttribute("direccionEmpleado", direccionEmpleado);
+        request.getSession().setAttribute("fechaNacEmpleado", fechaNacEmpleado);
+        request.getSession().setAttribute("cargoEmpleado", cargoEmpleado);
+        
+        Controladora control = new Controladora();
+        
+        control.crearEmpleado(usuarioEmpleado, contraseniaEmpleado, nombreEmpleado, apellidoEmpleado, dniEmpleado, direccionEmpleado, fechaNacEmpleado, cargoEmpleado);
+        //armo la respuesta
+        response.sendRedirect("confirmacion.jsp");
     }
 
     /**

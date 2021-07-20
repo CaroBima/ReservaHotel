@@ -21,11 +21,13 @@ public class Empleado extends Persona implements Serializable{
     public Empleado() {
     }
 
-    public Empleado(Usuario usuario, Cargo idCargo, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+    public Empleado(Usuario usuario, Cargo idCargo, int idPersona, String dni, String nombre, String apellido, String direccion, Date fechaNac) {
         super(idPersona, dni, nombre, apellido, direccion, fechaNac);
         this.usuario = usuario;
         this.idCargo = idCargo;
     }
+
+  
 
     
     //getters y setters

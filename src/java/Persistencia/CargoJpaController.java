@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 
+
 public class CargoJpaController implements Serializable {
 
     public CargoJpaController(EntityManagerFactory emf) {
@@ -22,15 +23,14 @@ public class CargoJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
-     public CargoJpaController() {
+      public CargoJpaController() {
         emf = Persistence.createEntityManagerFactory("HotelPU");
     }
-     
+      
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    
     public void create(Cargo cargo) {
         EntityManager em = null;
         try {

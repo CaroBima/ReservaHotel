@@ -21,7 +21,7 @@
             </p>
            
             <p>
-                <input type="submit" name="btnGuardar" value="Guardar" > 
+                <input type="submit" name="btnGuardar" value="Guardar y cerrar" onclick = 'cerrar()'> 
             </p>
         </form>
     </body>

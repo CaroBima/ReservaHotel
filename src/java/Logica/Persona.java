@@ -22,7 +22,7 @@ public class Persona implements Serializable {
     private int idPersona;
     
     @Basic
-    private int dni;
+    private String dni;
     private String nombre;
     private String apellido;
     private String direccion;
@@ -33,7 +33,7 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+    public Persona(int idPersona, String dni, String nombre, String apellido, String direccion, Date fechaNac) {
         this.idPersona = idPersona;
         this.dni = dni;
         this.nombre = nombre;
@@ -50,11 +50,11 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -89,8 +89,9 @@ public class Persona implements Serializable {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
-  
 
    
+
+  
     
 }

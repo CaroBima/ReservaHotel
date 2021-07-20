@@ -15,5 +15,7 @@ function abrirVentana(url, title, w, h)
     if (window.focus) {
         newWindow.focus();
     }
-  
 }
+
+
+

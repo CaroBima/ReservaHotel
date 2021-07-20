@@ -23,10 +23,12 @@ public class Huesped extends Persona implements Serializable {
     public Huesped() {
     }
 
-    public Huesped(String profesion, int idPersona, int dni, String nombre, String apellido, String direccion, Date fechaNac) {
+    public Huesped(String profesion, int idPersona, String dni, String nombre, String apellido, String direccion, Date fechaNac) {
         super(idPersona, dni, nombre, apellido, direccion, fechaNac);
         this.profesion = profesion;
     }
+
+   
 
    
 
