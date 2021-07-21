@@ -95,10 +95,10 @@ public class SvAltaEmpleado extends HttpServlet {
         request.getSession().setAttribute("cargoEmpleado", cargoEmpleado);
         
         Controladora control = new Controladora();
-        
+       
         control.crearEmpleado(usuarioEmpleado, contraseniaEmpleado, nombreEmpleado, apellidoEmpleado, dniEmpleado, direccionEmpleado, fechaNacEmpleado, cargoEmpleado);
         //armo la respuesta
-        response.sendRedirect("confirmacion.jsp");
+        //response.sendRedirect("confirmacion.jsp");
     }
 
     /**

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 public class Controladora {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
@@ -14,10 +16,20 @@ public class Controladora {
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado){
         Empleado empleado = new Empleado();
-        Date fechaNac;
+//        Date fechaNac = null;
         Usuario usuario = new Usuario();
-        fechaNac = ParseFecha(fechaNacimiento);
         
+     
+//        SimpleDateFormat fNac = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            fechaNac = fNac.parse(fechaNacimiento);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        Cargo cargoEmple = new Cargo();
+        
+        cargoEmple = this.buscarCargo(cargoEmpleado);
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
@@ -28,7 +40,9 @@ public class Controladora {
         empleado.setApellido(apellidoEmpleado);
         empleado.setDni(dniEmpleado);
         empleado.setDireccion(direccionEmpleado);
-        empleado.setFechaNac(fechaNac);
+        //empleado.setFechaNac(fechaNac);
+        empleado.setIdCargo(cargoEmple);
+        
         // Falta String cargoEmpleado, buscarlo en la bd para recuperar el id
     }
 
@@ -37,9 +51,13 @@ public class Controladora {
         List<Cargo> listaCargos = new ArrayList();
         Cargo cargo = new Cargo();
         listaCargos = this.recuperarCargos();
-        int i = 0;
-        while((i< listaCargos.size())) { //recorrer lista para buscar el id del cargo
-            i++;
+        
+        //recorro la lista buscando si esta el cargo
+        for( Cargo c : listaCargos){
+            if(c.getNombreCargo().equals(nombreCargo)){
+                cargo = c;
+                break;
+            }
         }
         return cargo;
     }

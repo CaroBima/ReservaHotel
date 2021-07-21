@@ -16,7 +16,7 @@
         <title>Alta de Nuevo Empleado</title>
     </head>
     <body>
-        <form action="SvAltaEmpleado" method="POST">
+        <form name="formAltaEmple" action="SvAltaEmpleado" method="POST">
             <h1>Alta de empleado</h1>
             <br>
             
@@ -53,7 +53,7 @@
                 
                 <p>
                     <label for = "fechaNacEmpleado" >Fecha de nacimiento: </label>
-                    <input type="date" name="fechaNacEmpleado">
+                    <input type="date" name="fechaNacEmpleado" >
                 </p>
                 
                 <p>
@@ -71,21 +71,11 @@
                                 out.println("<option>" + cargo.getNombreCargo() + "</option>");
                             }
                         %>
-                        
-                        <!--
-                            <option value="Recepcionista">Recepcionista</option>
-                            <option value="Concerje">Concerje</option>
-                            <option value="Gobernante">Gobernante</option>
-                            <option value="Camarero de Piso">Camarero/a de piso</option>
-                            <option value="Mozo">Mozo/a</option>
-                            <option value="Personal de cocina">Personal de cocina</option>
-                            <option value="Seguridad">Seguridad</option>
-                            <option value="Mantenimiento">Mantenimiento</option>
-                            <option value="Gerencia">Gerencia</option>
-                        -->
                       </select>
-                     <input type="button" name="btnNuevoCargo" value="+" onclick='abrirVentana("altaCargo.jsp", "_blank",550, 250)'> 
+                     <input type="button" name="btnNuevoCargo" value="+" onclick='ingresoCargo()'> 
+
                      
+                        
                 </p>
             <br>
             <p>

@@ -15,7 +15,23 @@ function abrirVentana(url, title, w, h)
     if (window.focus) {
         newWindow.focus();
     }
+    return 1;
 }
+
+
+function ingresoCargo(){
+   let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
+   
+   var s = document.formAltaEmple.cargoEmpleado;
+    //Ahora para crear el objeto option que le vas a añadir seria
+    var option = document.createElement("option");
+    option.value= nuevoCargo
+    option.text= nuevoCargo;
+
+    s.appendChild(option) // y aqui lo añadiste
+}
+
+
 
 
 
