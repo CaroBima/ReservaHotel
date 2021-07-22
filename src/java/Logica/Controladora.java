@@ -21,20 +21,12 @@ public class Controladora {
         Cargo cargoEmple = new Cargo();
         
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
+        //si el cargo no se encuentra en la base de datos, lo crea
         cargoEmple = this.buscarCargo(cargoEmpleado);
         
-        //compruebo que el cargo del empleado este en la base de datos, utilizo el 
-        //cargoEmple recuperado de la bd y el string cargoEmpleado pasado desde el front
-        if(cargoEmple.equals(null) || (!cargoEmpleado.equals("-")) ){ 
-            this.crearCargo(cargoEmpleado);
-            System.out.println("llega");
-            //vuelvo a buscarlo para obtener el id que se le asigno automaticamente, 
-            //para poder pasarlo como parametro en empleado
-            cargoEmple = this.buscarCargo(cargoEmpleado);
-        }
             
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
-        System.out.println("cargo " + cargoEmple.getNombreCargo() + cargoEmple.getIdCargo() );
+        System.out.println("cargo " + cargoEmple.getNombreCargo() + " " +cargoEmple.getIdCargo() );
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
        
@@ -90,26 +82,37 @@ public class Controladora {
         controlPersis.crearCargo(cargo);
     }
     
-//método utilizado para recuperar la lista de cargos en un array, para pasarlos al combobox
+    //método utilizado para recuperar la lista de cargos en un array, para pasarlos al combobox
     public List<Cargo> recuperarCargos(){
-        List<Cargo> listaCargos = new ArrayList();
+        List<Cargo> listaCargos;
         listaCargos = controlPersis.recuperarCargos();
         return listaCargos;
     }
     
-//método para buscar el cargo en la bd, para poder pasar el empleado a la controladora de persistencia    
+    //método para buscar el cargo en la bd, para poder pasar el empleado a la controladora 
+    // de persistencia si el cargo no esta, lo agrega    
     public Cargo buscarCargo(String nombreCargo){
-        List<Cargo> listaCargos = new ArrayList();
+        System.out.println("entra a buscar cargo");
+        List<Cargo> listaCargos;
         Cargo cargo = new Cargo();
         listaCargos = this.recuperarCargos();
         
-        //recorro la lista buscando si esta el cargo
-        for( Cargo c : listaCargos){
-            if(c.getNombreCargo().equals(nombreCargo)){
-                cargo = c;
-                break;
+        //verifico si la lista esta vacía o no, para ver si hay registros en la base de datos
+        if(!listaCargos.isEmpty()){
+            //recorro la lista buscando si esta el cargo
+            for( Cargo c : listaCargos){
+                if(c.getNombreCargo().equals(nombreCargo)){
+                    cargo = c;
+                    break;
+                } 
             }
         }
+        
+        //si el cargo no esta guardado, lo crea
+        if (listaCargos.isEmpty() || cargo.getNombreCargo() == null){
+            this.crearCargo(nombreCargo);
+        } 
+        
         return cargo;
     }
     
