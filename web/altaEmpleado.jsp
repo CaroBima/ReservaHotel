@@ -68,18 +68,21 @@
                             listaCargos = control.recuperarCargos();
                             for (int i = 0; i < listaCargos.size(); i++) {
                                 cargo = listaCargos.get(i);
-                                out.println("<option>" + cargo.getNombreCargo() + "</option>");
+                                out.println("<option value=\"" + cargo.getNombreCargo() + "\"" + ">" + cargo.getNombreCargo() + "</option>");
                             }
                         %>
                       </select>
-                     <input type="button" name="btnNuevoCargo" value="+" onclick='ingresoCargo()'> 
-
+                      <input type="button" name="btnNuevoCargo" value="+" onclick='ingresoCargo()'> 
+                        <script>
+                         console.log(fechaNacEmpleado);
+                        </script>
                      
                         
                 </p>
             <br>
             <p>
                 <input type="submit" name="btnGuardar" value="Guardar"> 
+              
             </p>
             
             

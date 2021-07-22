@@ -1,14 +1,7 @@
-
-
 package Servlets;
 
 import Logica.Controladora;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -97,7 +90,10 @@ public class SvAltaEmpleado extends HttpServlet {
         Controladora control = new Controladora();
        
         control.crearEmpleado(usuarioEmpleado, contraseniaEmpleado, nombreEmpleado, apellidoEmpleado, dniEmpleado, direccionEmpleado, fechaNacEmpleado, cargoEmpleado);
-        //armo la respuesta
+        //llega ok
+        System.out.println(usuarioEmpleado + " " +contraseniaEmpleado + " " +nombreEmpleado + " " + apellidoEmpleado + " " + dniEmpleado + " " + direccionEmpleado + " " + fechaNacEmpleado + " " + cargoEmpleado);
+        
+    //armo la respuesta
         //response.sendRedirect("confirmacion.jsp");
     }
 

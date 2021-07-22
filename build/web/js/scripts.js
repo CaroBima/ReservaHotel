@@ -1,4 +1,5 @@
-//funcion que permite abrir la ventana para agregar un nuevo campo en la base de datos, centrandola en la pantalla
+//funcion que permite abrir la ventana para agregar un nuevo campo en la base de datos, 
+//centrandola en la pantalla, la use para agregar puesto primero pero no podia actualizar el cbobox
 function abrirVentana(url, title, w, h)
 {
     var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
@@ -15,20 +16,20 @@ function abrirVentana(url, title, w, h)
     if (window.focus) {
         newWindow.focus();
     }
-    return 1;
 }
 
 
 function ingresoCargo(){
    let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
    
-   var s = document.formAltaEmple.cargoEmpleado;
-    //Ahora para crear el objeto option que le vas a añadir seria
-    var option = document.createElement("option");
-    option.value= nuevoCargo
-    option.text= nuevoCargo;
+   var opcion = document.formAltaEmple.cargoEmpleado;
+    
+    //creo y asigno el nuevo cargo a la opcion que voy a agregar al select
+    var nuevaopcion = document.createElement("option");
+    nuevaopcion.value= nuevoCargo;
+    nuevaopcion.text= nuevoCargo;
 
-    s.appendChild(option) // y aqui lo añadiste
+    opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
 }
 
 
