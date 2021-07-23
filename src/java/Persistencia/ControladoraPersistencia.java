@@ -14,6 +14,13 @@ public class ControladoraPersistencia {
         controlHabitacion.create(cuarto);
     }
     
+    public List<Habitacion> recuperarHabitaciones(){
+        HabitacionJpaController controlHabitacion = new HabitacionJpaController();
+        List<Habitacion> listaHab = new ArrayList();
+        listaHab = controlHabitacion.findHabitacionEntities();
+        return listaHab;
+    }
+    
     
     
     //metodos para dar de alta un nuevo empleado

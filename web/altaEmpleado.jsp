@@ -59,7 +59,7 @@
                 <p>
                     <label for = "cargoEmpleado" >Cargo: </label>
                      <select name ="cargoEmpleado">
-                         <option value="-" selected>-</option>
+                         <option value="-">-</option>
                         <%
                             //Cargo los valores de la tabla de cargos en el combobox
                             Controladora control = new Controladora();

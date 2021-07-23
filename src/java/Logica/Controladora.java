@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Controladora {
@@ -16,17 +18,16 @@ public class Controladora {
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado){
         Empleado empleado = new Empleado();
         Usuario usuario = new Usuario();
-        
-        System.out.println("desde controladora: " + usuarioEmpleado + " " +contrasenia + " " +nombreEmpleado + " " + apellidoEmpleado + " " + dniEmpleado + " " + direccionEmpleado + " " + fechaNacimiento + " " + cargoEmpleado);
         Cargo cargoEmple = new Cargo();
         
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
         //si el cargo no se encuentra en la base de datos, lo crea
         cargoEmple = this.buscarCargo(cargoEmpleado);
         
-            
+        //convierto la fecha en date
+        Date fechaNac = this.ParseFecha(fechaNacimiento);
+        
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
-        System.out.println("cargo " + cargoEmple.getNombreCargo() + " " +cargoEmple.getIdCargo() );
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
        
@@ -36,27 +37,24 @@ public class Controladora {
         empleado.setApellido(apellidoEmpleado);
         empleado.setDni(dniEmpleado);
         empleado.setDireccion(direccionEmpleado);
-        //empleado.setFechaNac(fechaNac);
+        empleado.setFechaNac(fechaNac);
         empleado.setIdCargo(cargoEmple);
         
-       
+        controlPersis.crearEmpleado(empleado);
     }
 
 
     
 //método para convertir el string en formato fecha para poder pasarlo a la controladora de persistencia
-     public static Date ParseFecha(String fecha)
-    {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
+     public Date ParseFecha(String fechaNacimiento){
+        Date fechaNac = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
         try {
-            fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
-            System.out.println(ex);
+            fechaNac = formato.parse(fechaNacimiento);
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return fechaDate;
+        return fechaNac;
     }
     
 
@@ -74,6 +72,13 @@ public class Controladora {
         System.out.println("llega a controladora");
     }
    
+    public List<Habitacion> recuperarHabitacion(){
+    //para traer el listado de habitaciones
+        List<Habitacion> listaHabit = new ArrayList();
+        listaHabit = controlPersis.recuperarHabitaciones();
+        return listaHabit;
+    }
+    
 
 //métodos para la gestion de cargos
     public void crearCargo(String cargoEmpleado){

@@ -28,6 +28,7 @@ function ingresoCargo(){
     var nuevaopcion = document.createElement("option");
     nuevaopcion.value= nuevoCargo;
     nuevaopcion.text= nuevoCargo;
+    nuevaopcion.selected = nuevoCargo;
 
     opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
 }
