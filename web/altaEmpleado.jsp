@@ -73,10 +73,6 @@
                         %>
                       </select>
                       <input type="button" name="btnNuevoCargo" value="+" onclick='ingresoCargo()'> 
-                        <script>
-                         console.log(fechaNacEmpleado);
-                        </script>
-                     
                         
                 </p>
             <br>

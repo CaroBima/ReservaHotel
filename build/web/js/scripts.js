@@ -18,7 +18,7 @@ function abrirVentana(url, title, w, h)
     }
 }
 
-
+//permite ingresar un nuevo cargo en el combobox que esta en el formulario de empleado
 function ingresoCargo(){
    let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
    
@@ -32,8 +32,5 @@ function ingresoCargo(){
 
     opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
 }
-
-
-
 
 
