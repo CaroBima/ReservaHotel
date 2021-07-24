@@ -1,5 +1,7 @@
 <%-- 
-    Alta de una habitación
+    Document   : index
+    Created on : 24 jul. 2021, 10:50:18
+    Author     : Caro
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -91,54 +93,14 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Alta de Habitación</span>
+                                <span class="section-heading-lower">Consultar Empleado</span>
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form action="SvAltaHabitacion"  class="border p-3 form" method="POST">
-                                <h1>Nueva habitación</h1>
-                                <br>
+                            <form name="formConsultaEmpleado"  class="border p-3 form" action="SvConsultaEmpleado" method="POST">
 
-                                <p>Nombre temático: <input type="text" name="nombreTematico"></p>
-                                <br>
 
-                                <p>Número de Habitación: <select name ="nroHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </p>
-                                <br>
-
-                                <p>Piso: <select name="pisoHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1º Piso</option>
-                                        <option value="2">2º Piso</option>
-                                        <option value="3">3º Piso</option>
-                                        <option value="4">4º Piso</option>
-                                        <option value="5">5º Piso</option>
-                                        <option value="6">6º Piso</option>
-                                        <option value="7">7º Piso</option>
-                                        <option value="8">8º Piso</option>
-                                    </select>
-                                </p>
-                                <br>
-
-                                <p>Tipo:<input type="radio" name="tipoHabitacion" value="Single">Single
-                                    <input type="radio" name="tipoHabitacion" value="Doble">Doble
-                                    <input type="radio" name="tipoHabitacion" value="Triple">Triple
-                                    <input type="radio" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
-                                </p>
-                                <br>
-
-                                <p>Precio: <input type="text" name="precioHabitacion"></p>
-                                <br>
-                                <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Enviar"> 
-                                </div>    
-
+                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
                             </form>
 
 
@@ -156,7 +118,4 @@
 
     </body>
 </html>
-
-
-
 

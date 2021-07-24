@@ -1,5 +1,7 @@
 <%-- 
-    Alta de una habitación
+    Document   : consultaEmpleado
+    Created on : 24 jul. 2021, 10:47:12
+    Author     : Caro
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Hotel Integrador</title>
+        <title>Nueva reserva</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -23,7 +25,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Gestion de reservas</title>
+        <title>Consulta de Empleados</title>
     </head>
     <body>
 
@@ -34,7 +36,7 @@
             </h1>
         </header>
 
-        <!-- Menú de navegación-->
+               <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -84,6 +86,23 @@
             </div>
         </nav>
 
+        <!--
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Inicio</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaReserva.jsp">Alta de reserva</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaEmpleado.jsp">Alta Empleado</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaHabitacion.jsp">Alta Habitacion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        -->
+
         <section class="page-section cta">
             <div class="container">
                 <div class="row">
@@ -91,54 +110,14 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Alta de Habitación</span>
+                                <span class="section-heading-lower">Consultar Empleado</span>
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form action="SvAltaHabitacion"  class="border p-3 form" method="POST">
-                                <h1>Nueva habitación</h1>
-                                <br>
+                            <form name="formConsultaEmpleado"  class="border p-3 form" action="SvConsultaEmpleado" method="POST">
 
-                                <p>Nombre temático: <input type="text" name="nombreTematico"></p>
-                                <br>
 
-                                <p>Número de Habitación: <select name ="nroHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </p>
-                                <br>
-
-                                <p>Piso: <select name="pisoHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1º Piso</option>
-                                        <option value="2">2º Piso</option>
-                                        <option value="3">3º Piso</option>
-                                        <option value="4">4º Piso</option>
-                                        <option value="5">5º Piso</option>
-                                        <option value="6">6º Piso</option>
-                                        <option value="7">7º Piso</option>
-                                        <option value="8">8º Piso</option>
-                                    </select>
-                                </p>
-                                <br>
-
-                                <p>Tipo:<input type="radio" name="tipoHabitacion" value="Single">Single
-                                    <input type="radio" name="tipoHabitacion" value="Doble">Doble
-                                    <input type="radio" name="tipoHabitacion" value="Triple">Triple
-                                    <input type="radio" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
-                                </p>
-                                <br>
-
-                                <p>Precio: <input type="text" name="precioHabitacion"></p>
-                                <br>
-                                <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Enviar"> 
-                                </div>    
-
+                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
                             </form>
 
 
@@ -156,7 +135,3 @@
 
     </body>
 </html>
-
-
-
-
