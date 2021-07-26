@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Habitacion implements Serializable  {
@@ -20,7 +20,7 @@ public class Habitacion implements Serializable  {
     private int piso; //8 pisos como maximo
     private int nroHabitacion; // 4 habitaciones por piso
     private Double precioHabitacion;
-    private String tipoHab; //fk de tipoHabitacion, si es single, doble
+    private String tipoHab; //tipoHabitacion, si es single, doble
 
     
     //constructores

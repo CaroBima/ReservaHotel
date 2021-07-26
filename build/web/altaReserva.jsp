@@ -4,9 +4,11 @@
     Author     : Caro
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Logica.Controladora"%>
 <%@page import="Logica.Habitacion"%>
 <%@page import="java.util.List"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -176,9 +178,17 @@
                                     <label for = "habitacionReserva" >Habitaciones disponibles:</label> 
                                     <select name ="habitacionReserva">
                                         <option value="-">-</option>
-                                        <c:forEach items="${listaHab}" var="listaHab">
-                                            <option value="${listaHab.getNombreTematica()}">${listaHab.getNombreTematica()} </option>
-                                        </c:forEach>    
+                                         <%
+                                            //Cargo los valores de la tabla de habitaciones en el combobox
+                                            Controladora control = new Controladora();
+                                            List<Habitacion> listaHabitacion = new ArrayList();
+                                            Habitacion habitacion = new Habitacion();
+                                            listaHabitacion = control.recuperarHabitacion();
+                                            for (int i = 0; i < listaHabitacion.size(); i++) {
+                                                habitacion = listaHabitacion.get(i);
+                                                out.println("<option value=\"" + habitacion.getNombreTematica() + "\" " + ">" +  habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
+                                            }
+                                        %>
                                     </select>
                                 </p>
 
