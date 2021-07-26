@@ -5,15 +5,13 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 //import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 
-@Entity(name = "huesped")
-@PrimaryKeyJoinColumn( referencedColumnName = "idHuesped")
+
+@Entity
 public class Huesped extends Persona implements Serializable {
     
-//    @OneToOne
-//    int idHuesped;
+
     
     @Basic
     private String profesion;

@@ -1,9 +1,6 @@
 package Servlets;
 
-import Logica.Controladora;
-import Logica.Habitacion;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -13,8 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Persona implements Serializable {
     
     @Id

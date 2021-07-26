@@ -5,10 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity(name = "empleado")
-@PrimaryKeyJoinColumn(referencedColumnName = "idEmpleado")
+@Entity
 public class Empleado extends Persona implements Serializable{
     
     @OneToOne (cascade = CascadeType.PERSIST)
