@@ -103,71 +103,70 @@
                             <form name="formAltaEmple" class="border p-3 form" action="SvAltaEmpleado" method="POST">
                                 <h1>Nuevo empleado</h1>
                                 <br>
-
-                                <p>
-                                    <label for = "usuarioEmpleado" >Nombre de usuario:</label> 
-                                    <input type="text" name="usuarioEmpleado">
-                                </p>
-
-                                <p>
-                                    <label for = "contraseniaEmpleado" >Contraseña:</label> 
-                                    <input type="password" name="contraseniaEmpleado">
-                                </p>
-
-
-                                <p>
-                                    <label for = "nombreEmpleado" >Nombre:</label> 
-                                    <input type="text" name="nombreEmpleado">
-                                </p>
-
-                                <p>
-                                    <label for = "apellidoEmpleado" >Apellido:</label> 
-                                    <input type="text" name="apellidoEmpleado">
-                                </p>
-
-                                <p>  
-                                    <label for = "dniEmpleado" >Dni: </label>
-                                    <input type="text" name="dniEmpleado">
-                                </p>
-
-                                <p>
-                                    <label for = "direccionEmpleado" >Dirección: </label>
-                                    <input type="text" name="direccionEmpleado">
-                                </p>
-
-                                <p>
-                                    <label for = "fechaNacEmpleado" >Fecha de nacimiento: </label>
-                                    <input type="date" name="fechaNacEmpleado" >
-                                </p>
-
-                                <p>
-                                    <label for = "cargoEmpleado" >Cargo: </label>
-                                    <select name ="cargoEmpleado">
-                                        <option value="-">-</option>
-                                        <%
-                                            //Cargo los valores de la tabla de cargos en el combobox
-                                            Controladora control = new Controladora();
-                                            List<Cargo> listaCargos = new ArrayList();
-                                            Cargo cargo = new Cargo();
-                                            listaCargos = control.recuperarCargos();
-                                            for (int i = 0; i < listaCargos.size(); i++) {
-                                                cargo = listaCargos.get(i);
-                                                out.println("<option value=\"" + cargo.getNombreCargo() + "\"" + ">" + cargo.getNombreCargo() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                    <input type="button" name="btnNuevoCargo" value="+" onclick='ingresoCargo()'> 
-
-                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "usuarioEmpleado" class="form-label">Usuario:</label> 
+                                        <input type="text"  class="form-control" name="usuarioEmpleado">
+                                    </div>   
+                                    <div class="col">
+                                        <label for = "contraseniaEmpleado" class="form-label">Contraseña:</label> 
+                                        <input type="password"  class="form-control" name="contraseniaEmpleado">
+                                    </div>
+                                </div> 
                                 <br>
-                                <p>
-                                    <input type="submit" name="btnGuardar" value="Guardar"> 
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "nombreEmpleado" class="form-label">Nombre:</label> 
+                                        <input type="text"  class="form-control" name="nombreEmpleado">
+                                    </div>
 
-                                </p>
+                                    <div class="col">
+                                        <label for = "apellidoEmpleado" class="form-label">Apellido:</label> 
+                                        <input type="text"  class="form-control" name="apellidoEmpleado">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col"> 
+                                        <label for = "dniEmpleado" class="form-label">Dni: </label>
+                                        <input type="text"  class="form-control" name="dniEmpleado">
+                                    </div>
 
+                                    <div class="col">
+                                        <label for = "direccionEmpleado" class="form-label">Dirección: </label>
+                                        <input type="text"  class="form-control" name="direccionEmpleado">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "fechaNacEmpleado" class="form-label">Fecha de nacimiento: </label>
+                                        <input type="date"  class="form-control" name="fechaNacEmpleado" >
+                                    </div>
 
+                                    <div class="col">
+                                        <label for = "cargoEmpleado" class="form-label">Cargo: </label>
+                                        <select name ="cargoEmpleado"  class="form-control">
+                                            <option value="-"  class="form-control-lg">-</option>
+                                            <%
+                                                //Cargo los valores de la tabla de cargos en el combobox
+                                                Controladora control = new Controladora();
+                                                List<Cargo> listaCargos = new ArrayList();
+                                                Cargo cargo = new Cargo();
+                                                listaCargos = control.recuperarCargos();
+                                                for (int i = 0; i < listaCargos.size(); i++) {
+                                                    cargo = listaCargos.get(i);
+                                                    out.println("<option value=\"" + cargo.getNombreCargo() + "\"" + ">" + cargo.getNombreCargo() + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                        <input type="button" name="btnNuevoCargo" class="btn btn-primary btn-xs" value="Añadir cargo" onclick='ingresoCargo()'> 
+
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Enviar"> 
+                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar"> 
                                 </div>    
 
                             </form>

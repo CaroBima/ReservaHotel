@@ -13,7 +13,7 @@ public class Empleado extends Persona implements Serializable{
     private Usuario usuario;
     
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Cargo idCargo; 
 
     //constructores

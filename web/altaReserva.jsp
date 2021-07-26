@@ -106,96 +106,106 @@
                             <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST">
 
                                 <!-- Ingreso de datos del huesped -->
-                                <!-- Ingreso del dni del huesped -->
+                                <div class="row">
+                                    <!-- Ingreso de nombre del huesped -->
+                                    <div class="col">
+                                        <label for = "nombreHuesped" class="form-label" >Nombre: </label>
+                                        <input type="text" class="form-control" name="nombreHuesped">
+                                    </div>
 
-                                <p class="mb-3">
-                                    <label for = "dniHuesped" class="form-label" >Número de dni: </label>
-                                    <input type="text" name="dniHuesped">
-                                </p>
+                                    <!-- Ingreso del apellido -->
+                                    <div class="col">
+                                        <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
+                                        <input type="text" class="form-control" name="apellidoHuesped">
+                                    </div>
+                                </div>
 
-                                <!-- Ingreso de nombre del huesped -->
+                                <div class="row">
+                                    <!-- Ingreso del dni del huesped -->
+                                    <div class="col">
+                                        <label for = "dniHuesped" class="form-label" >Número de dni: </label>
+                                        <input type="text" class="form-control" name="dniHuesped">
+                                    </div>
 
-                                <p class="mb-3">
-                                    <label for = "nombreHuesped" class="form-label" >Nombre: </label>
-                                    <input type="text" name="nombreHuesped">
-                                </p>
-
-                                <!-- Ingreso del apellido -->
-                                <p class="mb-3">
-                                    <label for = "apellidoHuesped" >Apellido: </label>
-                                    <input type="text" name="apellidoHuesped">
-
-                                </p>
-
-                                <!-- Fecha de nacimiento del huesped -->
-                                <p class="mb-3">
-                                    <label for = "fechaNacHuesped" >Fecha de nacimiento: </label>
-                                    <input type="date" name="fechaNacHuesped">
-                                </p>
+                                    <!-- Fecha de nacimiento del huesped -->
+                                    <div class="col">
+                                        <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
+                                        <input type="date" class="form-control" name="fechaNacHuesped">
+                                    </div>
+                                </div>
 
                                 <!-- ingreso de dirección -->
-                                <p class="mb-3">
-                                    <label for = "direccionHuesped" >Dirección: </label>
-                                    <input type="text" name="direccionHuesped">
-                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "direccionHuesped" class="form-label" >Dirección: </label>
+                                        <input type="text" class="form-control" name="direccionHuesped">
+                                    </div>
 
-                                <!-- Ingreso de Profesion -->
-                                <p class="mb-3">
-                                    <label for = "profesionHuesped" >Profesión: </label>
-                                    <input type="text" name="profesionHuesped">
-                                </p>
+                                    <!-- Ingreso de Profesion -->
+
+                                    <div class="col">
+                                        <label for = "profesionHuesped" class="form-label">Profesión: </label>
+                                        <input type="text" class="form-control"  name="profesionHuesped">
+                                    </div>
+                                </div>
 
                                 <!-- Ingreso de Cantidad de personas -->
-                                <p class="mb-3">
-                                    <label for = "cantidadPersonas" >Cantidad de personas:</label> 
-                                    <select name ="cantidadPersonas">
-                                        <option value="-" selected>-</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                    </select>
-                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "cantidadPersonas" class="form-label">Cantidad de personas:</label> 
+                                        <select name ="cantidadPersonas" class="form-control">
+                                            <option value="-" selected>-</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                        </select>
+                                    </div>
 
-                                <!<!-- Fecha de chek in -->
-                                <p class="mb-3">
-                                    <label for = "fechaCheckIn" >Fecha de Check-In: </label>
-                                    <input type="date" name="fechaCheckIn">
-                                </p>
+                                    <div class="col">
+                                        <!-- Seleccion de habitación que se va a reservar -->
+                                        <label for = "habitacionReserva" class="form-label">Habitaciones disponibles:</label> 
+                                        <select name ="habitacionReserva" class="form-control">
+                                            <option value="-">-</option>
+                                            <%
+                                                //Cargo los valores de la tabla de habitaciones en el combobox
+                                                Controladora control = new Controladora();
+                                                List<Habitacion> listaHabitacion = new ArrayList();
+                                                Habitacion habitacion = new Habitacion();
+                                                listaHabitacion = control.recuperarHabitacion();
+                                                for (int i = 0; i < listaHabitacion.size(); i++) {
+                                                    habitacion = listaHabitacion.get(i);
+                                                    out.println("<option value=\"" + habitacion.getNombreTematica() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <!<!-- Fecha de chek out -->
-                                <p class="mb-3">
-                                    <label for = "fechaCheckOut" >Fecha de Check-Out: </label>
-                                    <input type="date" name="fechaCheckOut">
-                                </p>
+                                <!-- Fecha de chek in -->
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "fechaCheckIn" class="form-label" >Fecha de Check-In: </label>
+                                        <input type="date" class="form-control" name="fechaCheckIn">
+                                    </div>
 
-                                <!-- Seleccion de habitación que se va a reservar -->
-                                <p class="mb-3">
-                                    <label for = "habitacionReserva" >Habitaciones disponibles:</label> 
-                                    <select name ="habitacionReserva">
-                                        <option value="-">-</option>
-                                         <%
-                                            //Cargo los valores de la tabla de habitaciones en el combobox
-                                            Controladora control = new Controladora();
-                                            List<Habitacion> listaHabitacion = new ArrayList();
-                                            Habitacion habitacion = new Habitacion();
-                                            listaHabitacion = control.recuperarHabitacion();
-                                            for (int i = 0; i < listaHabitacion.size(); i++) {
-                                                habitacion = listaHabitacion.get(i);
-                                                out.println("<option value=\"" + habitacion.getNombreTematica() + "\" " + ">" +  habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </p>
+                                    <!-- Fecha de chek out -->    
+                                    <div class="col">
+                                        <label for = "fechaCheckOut" class="form-label">Fecha de Check-Out: </label>
+                                        <input type="date" class="form-control" name="fechaCheckOut">
+                                    </div>
+                                </div>
 
-                                <p class="mb-3">
-                                    <label for = "importeTotalReserva" >Importe total: </label>
-                                    <input type="text" name="importeTotalReserva" value= "$0.0" disabled>
-                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "importeTotalReserva" class="form-label">Importe total: </label>
+                                        <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
+                                    </div>
+                                </div>
                                 <br>
 
                                 <div class="intro-button mx-auto">
@@ -211,7 +221,7 @@
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
         </footer>
-        
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

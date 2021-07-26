@@ -94,49 +94,73 @@
                                 <span class="section-heading-lower">Alta de Habitación</span>
                             </h2>
 
-                            <!-- Formulario de reserva -->
+                            <!-- Formulario de alta de nueva habitación -->
                             <form action="SvAltaHabitacion"  class="border p-3 form" method="POST">
                                 <h1>Nueva habitación</h1>
+                                
                                 <br>
-
-                                <p>Nombre temático: <input type="text" name="nombreTematico"></p>
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Ingreso del tipo de habitación -->
+                                        <label for = "tipoHabitacion" class="form-label">Tipo:</label>
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                    </div>  
+                                </div>
+                                
                                 <br>
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Ingreso del nombre temático de la habitación-->
+                                        <label for = "nombreTematico" class="form-label">Nombre temático:</label> 
+                                        <input type="text" class="form-control" name="nombreTematico">
+                                    </div>
 
-                                <p>Número de Habitación: <select name ="nroHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </p>
-                                <br>
+                                    <div class="col">
+                                        <!-- Ingreso del precio de la habitación-->
+                                        <label for = "precioHabitacion" class="form-label">Precio:</label> 
+                                        <input type="text" class="form-control" name="precioHabitacion">
+                                    </div>
+                                </div>
 
-                                <p>Piso: <select name="pisoHabitacion">
-                                        <option value="0" selected>-</option>
-                                        <option value="1">1º Piso</option>
-                                        <option value="2">2º Piso</option>
-                                        <option value="3">3º Piso</option>
-                                        <option value="4">4º Piso</option>
-                                        <option value="5">5º Piso</option>
-                                        <option value="6">6º Piso</option>
-                                        <option value="7">7º Piso</option>
-                                        <option value="8">8º Piso</option>
-                                    </select>
-                                </p>
-                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Ingreso del piso donde esta la habitación -->
+                                        <label for = "pisoHabitacion" class="form-label">Piso:</label> 
+                                        <select name="pisoHabitacion" class="form-control">
+                                            <option value="0" selected>-</option>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                        </select>
+                                    </div> 
 
-                                <p>Tipo:<input type="radio" name="tipoHabitacion" value="Single">Single
-                                    <input type="radio" name="tipoHabitacion" value="Doble">Doble
-                                    <input type="radio" name="tipoHabitacion" value="Triple">Triple
-                                    <input type="radio" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
-                                </p>
-                                <br>
+                                    <!-- Ingreso del número de habitación -->
+                                    <div class="col">
+                                        <label for = "nroHabitacion" class="form-label">Número de Habitación:</label> 
+                                        <select name ="nroHabitacion" class="form-control">
+                                            <option value="0" selected>-</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <p>Precio: <input type="text" name="precioHabitacion"></p>
+
                                 <br>
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Enviar"> 
+                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 
                                 </div>    
 
                             </form>
