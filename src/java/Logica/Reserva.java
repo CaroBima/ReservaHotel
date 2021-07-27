@@ -20,13 +20,15 @@ public class Reserva implements Serializable {
     
     @Basic
     private int cantPersonas;
-    private int montoTotalReserva;
+    private double montoTotalReserva;
     @Temporal(TemporalType.DATE)
     private Date fechaCheckIn;
     @Temporal(TemporalType.DATE)
     private Date fechaCheckOut;
     
-    
+    @OneToOne
+    private Huesped huesped;
+     
     @OneToOne
     private Habitacion idHabitación;
     
@@ -39,16 +41,20 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(int idReserva, int cantPersonas, int montoTotalReserva, Date fechaCheckIn, Date fechaCheckOut, Habitacion idHabitación, Empleado idEmpleado) {
+    public Reserva(int idReserva, int cantPersonas, double montoTotalReserva, Date fechaCheckIn, Date fechaCheckOut, Huesped huesped, Habitacion idHabitación, Empleado idEmpleado) {
         this.idReserva = idReserva;
         this.cantPersonas = cantPersonas;
         this.montoTotalReserva = montoTotalReserva;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
+        this.huesped = huesped;
         this.idHabitación = idHabitación;
         this.idEmpleado = idEmpleado;
     }
 
+    
+
+   
      
     //getters y setters
 
@@ -68,11 +74,11 @@ public class Reserva implements Serializable {
         this.cantPersonas = cantPersonas;
     }
 
-    public int getMontoTotalReserva() {
+    public double getMontoTotalReserva() {
         return montoTotalReserva;
     }
 
-    public void setMontoTotalReserva(int montoTotalReserva) {
+    public void setMontoTotalReserva(double montoTotalReserva) {
         this.montoTotalReserva = montoTotalReserva;
     }
 
@@ -92,6 +98,14 @@ public class Reserva implements Serializable {
         this.fechaCheckOut = fechaCheckOut;
     }
 
+    public Huesped getHuesped() {
+        return huesped;
+    }
+
+    public void setHuesped(Huesped huesped) {
+        this.huesped = huesped;
+    }
+
     public Habitacion getIdHabitación() {
         return idHabitación;
     }
@@ -107,8 +121,6 @@ public class Reserva implements Serializable {
     public void setIdEmpleado(Empleado idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-
-   
 
    
 }

@@ -176,10 +176,10 @@
                                                 Controladora control = new Controladora();
                                                 List<Habitacion> listaHabitacion = new ArrayList();
                                                 Habitacion habitacion = new Habitacion();
-                                                listaHabitacion = control.recuperarHabitacion();
+                                                listaHabitacion = control.recuperarHabitaciones();
                                                 for (int i = 0; i < listaHabitacion.size(); i++) {
                                                     habitacion = listaHabitacion.get(i);
-                                                    out.println("<option value=\"" + habitacion.getNombreTematica() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
+                                                    out.println("<option value=\"" + habitacion.getIdHabitacion() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
                                                 }
                                             %>
                                         </select>

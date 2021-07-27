@@ -30,6 +30,15 @@ public class ControladoraPersistencia {
         return listaHab;
     }
     
+        //método para buscar una habitacion por su id y retornarla
+    public Habitacion buscarUnaHabitacion(int idHabitacion){
+        HabitacionJpaController controlHabitacion = new HabitacionJpaController();
+        Habitacion habitacion = new Habitacion();
+        
+        habitacion = controlHabitacion.findHabitacion(idHabitacion);
+        
+        return habitacion;
+    }
     
     
     //metodos para dar de alta un nuevo empleado
