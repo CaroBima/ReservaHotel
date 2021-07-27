@@ -168,10 +168,7 @@
                                 <div class="intro-button mx-auto">
                                     <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar"> 
                                 </div>    
-
                             </form>
-
-
                         </div>
                     </div>
                 </div>

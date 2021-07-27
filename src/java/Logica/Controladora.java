@@ -13,6 +13,11 @@ import java.util.logging.Logger;
 public class Controladora {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
+//Métodos para la reserva
+    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String importeTotalReserva){
+        
+    }
+    
     
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado){

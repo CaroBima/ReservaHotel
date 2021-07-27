@@ -22,15 +22,19 @@ function abrirVentana(url, title, w, h)
 function ingresoCargo(){
    let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
    
+   
    var opcion = document.formAltaEmple.cargoEmpleado;
     
-    //creo y asigno el nuevo cargo a la opcion que voy a agregar al select
-    var nuevaopcion = document.createElement("option");
-    nuevaopcion.value= nuevoCargo;
-    nuevaopcion.text= nuevoCargo;
-    nuevaopcion.selected = nuevoCargo;
+    //verifico que se ingrese algun valor, que no quede en null
+    if(nuevoCargo.length>0){
+         //creo y asigno el nuevo cargo a la opcion que voy a agregar al select
+        var nuevaopcion = document.createElement("option");
+        nuevaopcion.value= nuevoCargo;
+        nuevaopcion.text= nuevoCargo;
+        nuevaopcion.selected = nuevoCargo;
 
-    opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
+        opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
+    }
 }
 
 

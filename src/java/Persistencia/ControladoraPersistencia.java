@@ -4,10 +4,19 @@ package Persistencia;
 import Logica.Cargo;
 import Logica.Empleado;
 import Logica.Habitacion;
+import Logica.Reserva;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControladoraPersistencia {
+    
+    //métodos para la reserva
+    
+    public void crearReserva(Reserva reserva){
+        ReservaJpaController controlReserva = new ReservaJpaController();
+        controlReserva.create(reserva);
+    }
+    
     //metodos para la Habitación
     public void crearHabitacion(Habitacion cuarto){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
