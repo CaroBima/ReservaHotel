@@ -16,13 +16,13 @@ public class Controladora {
 //Métodos para la reserva
     public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String importeTotalReserva){
         Huesped huesped = new Huesped();
-        Date fechaNac = new Date();
-        Date fCheckIn = new Date();
-        Date fCheckOut = new Date();
-        Habitacion habitacion = new Habitacion();
+        Date fechaNac;
+        Date fCheckIn;
+        Date fCheckOut;
+        Habitacion habitacion;
         Reserva reserva = new Reserva();
-        int cantidadPers = 0;
-        double montoTot = 0;
+        int cantidadPers;
+        double montoTot;
         int idHab;
         
         
