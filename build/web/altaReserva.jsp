@@ -4,6 +4,7 @@
     Author     : Caro
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Logica.Controladora"%>
 <%@page import="Logica.Habitacion"%>
@@ -189,14 +190,14 @@
                                 <!-- Fecha de chek in -->
                                 <div class="row">
                                     <div class="col">
-                                        <label for = "fechaCheckIn" class="form-label" >Fecha de Check-In: </label>
-                                        <input type="date" class="form-control" name="fechaCheckIn">
+                                        <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
+                                        <input type="date" class="form-control" name="fechaCheckIn" value="2021-07-27">
                                     </div>
 
                                     <!-- Fecha de chek out -->    
                                     <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label">Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut">
+                                        <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
+                                        <input type="date" class="form-control" name="fechaCheckOut" value=''>
                                     </div>
                                 </div>
 
@@ -205,12 +206,28 @@
                                         <label for = "importeTotalReserva" class="form-label">Importe total: </label>
                                         <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
                                     </div>
+                                    <div class="intro-button mx-auto">
+                                        
+                                        <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total">
+                                            <%
+                                            //String fechaDesde = request.getParameter("fechaCheckIn");
+                                           // String fechaHasta = request.getParameter("fechaCheckOut");
+                                            //String habRes = request.getParameter("habitacionReserva");
+                                            //if(!fechaDesde.equals("") && !fechaHasta.equals("")){
+                                            //    double importeTotal = control.calcularMontoTotal(fechaDesde, fechaHasta, habRes);
+                                            //   System.out.println("llega");
+                                            //    }
+                                            %>  
+                                                
+                                    </div> 
                                 </div>
+
+
                                 <br>
 
                                 <div class="intro-button mx-auto">
-                                    <a class="btn btn-primary btn-xl" href="#!">Guardar</a>
-                                </div>
+                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 
+                                </div>    
                             </form>
 
 

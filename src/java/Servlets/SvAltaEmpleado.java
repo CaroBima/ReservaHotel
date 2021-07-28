@@ -65,18 +65,7 @@ public class SvAltaEmpleado extends HttpServlet {
         String fechaNacEmpleado = request.getParameter("fechaNacEmpleado");  //ver como hacer con date
         String cargoEmpleado = request.getParameter("cargoEmpleado");
        
-       
-        
-//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-//        Date fechaNacimiento = new Date();
-//        
-//        try {
-//            Date fechaNacimiento = formato.parse(fechaNacEmpleado);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(SvAltaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-        
+
         //traigo la sesion y asigno  los atributos para abrir en cualquier JSP
         request.getSession().setAttribute("usuarioEmpleado", usuarioEmpleado);
         request.getSession().setAttribute("contraseniaEmpleado", contraseniaEmpleado);
@@ -89,19 +78,16 @@ public class SvAltaEmpleado extends HttpServlet {
         
         Controladora control = new Controladora();
        
+        //paso los datos a la lógica
         control.crearEmpleado(usuarioEmpleado, contraseniaEmpleado, nombreEmpleado, apellidoEmpleado, dniEmpleado, direccionEmpleado, fechaNacEmpleado, cargoEmpleado);
-        //llega ok
-        System.out.println(usuarioEmpleado + " " +contraseniaEmpleado + " " +nombreEmpleado + " " + apellidoEmpleado + " " + dniEmpleado + " " + direccionEmpleado + " " + fechaNacEmpleado + " " + cargoEmpleado);
         
-    //armo la respuesta
-        //response.sendRedirect("confirmacion.jsp");
+        
+        //redirecciono a la página de confirmacion
+        response.sendRedirect("confirmAltaEmpleado.jsp");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+  
+    
     @Override
     public String getServletInfo() {
         return "Short description";

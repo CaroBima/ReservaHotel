@@ -3,7 +3,6 @@ package Logica;
 import Persistencia.ControladoraPersistencia;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -58,12 +57,7 @@ public class Controladora {
         reserva.setFechaCheckOut(fCheckOut);
         reserva.setIdHabitación(habitacion);
         
-        
-        
-        
-        
-        
-    }
+ }
     
     
 //Métodos para el empleado
@@ -121,23 +115,57 @@ public class Controladora {
         habitacion.setPrecioHabitacion(precio);
         
         controlPersis.crearHabitacion(habitacion);
-        System.out.println("llega a controladora");
+        
+    }
+    
+    public double calcularMontoTotal(String fechaDesde, String fechaHasta, String habitacionReserva){
+        double montoTotal = 0;
+        double montoPorDia = 0;
+        Date fechaDesdeCalc;
+        Date fechaHastaCalc;
+        int cantidadDias;
+        int idHab;
+        Controladora control = new Controladora();
+        
+        //parseo las fechas de string a date
+        fechaDesdeCalc = parseFecha(fechaDesde);
+        fechaHastaCalc = parseFecha(fechaHasta);
+        
+        idHab = Integer.parseInt(habitacionReserva);
+        
+        //calculo la cantidad de dias
+        int milisegundosPorDia = 86400000;
+        cantidadDias = (int) ((fechaHastaCalc.getTime()-fechaDesdeCalc.getTime()) / milisegundosPorDia);
+        
+        //recupero el costo de la habitacion y calculo el total para retornarlo
+        montoPorDia = control.buscarPrecioHabitacion(idHab);
+        montoTotal = montoPorDia * cantidadDias;
+        
+        return montoTotal;
     }
    
+    //para devolver el listado de habitaciones
     public List<Habitacion> recuperarHabitaciones(){
-    //para traer el listado de habitaciones
-        List<Habitacion> listaHabit = new ArrayList();
-        listaHabit = controlPersis.recuperarHabitaciones();
-        return listaHabit;
+    
+        return controlPersis.recuperarHabitaciones();
     }
     
         //recupera la habitacion segun su id de habitacion
     public Habitacion buscarUnaHabitacion(int id){
+        
+        return controlPersis.buscarUnaHabitacion(id);
+    }
+    
+    //utilizada para consultar el precio de una determinada habitacion
+    public double buscarPrecioHabitacion(int id){
+        double importeHabitacion;
         Habitacion habitacion = new Habitacion();
         
-        habitacion = controlPersis.buscarUnaHabitacion(id);
+        //recupero la habitacion y obtengo el precio por dia
+        habitacion = buscarUnaHabitacion(id);
+        importeHabitacion = habitacion.getPrecioHabitacion();
         
-        return habitacion;
+        return importeHabitacion;
     }
 
 //métodos para la gestion de cargos
@@ -157,7 +185,7 @@ public class Controladora {
     //método para buscar el cargo en la bd, para poder pasar el empleado a la controladora 
     // de persistencia si el cargo no esta, lo agrega    
     public Cargo buscarCargo(String nombreCargo){
-        System.out.println("entra a buscar cargo");
+        
         List<Cargo> listaCargos;
         Cargo cargo = new Cargo();
         listaCargos = this.recuperarCargos();
@@ -168,6 +196,7 @@ public class Controladora {
             for( Cargo c : listaCargos){
                 if(c.getNombreCargo().equals(nombreCargo)){
                     cargo = c;
+                    System.out.println(cargo.getNombreCargo());
                     break;
                 } 
             }
@@ -175,10 +204,15 @@ public class Controladora {
         
         //si el cargo no esta guardado, lo crea
         if (listaCargos.isEmpty() || cargo.getNombreCargo() == null){
-            this.crearCargo(nombreCargo);
+            //this.crearCargo(nombreCargo);
+            System.out.println("pasa siempre por aca");
         } 
         
         return cargo;
+    }
+    
+    public void agregarAdmin(){
+        controlPersis.agregarAdmin();
     }
     
 }

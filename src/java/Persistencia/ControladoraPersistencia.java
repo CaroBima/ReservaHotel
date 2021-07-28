@@ -5,6 +5,7 @@ import Logica.Cargo;
 import Logica.Empleado;
 import Logica.Habitacion;
 import Logica.Reserva;
+import Logica.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,4 +63,24 @@ public class ControladoraPersistencia {
         listaCargos = controlCargo.findCargoEntities();
         return listaCargos;
     }
+     
+     
+    public void agregarAdmin(){
+        UsuarioJpaController controlUsuario = new UsuarioJpaController();
+        Usuario usuario = new Usuario();
+        List<Usuario> listaUsuarios;
+        
+        //asigno los datos para poder pasarlo a la controladora de usuario al guardarlo
+        usuario.setNombreUsuario("admin");
+        usuario.setContrasenia("admin");
+        
+        //recupero la lista de usuarios
+        listaUsuarios = controlUsuario.findUsuarioEntities();
+        
+        if(listaUsuarios == null){
+            controlUsuario.create(usuario);
+        }
+        
+    }
+
 }

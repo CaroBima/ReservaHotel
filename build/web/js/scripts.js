@@ -19,22 +19,41 @@ function abrirVentana(url, title, w, h)
 }
 
 //permite ingresar un nuevo cargo en el combobox que esta en el formulario de empleado
-function ingresoCargo(){
-   let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
-   
-   
-   var opcion = document.formAltaEmple.cargoEmpleado;
-    
+function ingresoCargo() {
+    let nuevoCargo = prompt('Ingrese el nuevo cargo: ', );
+
+
+    var opcion = document.formAltaEmple.cargoEmpleado;
+
     //verifico que se ingrese algun valor, que no quede en null
-    if(nuevoCargo.length>0){
-         //creo y asigno el nuevo cargo a la opcion que voy a agregar al select
+    if (nuevoCargo.length > 0) {
+        //creo y asigno el nuevo cargo a la opcion que voy a agregar al select
         var nuevaopcion = document.createElement("option");
-        nuevaopcion.value= nuevoCargo;
-        nuevaopcion.text= nuevoCargo;
+        nuevaopcion.value = nuevoCargo;
+        nuevaopcion.text = nuevoCargo;
         nuevaopcion.selected = nuevoCargo;
 
         opcion.appendChild(nuevaopcion); // agrego la nueva opcion al combobox
     }
+}
+
+function fechaActual() {
+    var fechaHoy = new Date(); //Fecha actual
+    var mes = fechaHoy.getMonth() + 1; //mes actual
+    var dia = fechaHoy.getDate(); //obteniendo dia
+    var anio = fechaHoy.getFullYear(); //obteniendo año
+    if (dia < 10)
+        dia = '0' + dia; //agrega cero si es menor de 10
+    if (mes < 10)
+        mes = '0' + mes; //agrega cero si es menor de 10
+
+//   console.log(anio + "-" + mes + "-" + dia);
+    return anio + "-" + mes + "-" + dia;
+//    document.write = anio + "-" + mes + "-" + dia;
+//document.getElementById('fechaCheckOut').value=anio+"-"+mes+"-"+dia;
+
+
+
 }
 
 
