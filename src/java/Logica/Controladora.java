@@ -211,8 +211,30 @@ public class Controladora {
         return cargo;
     }
     
+    //para agregar el usuario admin cuando se carga por primera vez
     public void agregarAdmin(){
         controlPersis.agregarAdmin();
+    }
+    
+    
+    //metodo para el logueo del usuario, verifica si existe en la base de datos
+    //si no hay ningun usuario, crea el usuario admin, clave admin
+    public boolean verificarUsuario(String usuario, String contrasenia){
+        List<Usuario> listaUsuarios; 
+        listaUsuarios = controlPersis.recuperarUsuarios();
+        
+        if(listaUsuarios != null){
+            for( Usuario usu : listaUsuarios){
+                if(usu.getNombreUsuario().equals(usuario) && usu.getContrasenia().equals(contrasenia)){
+                    return true;
+                }
+                    
+            }
+        }else{ //si la lista está vacía agrego el usuario admin / clave admin
+            agregarAdmin();
+        }
+    
+        return false;
     }
     
 }

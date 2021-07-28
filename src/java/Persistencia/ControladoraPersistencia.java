@@ -65,6 +65,18 @@ public class ControladoraPersistencia {
     }
      
      
+     
+    //metodos para usuario
+     
+     public List recuperarUsuarios(){
+         UsuarioJpaController controlUsuario = new UsuarioJpaController();
+         List <Usuario> listaUsuarios;
+         
+         //recupero la lista de usuarios y la devuelvo
+         listaUsuarios = controlUsuario.findUsuarioEntities();
+         return listaUsuarios;
+     }
+     
     public void agregarAdmin(){
         UsuarioJpaController controlUsuario = new UsuarioJpaController();
         Usuario usuario = new Usuario();

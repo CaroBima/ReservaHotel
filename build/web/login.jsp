@@ -57,7 +57,7 @@
                                         <input type="text"  class="form-control" name="nombreUsuario">
                                     </div>   
                                     <div class="col">
-                                        <label for = "contraUsuario" class="form-label">Contraseña:</label> 
+                                        <label for = "contraUsuario" class="form-label wrap-input100 validate-input"  data-validate = "Debe ingresar su contraseña">Contraseña:</label> 
                                         <input type="password"  class="form-control" name="contraUsuario">
                                     </div>
                                 </div> 
