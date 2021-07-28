@@ -13,12 +13,24 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+        HttpSession sesion = request.getSession();
+        String loginusuario = (String) sesion.getAttribute("usuario");
+        
+        //verifico si el usuario admin esta creado y si no lo agrego
+            if(loginusuario == null){
+                response.sendRedirect("login.jsp");
+            }else{
+               
+        %>
         <form>
             <h1>Cargo guardado correctamente!</h1>
             <input type="submit" name="btnNuevoCargo" value="Cerrar" onclick='window.close()'> 
         </form>
         
         
-        
+        <%
+            }
+        %>
     </body>
 </html>

@@ -28,7 +28,16 @@
         <title>Consulta de Empleados</title>
     </head>
     <body>
-
+        <%
+        HttpSession sesion = request.getSession();
+        String loginusuario = (String) sesion.getAttribute("usuario");
+        
+        //verifico si el usuario admin esta creado y si no lo agrego
+            if(loginusuario == null){
+                response.sendRedirect("login.jsp");
+            }else{
+               
+        %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">Hotel</span>
@@ -86,23 +95,6 @@
             </div>
         </nav>
 
-        <!--
-        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Inicio</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaReserva.jsp">Alta de reserva</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaEmpleado.jsp">Alta Empleado</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="altaHabitacion.jsp">Alta Habitacion</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        -->
-
         <section class="page-section cta">
             <div class="container">
                 <div class="row">
@@ -132,6 +124,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-
+        <%
+            }
+        %>
     </body>
 </html>

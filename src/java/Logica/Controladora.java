@@ -223,14 +223,16 @@ public class Controladora {
         List<Usuario> listaUsuarios; 
         listaUsuarios = controlPersis.recuperarUsuarios();
         
-        if(listaUsuarios != null){
+        if(!listaUsuarios.isEmpty()){
             for( Usuario usu : listaUsuarios){
+                System.out.println("recorre la lista");
                 if(usu.getNombreUsuario().equals(usuario) && usu.getContrasenia().equals(contrasenia)){
                     return true;
                 }
                     
             }
         }else{ //si la lista está vacía agrego el usuario admin / clave admin
+            System.out.println("intenta agregar admin");
             agregarAdmin();
         }
     

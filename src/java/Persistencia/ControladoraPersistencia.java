@@ -59,7 +59,7 @@ public class ControladoraPersistencia {
     
      public List<Cargo> recuperarCargos(){
        CargoJpaController controlCargo = new CargoJpaController();
-        List<Cargo> listaCargos = new ArrayList();
+        List<Cargo> listaCargos;
         listaCargos = controlCargo.findCargoEntities();
         return listaCargos;
     }
@@ -89,7 +89,7 @@ public class ControladoraPersistencia {
         //recupero la lista de usuarios
         listaUsuarios = controlUsuario.findUsuarioEntities();
         
-        if(listaUsuarios == null){
+        if(listaUsuarios.isEmpty()){
             controlUsuario.create(usuario);
         }
         

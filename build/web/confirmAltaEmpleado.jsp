@@ -28,7 +28,16 @@
         <title>Gestion de reservas</title>
     </head>
     <body>
-
+        <%
+        HttpSession sesion = request.getSession();
+        String loginusuario = (String) sesion.getAttribute("usuario");
+        
+        //verifico si el usuario admin esta creado y si no lo agrego
+            if(loginusuario == null){
+                response.sendRedirect("login.jsp");
+            }else{
+               
+        %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">Hotel</span>
@@ -116,7 +125,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-
+        <%
+            }
+        %>
     </body>
 </html>
 

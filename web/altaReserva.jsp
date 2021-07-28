@@ -35,7 +35,16 @@
         <title>Nueva reserva</title>
     </head>
     <body>
+        <%
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
 
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+
+        %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">Hotel</span>
@@ -172,8 +181,7 @@
                                         <label for = "habitacionReserva" class="form-label">Habitaciones disponibles:</label> 
                                         <select name ="habitacionReserva" class="form-control">
                                             <option value="-">-</option>
-                                            <%
-                                                //Cargo los valores de la tabla de habitaciones en el combobox
+                                            <%                                                //Cargo los valores de la tabla de habitaciones en el combobox
                                                 Controladora control = new Controladora();
                                                 List<Habitacion> listaHabitacion = new ArrayList();
                                                 Habitacion habitacion = new Habitacion();
@@ -207,18 +215,18 @@
                                         <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
                                     </div>
                                     <div class="intro-button mx-auto">
-                                        
+
                                         <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total">
-                                            <%
+                                        <%
                                             //String fechaDesde = request.getParameter("fechaCheckIn");
-                                           // String fechaHasta = request.getParameter("fechaCheckOut");
+                                            // String fechaHasta = request.getParameter("fechaCheckOut");
                                             //String habRes = request.getParameter("habitacionReserva");
                                             //if(!fechaDesde.equals("") && !fechaHasta.equals("")){
                                             //    double importeTotal = control.calcularMontoTotal(fechaDesde, fechaHasta, habRes);
                                             //   System.out.println("llega");
                                             //    }
-                                            %>  
-                                                
+                                        %>  
+
                                     </div> 
                                 </div>
 
@@ -243,6 +251,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-
+        <%
+            }
+        %>
     </body>
 </html>
