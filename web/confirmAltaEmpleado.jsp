@@ -29,14 +29,14 @@
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-            if(loginusuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -104,16 +104,42 @@
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
                                 <span class="section-heading-lower">Alta de nuevo empleado</span>
                             </h2>
-                            <p>Los datos han sido guardados correctamente</p>
-                            
-                            <p>Nombre de usuario: <%= session.getAttribute("usuarioEmpleado") %></p>
-                            <p>Nombre: <%= session.getAttribute("nombreEmpleado") %></p>
-                            <p>Apellido: <%= session.getAttribute("apellidoEmpleado") %></p>
-                            <p>Dni: <%= session.getAttribute("dniEmpleado")%> </p>
-                            <p>Dirección: <%= session.getAttribute("direccionEmpleado")%> </p>
-                            <p>Fecha de nacimiento: <%= session.getAttribute("fechaNacEmpleado")%> </p>
-                            <p>Cargo: <%= session.getAttribute("cargoEmpleado")%> </p>
-     
+                            <h4 >Los datos han sido guardados correctamente:</h4>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Nombre de usuario:</td>
+                                        <td><%= session.getAttribute("usuarioEmpleado")%></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td><%= session.getAttribute("nombreEmpleado")%></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Apellido:</td>
+                                        <td><%= session.getAttribute("apellidoEmpleado")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dni:</td>
+                                        <td><%= session.getAttribute("dniEmpleado")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dirección:</td>
+                                        <td><%= session.getAttribute("direccionEmpleado")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de nacimiento:</td>
+                                        <td><%= session.getAttribute("fechaNacEmpleado")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cargo:</td>
+                                        <td><%= session.getAttribute("cargoEmpleado")%></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
