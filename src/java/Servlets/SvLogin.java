@@ -55,12 +55,9 @@ public class SvLogin extends HttpServlet {
             HttpSession misesion = request.getSession(true);
             misesion.setAttribute("usuario", usuario);
             misesion.setAttribute("contrasenia", contrasenia);
-            System.out.println("entra al autorizado");
             response.sendRedirect("index.jsp");
         }
         else{
-            System.out.println("no entra al autorizado");
-            control.agregarAdmin();
             response.sendRedirect("login.jsp");
         }
     }

@@ -65,7 +65,7 @@ public class SvAltaCargo extends HttpServlet {
         Controladora control = new Controladora();
        
         //envio el cargo nuevo al metodo que une la logica con la persistencia
-        control.crearCargo(cargoEmpleado);
+        //control.crearCargo(cargoEmpleado);
          //confirmacion
         response.sendRedirect("confirmacion.jsp");
     }

@@ -77,7 +77,8 @@ public class SvAltaEmpleado extends HttpServlet {
         request.getSession().setAttribute("cargoEmpleado", cargoEmpleado);
         
         Controladora control = new Controladora();
-       
+        
+        
         //paso los datos a la lógica
         control.crearEmpleado(usuarioEmpleado, contraseniaEmpleado, nombreEmpleado, apellidoEmpleado, dniEmpleado, direccionEmpleado, fechaNacEmpleado, cargoEmpleado);
         

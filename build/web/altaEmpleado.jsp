@@ -163,9 +163,11 @@
                                                 List<Cargo> listaCargos = new ArrayList();
                                                 Cargo cargo = new Cargo();
                                                 listaCargos = control.recuperarCargos();
+                                                if(!listaCargos.isEmpty()){
                                                 for (int i = 0; i < listaCargos.size(); i++) {
                                                     cargo = listaCargos.get(i);
                                                     out.println("<option value=\"" + cargo.getNombreCargo() + "\"" + ">" + cargo.getNombreCargo() + "</option>");
+                                                    }
                                                 }
                                             %>
                                         </select>

@@ -68,7 +68,8 @@ public class Controladora {
         
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
         //si el cargo no se encuentra en la base de datos, lo crea
-        cargoEmple = buscarCargo(cargoEmpleado);
+        cargoEmple = buscarUnCargo(cargoEmpleado);
+        System.out.println(cargoEmple.getNombreCargo() + cargoEmple.getIdCargo());
         
         //convierto la fecha en date
         Date fechaNac = parseFecha(fechaNacimiento);
@@ -86,6 +87,7 @@ public class Controladora {
         empleado.setFechaNac(fechaNac);
         empleado.setIdCargo(cargoEmple);
         
+        System.out.println(cargoEmple.getNombreCargo() + cargoEmple.getIdCargo());
         controlPersis.crearEmpleado(empleado);
     }
 
@@ -159,7 +161,7 @@ public class Controladora {
     //utilizada para consultar el precio de una determinada habitacion
     public double buscarPrecioHabitacion(int id){
         double importeHabitacion;
-        Habitacion habitacion = new Habitacion();
+        Habitacion habitacion;
         
         //recupero la habitacion y obtengo el precio por dia
         habitacion = buscarUnaHabitacion(id);
@@ -168,12 +170,7 @@ public class Controladora {
         return importeHabitacion;
     }
 
-//métodos para la gestion de cargos
-    public void crearCargo(String cargoEmpleado){
-       Cargo cargo = new Cargo();
-        cargo.setNombreCargo(cargoEmpleado);
-        controlPersis.crearCargo(cargo);
-    }
+////métodos para la gestion de cargos
     
     //método utilizado para recuperar la lista de cargos en un array, para pasarlos al combobox
     public List<Cargo> recuperarCargos(){
@@ -181,35 +178,23 @@ public class Controladora {
         listaCargos = controlPersis.recuperarCargos();
         return listaCargos;
     }
+
     
-    //método para buscar el cargo en la bd, para poder pasar el empleado a la controladora 
-    // de persistencia si el cargo no esta, lo agrega    
-    public Cargo buscarCargo(String nombreCargo){
+    public void crearCargo(String cargoEmpleado){
+       Cargo cargo = new Cargo();
+        cargo.setNombreCargo(cargoEmpleado);
         
-        List<Cargo> listaCargos;
+        controlPersis.crearCargo(cargo);
+    }
+    
+    
+    public Cargo buscarUnCargo(String nombreCargo){
         Cargo cargo = new Cargo();
-        listaCargos = this.recuperarCargos();
-        
-        //verifico si la lista esta vacía o no, para ver si hay registros en la base de datos
-        if(!listaCargos.isEmpty()){
-            //recorro la lista buscando si esta el cargo
-            for( Cargo c : listaCargos){
-                if(c.getNombreCargo().equals(nombreCargo)){
-                    cargo = c;
-                    System.out.println(cargo.getNombreCargo());
-                    break;
-                } 
-            }
-        }
-        
-        //si el cargo no esta guardado, lo crea
-        if (listaCargos.isEmpty() || cargo.getNombreCargo() == null){
-            //this.crearCargo(nombreCargo);
-            System.out.println("pasa siempre por aca");
-        } 
-        
+        cargo = controlPersis.buscarUnCargo(nombreCargo);
         return cargo;
     }
+    
+
     
     //para agregar el usuario admin cuando se carga por primera vez
     public void agregarAdmin(){
@@ -225,14 +210,12 @@ public class Controladora {
         
         if(!listaUsuarios.isEmpty()){
             for( Usuario usu : listaUsuarios){
-                System.out.println("recorre la lista");
                 if(usu.getNombreUsuario().equals(usuario) && usu.getContrasenia().equals(contrasenia)){
                     return true;
                 }
                     
             }
         }else{ //si la lista está vacía agrego el usuario admin / clave admin
-            System.out.println("intenta agregar admin");
             agregarAdmin();
         }
     

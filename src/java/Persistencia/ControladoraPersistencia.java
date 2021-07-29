@@ -6,7 +6,6 @@ import Logica.Empleado;
 import Logica.Habitacion;
 import Logica.Reserva;
 import Logica.Usuario;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ControladoraPersistencia {
@@ -26,7 +25,7 @@ public class ControladoraPersistencia {
     
     public List<Habitacion> recuperarHabitaciones(){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
-        List<Habitacion> listaHab = new ArrayList();
+        List<Habitacion> listaHab;
         listaHab = controlHabitacion.findHabitacionEntities();
         return listaHab;
     }
@@ -34,7 +33,7 @@ public class ControladoraPersistencia {
         //método para buscar una habitacion por su id y retornarla
     public Habitacion buscarUnaHabitacion(int idHabitacion){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
-        Habitacion habitacion = new Habitacion();
+        Habitacion habitacion;
         
         habitacion = controlHabitacion.findHabitacion(idHabitacion);
         
@@ -64,6 +63,30 @@ public class ControladoraPersistencia {
         return listaCargos;
     }
      
+     //busco un determinado cargo pasando por parametro el nombre 
+     public Cargo buscarUnCargo(String nombreCargo){
+         List<Cargo> listaCargos;
+         Cargo cargo = new Cargo();
+         CargoJpaController controlCargo = new CargoJpaController();
+         
+         listaCargos = recuperarCargos();
+         
+         if(!listaCargos.isEmpty()){
+             for(Cargo c : listaCargos){
+                if(c.getNombreCargo().equals(nombreCargo)){
+                     cargo = c;
+                     return cargo;
+                 }
+             }
+         }
+         
+        if(cargo.getNombreCargo() == null){
+            //si no se encuentra el cargo en la bd lo asigna al cargo para devolverlo
+             cargo.setNombreCargo(nombreCargo);
+         }
+         
+         return cargo;
+     }
      
      
     //metodos para usuario
