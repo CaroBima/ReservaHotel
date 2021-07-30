@@ -13,12 +13,13 @@ public class Controladora {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
 //Métodos para la reserva
-    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut){
+    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String usuario){
         Huesped huesped = new Huesped();
         Date fechaNac;
         Date fCheckIn;
         Date fCheckOut;
         Habitacion habitacion;
+        Empleado emple = new Empleado();
         Reserva reserva = new Reserva();
         int cantidadPers;
         double montoTot;
@@ -37,6 +38,9 @@ public class Controladora {
         
         //busco la habitacion
         habitacion = buscarUnaHabitacion(idHab);
+        
+        //busco el empleado que hizo la reserva
+        emple = buscarUnEmpleado(usuario);
                
         //guardo los datos correspondientes al huesped 
         huesped.setNombre(nombreHuesped);
@@ -58,6 +62,7 @@ public class Controladora {
         reserva.setFechaCheckOut(fCheckOut);
         reserva.setIdHabitación(habitacion);
         reserva.setMontoTotalReserva(montoTot);
+        reserva.setIdEmpleado(emple);
         
         controlPersis.crearReserva(reserva);
  }
@@ -95,7 +100,20 @@ public class Controladora {
         controlPersis.crearEmpleado(empleado);
     }
 
-
+public Empleado buscarUnEmpleado(String usuario){
+    Empleado empleado = new Empleado();
+    List<Empleado> listaEmple;
+    
+    listaEmple = controlPersis.recuperarEmpleados();
+        for(Empleado e: listaEmple){
+            if(e.getUsuario().equals(usuario)){
+                empleado = e;
+                return empleado;
+            }
+                
+        }
+    return empleado;
+}
     
 //método para convertir el string en formato fecha para poder pasarlo a la controladora de persistencia
      public Date parseFecha(String fechaAParsear){

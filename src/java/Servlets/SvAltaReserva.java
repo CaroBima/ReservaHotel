@@ -57,7 +57,7 @@ public class SvAltaReserva extends HttpServlet {
 
         Controladora control = new Controladora();
         System.out.println(fechaCheckOut);
-        control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut);
+        control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut, usuario);
 
     }
 

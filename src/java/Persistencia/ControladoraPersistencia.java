@@ -48,7 +48,14 @@ public class ControladoraPersistencia {
         controlEmple.create(empleado);
     }
     
-   
+   public List recuperarEmpleados(){
+       List<Empleado> listaEmple;
+       
+       EmpleadoJpaController controlEmple = new EmpleadoJpaController();
+       listaEmple = controlEmple.findEmpleadoEntities();
+       
+       return listaEmple;
+   }
     
     
     //metodos para el cargo
@@ -82,7 +89,11 @@ public class ControladoraPersistencia {
          
         if(cargo.getNombreCargo() == null){
             //si no se encuentra el cargo en la bd lo asigna al cargo para devolverlo
-             cargo.setNombreCargo(nombreCargo);
+            CargoJpaController controlCargo = new CargoJpaController();
+            cargo.setNombreCargo(nombreCargo);
+            //lo guardo en la bd
+            controlCargo.create(cargo);
+             
          }
          
          return cargo;

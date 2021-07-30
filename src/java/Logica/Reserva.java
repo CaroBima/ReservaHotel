@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +29,8 @@ public class Reserva implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCheckOut;
     
-     @JoinColumn(name = "id_huesped", nullable = false)
+    
+    @JoinColumn(name = "id_huesped", nullable = false)
     @OneToOne (cascade = CascadeType.PERSIST)
     private Huesped huesped;
      
@@ -39,7 +39,7 @@ public class Reserva implements Serializable {
     private Habitacion idHabitación;
     
     @JoinColumn(name = "id_empleado", nullable = false)
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Empleado idEmpleado;
     
     
