@@ -3,10 +3,14 @@ package Logica;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,13 +30,16 @@ public class Reserva implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCheckOut;
     
-    @OneToOne
+     @JoinColumn(name = "id_huesped", nullable = false)
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Huesped huesped;
      
-    @OneToOne
+    @JoinColumn(name = "id_habitacion", nullable = false)
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Habitacion idHabitación;
     
-    @OneToOne
+    @JoinColumn(name = "id_empleado", nullable = false)
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Empleado idEmpleado;
     
     

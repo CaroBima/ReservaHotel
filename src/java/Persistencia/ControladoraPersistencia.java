@@ -13,6 +13,7 @@ public class ControladoraPersistencia {
     //métodos para la reserva
     
     public void crearReserva(Reserva reserva){
+        System.out.println("entra a crear reserva");
         ReservaJpaController controlReserva = new ReservaJpaController();
         controlReserva.create(reserva);
     }
@@ -67,8 +68,7 @@ public class ControladoraPersistencia {
      public Cargo buscarUnCargo(String nombreCargo){
          List<Cargo> listaCargos;
          Cargo cargo = new Cargo();
-         CargoJpaController controlCargo = new CargoJpaController();
-         
+                 
          listaCargos = recuperarCargos();
          
          if(!listaCargos.isEmpty()){

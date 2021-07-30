@@ -13,7 +13,7 @@ public class Controladora {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
 //Métodos para la reserva
-    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String importeTotalReserva){
+    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped,  String direccionHuesped, String profesionHuesped, String  cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut){
         Huesped huesped = new Huesped();
         Date fechaNac;
         Date fCheckIn;
@@ -25,11 +25,9 @@ public class Controladora {
         int idHab;
         
         
-        //falta obtener el usuario para poder pasarlo a la bd <<< this.idEmpleado = idEmpleado;
         
         //convierto los strings en date y float
         cantidadPers = Integer.parseInt(cantidadPersonas);
-        montoTot = Double.parseDouble(importeTotalReserva);
         idHab = Integer.parseInt(habitacionReserva);
         
         //convierto los strings de fechas en Date
@@ -48,6 +46,9 @@ public class Controladora {
         huesped.setProfesion(profesionHuesped);
         huesped.setDireccion(direccionHuesped);
         
+        //cálculo del monto total de la reserva
+        montoTot = calcularMontoTotal(fCheckIn, fCheckOut, habitacion);
+          
         
         //asigno los datos en reserva para pasarlos al jpacontroller
         reserva.setHuesped(huesped);
@@ -56,15 +57,19 @@ public class Controladora {
         reserva.setFechaCheckIn(fCheckIn);
         reserva.setFechaCheckOut(fCheckOut);
         reserva.setIdHabitación(habitacion);
+        reserva.setMontoTotalReserva(montoTot);
         
+        controlPersis.crearReserva(reserva);
  }
+    
+
     
     
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado){
         Empleado empleado = new Empleado();
         Usuario usuario = new Usuario();
-        Cargo cargoEmple = new Cargo();
+        Cargo cargoEmple;
         
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
         //si el cargo no se encuentra en la base de datos, lo crea
@@ -73,7 +78,7 @@ public class Controladora {
         
         //convierto la fecha en date
         Date fechaNac = parseFecha(fechaNacimiento);
-        
+        System.out.println(fechaNac);
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
@@ -87,22 +92,23 @@ public class Controladora {
         empleado.setFechaNac(fechaNac);
         empleado.setIdCargo(cargoEmple);
         
-        System.out.println(cargoEmple.getNombreCargo() + cargoEmple.getIdCargo());
         controlPersis.crearEmpleado(empleado);
     }
 
 
     
 //método para convertir el string en formato fecha para poder pasarlo a la controladora de persistencia
-     public Date parseFecha(String fechaNacimiento){
-        Date fechaNac = new Date();
+     public Date parseFecha(String fechaAParsear){
+        Date fechaParse = new Date();
+        
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
         try {
-            fechaNac = formato.parse(fechaNacimiento);
+            fechaParse = formato.parse(fechaAParsear);
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return fechaNac;
+         formato.format(fechaParse);
+        return fechaParse;
     }
     
 
@@ -120,27 +126,19 @@ public class Controladora {
         
     }
     
-    public double calcularMontoTotal(String fechaDesde, String fechaHasta, String habitacionReserva){
+    public double calcularMontoTotal(Date fCheckIn, Date fCheckout, Habitacion habitacion){
         double montoTotal = 0;
         double montoPorDia = 0;
-        Date fechaDesdeCalc;
-        Date fechaHastaCalc;
         int cantidadDias;
-        int idHab;
         Controladora control = new Controladora();
         
-        //parseo las fechas de string a date
-        fechaDesdeCalc = parseFecha(fechaDesde);
-        fechaHastaCalc = parseFecha(fechaHasta);
-        
-        idHab = Integer.parseInt(habitacionReserva);
-        
+      
         //calculo la cantidad de dias
         int milisegundosPorDia = 86400000;
-        cantidadDias = (int) ((fechaHastaCalc.getTime()-fechaDesdeCalc.getTime()) / milisegundosPorDia);
+        cantidadDias = (int) ((fCheckIn.getTime()-fCheckout.getTime()) / milisegundosPorDia);
         
         //recupero el costo de la habitacion y calculo el total para retornarlo
-        montoPorDia = control.buscarPrecioHabitacion(idHab);
+        montoPorDia = habitacion.getPrecioHabitacion();
         montoTotal = montoPorDia * cantidadDias;
         
         return montoTotal;
@@ -189,7 +187,7 @@ public class Controladora {
     
     
     public Cargo buscarUnCargo(String nombreCargo){
-        Cargo cargo = new Cargo();
+        Cargo cargo;
         cargo = controlPersis.buscarUnCargo(nombreCargo);
         return cargo;
     }

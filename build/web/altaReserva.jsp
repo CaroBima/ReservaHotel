@@ -205,31 +205,21 @@
                                     <!-- Fecha de chek out -->    
                                     <div class="col">
                                         <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut" value=''>
+                                        <input type="date" class="form-control" name="fechaCheckOut" value="2021-07-28">
                                     </div>
                                 </div>
 
-                                <div class="row">
+                            <!--    <div class="row">
                                     <div class="col">
                                         <label for = "importeTotalReserva" class="form-label">Importe total: </label>
                                         <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
                                     </div>
                                     <div class="intro-button mx-auto">
 
-                                        <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total">
-                                        <%
-                                            //String fechaDesde = request.getParameter("fechaCheckIn");
-                                            // String fechaHasta = request.getParameter("fechaCheckOut");
-                                            //String habRes = request.getParameter("habitacionReserva");
-                                            //if(!fechaDesde.equals("") && !fechaHasta.equals("")){
-                                            //    double importeTotal = control.calcularMontoTotal(fechaDesde, fechaHasta, habRes);
-                                            //   System.out.println("llega");
-                                            //    }
-                                        %>  
-
+                                        <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total" >
                                     </div> 
                                 </div>
-
+                             -->
 
                                 <br>
 

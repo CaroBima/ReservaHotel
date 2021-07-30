@@ -37,8 +37,9 @@ public class SvAltaReserva extends HttpServlet {
         String cantidadPersonas = request.getParameter("cantidadPersonas"); //(castear)
         String habitacionReserva = request.getParameter("habitacionReserva");
         String fechaCheckIn = request.getParameter("fechaCheckIn");
-        String fechaCheckOut = request.getParameter("fechaChekOut");
-        String importeTotalReserva = request.getParameter("importeTotalReserva");
+        String fechaCheckOut = request.getParameter("fechaCheckOut");
+        //String importeTotalReserva = request.getParameter("importeTotalReserva");
+        String usuario = request.getParameter("usuario");
 
         //traigo la sesion y asigno  los atributos para abrir en cualquier JSP
         request.getSession().setAttribute("nombreHuesped", nombreHuesped);
@@ -51,14 +52,12 @@ public class SvAltaReserva extends HttpServlet {
         request.getSession().setAttribute("habitacionReserva", habitacionReserva);
         request.getSession().setAttribute("fechaCheckIn", fechaCheckIn);
         request.getSession().setAttribute("fechaCheckOut", fechaCheckOut);
-        request.getSession().setAttribute("importeTotalReserva", importeTotalReserva);
+        //request.getSession().setAttribute("importeTotalReserva", importeTotalReserva);
+        request.getSession().setAttribute("usuario", usuario);
 
         Controladora control = new Controladora();
-        double montoTotal;
-        montoTotal = control.calcularMontoTotal(fechaCheckIn, fechaCheckOut, habitacionReserva);
-        
-        //falta definir el logueo del usuario
-        // control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut, montoTotal);
+        System.out.println(fechaCheckOut);
+        control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut);
 
     }
 
