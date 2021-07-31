@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -11,10 +12,12 @@ import javax.persistence.OneToOne;
 public class Empleado extends Persona implements Serializable{
     
     @OneToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn
     private Usuario usuario;
     
 
     @ManyToOne  (cascade = CascadeType.MERGE)
+    @JoinColumn
     private Cargo idCargo; 
 
     //constructores

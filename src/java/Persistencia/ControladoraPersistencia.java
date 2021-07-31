@@ -13,7 +13,6 @@ public class ControladoraPersistencia {
     //métodos para la reserva
     
     public void crearReserva(Reserva reserva){
-        System.out.println("entra a crear reserva");
         ReservaJpaController controlReserva = new ReservaJpaController();
         controlReserva.create(reserva);
     }

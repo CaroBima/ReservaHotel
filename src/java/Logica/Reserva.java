@@ -30,16 +30,16 @@ public class Reserva implements Serializable {
     private Date fechaCheckOut;
     
     
-    @JoinColumn(name = "id_huesped", nullable = false)
+    @JoinColumn
     @OneToOne (cascade = CascadeType.PERSIST)
     private Huesped huesped;
      
-    @JoinColumn(name = "id_habitacion", nullable = false)
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn
+    @ManyToOne (cascade = CascadeType.MERGE)
     private Habitacion idHabitación;
     
-    @JoinColumn(name = "id_empleado", nullable = false)
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn
+    @ManyToOne (cascade = CascadeType.MERGE)
     private Empleado idEmpleado;
     
     
