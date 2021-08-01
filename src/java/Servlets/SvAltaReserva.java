@@ -34,12 +34,11 @@ public class SvAltaReserva extends HttpServlet {
         String fechaNacHuesped = request.getParameter("fechaNacHuesped");
         String direccionHuesped = request.getParameter("direccionHuesped");
         String profesionHuesped = request.getParameter("profesionHuesped");
-        String cantidadPersonas = request.getParameter("cantidadPersonas"); //(castear)
+        String cantidadPersonas = request.getParameter("cantidadPersonas"); 
         String habitacionReserva = request.getParameter("habitacionReserva");
         String fechaCheckIn = request.getParameter("fechaCheckIn");
         String fechaCheckOut = request.getParameter("fechaCheckOut");
-        //String importeTotalReserva = request.getParameter("importeTotalReserva");
-        String usuario = request.getParameter("usuario");
+        String usuario = (String) request.getSession().getAttribute("usuario");
 
         //traigo la sesion y asigno  los atributos para abrir en cualquier JSP
         request.getSession().setAttribute("nombreHuesped", nombreHuesped);
@@ -52,11 +51,12 @@ public class SvAltaReserva extends HttpServlet {
         request.getSession().setAttribute("habitacionReserva", habitacionReserva);
         request.getSession().setAttribute("fechaCheckIn", fechaCheckIn);
         request.getSession().setAttribute("fechaCheckOut", fechaCheckOut);
-        //request.getSession().setAttribute("importeTotalReserva", importeTotalReserva);
         request.getSession().setAttribute("usuario", usuario);
-
+        
+        
         Controladora control = new Controladora();
-        System.out.println(fechaCheckOut);
+        
+        
         control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut, usuario);
 
     }

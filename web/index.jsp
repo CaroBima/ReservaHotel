@@ -30,14 +30,10 @@
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-        Controladora control = new Controladora();
-        control.agregarAdmin();
-        
-            if(loginusuario == null){
+        HttpSession misesion = request.getSession();
+        String usuario = (String) misesion.getAttribute("usuario");
+      
+            if(usuario == null){
                 response.sendRedirect("login.jsp");
             }else{
                

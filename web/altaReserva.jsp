@@ -36,14 +36,14 @@
     </head>
     <body>
         <%
-            HttpSession sesion = request.getSession();
-            String loginusuario = (String) sesion.getAttribute("usuario");
-
-            //verifico si el usuario admin esta creado y si no lo agrego
-            if (loginusuario == null) {
+        HttpSession sesion = request.getSession();
+        String loginusuario = (String) sesion.getAttribute("usuario");
+        
+        //verifico si el usuario admin esta creado y si no lo agrego
+            if(loginusuario == null){
                 response.sendRedirect("login.jsp");
-            } else {
-
+            }else{
+               
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">

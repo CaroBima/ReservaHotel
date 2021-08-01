@@ -60,24 +60,21 @@
                                 <div class="intro-button mx-auto">
                                     <input type="submit" name="btnIngresar" class="btn btn-primary btn-xl" value="Ingresar"> 
                                 </div> 
-                        </div> 
-
-                        </form>
-
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <footer class="footer text-faded text-center py-5">
-        <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
 
-</body>
+    </body>
 </html>
 
 

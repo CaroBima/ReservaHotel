@@ -55,6 +55,7 @@ public class SvLogin extends HttpServlet {
             HttpSession misesion = request.getSession(true);
             misesion.setAttribute("usuario", usuario);
             misesion.setAttribute("contrasenia", contrasenia);
+            
             response.sendRedirect("index.jsp");
         }
         else{

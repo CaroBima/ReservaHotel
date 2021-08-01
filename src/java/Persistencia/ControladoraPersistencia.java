@@ -110,6 +110,14 @@ public class ControladoraPersistencia {
          return listaUsuarios;
      }
      
+     
+     public void agregarAdmin(Empleado empleado){
+       EmpleadoJpaController controlEmpleado = new EmpleadoJpaController();
+       controlEmpleado.create(empleado);
+         
+     }
+     /*
+     //FUNCIONAAAAAA, para agregar solo el usuario admin
     public void agregarAdmin(){
         UsuarioJpaController controlUsuario = new UsuarioJpaController();
         Usuario usuario = new Usuario();
@@ -127,5 +135,6 @@ public class ControladoraPersistencia {
         }
         
     }
+    */
 
 }
