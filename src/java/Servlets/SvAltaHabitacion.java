@@ -80,8 +80,7 @@ public class SvAltaHabitacion extends HttpServlet {
        
         
         control.crearHabitación(nombreTematico, nroHabitacion, pisoHabitacion, tipoHabitacion, precioHabitacion);
-        //armo la respuesta
-        //response.sendRedirect("confirmacion.jsp");
+      
         
          //redirecciono a la página de confirmacion
         response.sendRedirect("confirmacionAltaHabitacion.jsp");

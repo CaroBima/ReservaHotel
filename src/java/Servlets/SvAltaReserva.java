@@ -59,6 +59,9 @@ public class SvAltaReserva extends HttpServlet {
         
         control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut, usuario);
 
+        //redirecciono a la página de confirmacion
+        response.sendRedirect("confirmacionReserva.jsp");
+    
     }
 
     @Override

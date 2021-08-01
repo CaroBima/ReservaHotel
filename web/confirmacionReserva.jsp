@@ -1,6 +1,6 @@
 <%-- 
-    Document   : confirmAltaEmpleado
-    Created on : 27 jul. 2021, 23:14:41
+    Document   : confirmacionReserva
+    Created on : 1 ago. 2021, 13:24:11
     Author     : Caro
 --%>
 
@@ -102,42 +102,59 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Alta de nuevo empleado</span>
+                                <span class="section-heading-lower">Nueva rerserva</span>
                             </h2>
                             <h4 >Los datos han sido guardados correctamente:</h4>
                             <br>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        <td>Nombre de usuario:</td>
-                                        <td><%= session.getAttribute("usuarioEmpleado")%></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Nombre:</td>
-                                        <td><%= session.getAttribute("nombreEmpleado")%></td>
+                                        <td>Nombre del huesped:</td>
+                                        <td><%= session.getAttribute("nombreHuesped")%></td>
                                     </tr>
 
                                     <tr>
                                         <td>Apellido:</td>
-                                        <td><%= session.getAttribute("apellidoEmpleado")%></td>
+                                        <td><%= session.getAttribute("apellidoHuesped")%></td>
                                     </tr>
+
                                     <tr>
                                         <td>Dni:</td>
-                                        <td><%= session.getAttribute("dniEmpleado")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dirección:</td>
-                                        <td><%= session.getAttribute("direccionEmpleado")%></td>
+                                        <td><%= session.getAttribute("dniHuesped")%></td>
                                     </tr>
                                     <tr>
                                         <td>Fecha de nacimiento:</td>
-                                        <td><%= session.getAttribute("fechaNacEmpleado")%></td>
+                                        <td><%= session.getAttribute("dniHuesped")%></td>
                                     </tr>
                                     <tr>
-                                        <td>Cargo:</td>
-                                        <td><%= session.getAttribute("cargoEmpleado")%></td>
+                                        <td>Dirección:</td>
+                                        <td><%= session.getAttribute("direccionHuesped")%></td>
                                     </tr>
+                                    <tr>
+                                        <td>Profesión:</td>
+                                        <td><%= session.getAttribute("profesionHuesped")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cantidad de personas:</td>
+                                        <td><%= session.getAttribute("cantidadPersonas")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Habitación reservada:</td>
+                                        <td><%= session.getAttribute("habitacionReserva")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de Check In:</td>
+                                        <td><%= session.getAttribute("fechaCheckIn")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de Check Out:</td>
+                                        <td><%= session.getAttribute("fechaCheckOut")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usuario que realizó la reserva:</td>
+                                        <td><%= session.getAttribute("usuario")%></td>
+                                    </tr>
+                                    
                                 </table>
                             </div>
                         </div>
