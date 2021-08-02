@@ -28,6 +28,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
+        <script src="js/validador.js"></script>
         <title>Gestion de reservas</title>
     </head>
     <body>
@@ -109,53 +110,53 @@
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form name="formAltaEmple" class="border p-3 form" action="SvAltaEmpleado" method="POST">
+                            <form name="formAltaEmple" class="border p-3 form" action="SvAltaEmpleado" method="POST" >
                                 <h1>Nuevo empleado</h1>
                                 <br>
                                 <div class="row">
                                     <div class="col">
                                         <label for = "usuarioEmpleado" class="form-label">Usuario:</label> 
-                                        <input type="text"  class="form-control" name="usuarioEmpleado">
+                                        <input type="text" class="form-control" id="usuarioEmpleado" name="usuarioEmpleado">
                                     </div>   
                                     <div class="col">
                                         <label for = "contraseniaEmpleado" class="form-label">Contraseña:</label> 
-                                        <input type="password"  class="form-control" name="contraseniaEmpleado">
+                                        <input type="password"  class="form-control" id="contraseniaEmpleado" name="contraseniaEmpleado" >
                                     </div>
                                 </div> 
                                 <br>
                                 <div class="row">
                                     <div class="col">
                                         <label for = "nombreEmpleado" class="form-label">Nombre:</label> 
-                                        <input type="text"  class="form-control" name="nombreEmpleado">
+                                        <input type="text"  class="form-control" id="nombreEmpleado" name="nombreEmpleado" >
                                     </div>
 
                                     <div class="col">
                                         <label for = "apellidoEmpleado" class="form-label">Apellido:</label> 
-                                        <input type="text"  class="form-control" name="apellidoEmpleado">
+                                        <input type="text"  class="form-control" id="apellidoEmpleado" name="apellidoEmpleado" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col"> 
                                         <label for = "dniEmpleado" class="form-label">Dni: </label>
-                                        <input type="text"  class="form-control" name="dniEmpleado">
+                                        <input type="text"  class="form-control" id="dniEmpleado" name="dniEmpleado" >
                                     </div>
 
                                     <div class="col">
                                         <label for = "direccionEmpleado" class="form-label">Dirección: </label>
-                                        <input type="text"  class="form-control" name="direccionEmpleado">
+                                        <input type="text"  class="form-control" id="direccionEmpleado" name="direccionEmpleado" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col">
                                         <label for = "fechaNacEmpleado" class="form-label">Fecha de nacimiento: </label>
-                                        <input type="date"  class="form-control" name="fechaNacEmpleado" >
+                                        <input type="date"  class="form-control" id="fechaNacEmpleado" name="fechaNacEmpleado" >
                                     </div>
 
                                     <div class="col">
                                         <label for = "cargoEmpleado" class="form-label">Cargo: </label>
-                                        <select name ="cargoEmpleado"  class="form-control">
+                                        <select name ="cargoEmpleado" id="cargoEmpleado" class="form-control" >
                                             <option value="-"  class="form-control-lg">-</option>
                                             <%
                                                 //Cargo los valores de la tabla de cargos en el combobox
@@ -171,13 +172,13 @@
                                                 }
                                             %>
                                         </select>
-                                        <input type="button" name="btnNuevoCargo" class="btn btn-primary btn-xs" value="Añadir cargo" onclick='ingresoCargo()'> 
+                                        <input type="button" id="btnNuevoCarg" name="btnNuevoCargo" class="btn btn-primary btn-xs" value="Añadir cargo" onclick='ingresoCargo()'> 
 
                                     </div>
                                 </div>
                                 <br>
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar"> 
+                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarEmpleado();"> 
                                 </div>    
                             </form>
                         </div>

@@ -1,6 +1,7 @@
 package Logica;
 
 import Persistencia.ControladoraPersistencia;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +25,8 @@ public class Controladora {
         int cantidadPers;
         double montoTot;
         int idHab;
+        Date fechaHoy = new Date();
+        
 
         //convierto los strings en date y float
         cantidadPers = Integer.parseInt(cantidadPersonas);
@@ -60,6 +63,7 @@ public class Controladora {
         reserva.setIdHabitación(habitacion);
         reserva.setMontoTotalReserva(montoTot);
         reserva.setIdEmpleado(emple);
+        reserva.setFechaReserva(fechaHoy);
 
         controlPersis.crearReserva(reserva);
     }
@@ -131,7 +135,10 @@ public class Controladora {
         formato.format(fechaParse);
         return fechaParse;
     }
+    
+    
 
+    
 //Métodos para la habitación
     public void crearHabitación(String nombreTematico, int nroHabitacion, int pisoHabitacion, String tipoHabitación, double precio) {
         Habitacion habitacion = new Habitacion();

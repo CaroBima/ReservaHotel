@@ -126,13 +126,13 @@
                                     <div class="col">
                                         <!-- Ingreso del nombre temático de la habitación-->
                                         <label for = "nombreTematico" class="form-label">Nombre temático:</label> 
-                                        <input type="text" class="form-control" name="nombreTematico">
+                                        <input type="text" class="form-control" name="nombreTematico" required>
                                     </div>
 
                                     <div class="col">
                                         <!-- Ingreso del precio de la habitación-->
                                         <label for = "precioHabitacion" class="form-label">Precio:</label> 
-                                        <input type="text" class="form-control" name="precioHabitacion">
+                                        <input type="text" class="form-control" name="precioHabitacion" required>
                                     </div>
                                 </div>
 
@@ -140,7 +140,7 @@
                                     <div class="col">
                                         <!-- Ingreso del piso donde esta la habitación -->
                                         <label for = "pisoHabitacion" class="form-label">Piso:</label> 
-                                        <select name="pisoHabitacion" class="form-control">
+                                        <select name="pisoHabitacion" class="form-control" required>
                                             <option value="0" selected>-</option>
                                             <option value="1">1º Piso</option>
                                             <option value="2">2º Piso</option>
@@ -156,7 +156,7 @@
                                     <!-- Ingreso del número de habitación -->
                                     <div class="col">
                                         <label for = "nroHabitacion" class="form-label">Número de Habitación:</label> 
-                                        <select name ="nroHabitacion" class="form-control">
+                                        <select name ="nroHabitacion" class="form-control" required>
                                             <option value="0" selected>-</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>

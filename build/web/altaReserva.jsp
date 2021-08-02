@@ -113,20 +113,20 @@
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST">
+                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" onload="cargarFechas();">
 
                                 <!-- Ingreso de datos del huesped -->
                                 <div class="row">
                                     <!-- Ingreso de nombre del huesped -->
                                     <div class="col">
                                         <label for = "nombreHuesped" class="form-label" >Nombre: </label>
-                                        <input type="text" class="form-control" name="nombreHuesped">
+                                        <input type="text" class="form-control" name="nombreHuesped" required>
                                     </div>
 
                                     <!-- Ingreso del apellido -->
                                     <div class="col">
                                         <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
-                                        <input type="text" class="form-control" name="apellidoHuesped">
+                                        <input type="text" class="form-control" name="apellidoHuesped" required>
                                     </div>
                                 </div>
 
@@ -134,13 +134,13 @@
                                     <!-- Ingreso del dni del huesped -->
                                     <div class="col">
                                         <label for = "dniHuesped" class="form-label" >Número de dni: </label>
-                                        <input type="text" class="form-control" name="dniHuesped">
+                                        <input type="text" class="form-control" name="dniHuesped" required>
                                     </div>
 
                                     <!-- Fecha de nacimiento del huesped -->
                                     <div class="col">
                                         <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
-                                        <input type="date" class="form-control" name="fechaNacHuesped">
+                                        <input type="date" class="form-control" name="fechaNacHuesped" required>
                                     </div>
                                 </div>
 
@@ -148,14 +148,14 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "direccionHuesped" class="form-label" >Dirección: </label>
-                                        <input type="text" class="form-control" name="direccionHuesped">
+                                        <input type="text" class="form-control" name="direccionHuesped" required>
                                     </div>
 
                                     <!-- Ingreso de Profesion -->
 
                                     <div class="col">
                                         <label for = "profesionHuesped" class="form-label">Profesión: </label>
-                                        <input type="text" class="form-control"  name="profesionHuesped">
+                                        <input type="text" class="form-control"  name="profesionHuesped" required>
                                     </div>
                                 </div>
 
@@ -199,13 +199,13 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
-                                        <input type="date" class="form-control" name="fechaCheckIn" value="2021-07-27">
+                                        <input type="date" class="form-control" name="fechaCheckIn">
                                     </div>
 
                                     <!-- Fecha de chek out -->    
                                     <div class="col">
                                         <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut" value="2021-07-28">
+                                        <input type="date" class="form-control" name="fechaCheckOut">
                                     </div>
                                 </div>
 

@@ -24,6 +24,8 @@ public class Reserva implements Serializable {
     @Basic
     private int cantPersonas;
     private double montoTotalReserva;
+    private Date fechaReserva;
+    
     @Temporal(TemporalType.DATE)
     private Date fechaCheckIn;
     @Temporal(TemporalType.DATE)
@@ -48,10 +50,11 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(int idReserva, int cantPersonas, double montoTotalReserva, Date fechaCheckIn, Date fechaCheckOut, Huesped huesped, Habitacion idHabitación, Empleado idEmpleado) {
+    public Reserva(int idReserva, int cantPersonas, double montoTotalReserva, Date fechaReserva, Date fechaCheckIn, Date fechaCheckOut, Huesped huesped, Habitacion idHabitación, Empleado idEmpleado) {
         this.idReserva = idReserva;
         this.cantPersonas = cantPersonas;
         this.montoTotalReserva = montoTotalReserva;
+        this.fechaReserva = fechaReserva;
         this.fechaCheckIn = fechaCheckIn;
         this.fechaCheckOut = fechaCheckOut;
         this.huesped = huesped;
@@ -59,10 +62,6 @@ public class Reserva implements Serializable {
         this.idEmpleado = idEmpleado;
     }
 
-    
-
-   
-     
     //getters y setters
 
     public int getIdReserva() {
@@ -87,6 +86,14 @@ public class Reserva implements Serializable {
 
     public void setMontoTotalReserva(double montoTotalReserva) {
         this.montoTotalReserva = montoTotalReserva;
+    }
+
+    public Date getFechaReserva() {
+        return fechaReserva;
+    }
+
+    public void setFechaReserva(Date fechaReserva) {
+        this.fechaReserva = fechaReserva;
     }
 
     public Date getFechaCheckIn() {

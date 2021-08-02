@@ -50,11 +50,11 @@
                                 <br>
                                 <p>
                                     <label for = "nombreUsuario" class="form-label wrap-input100 validate-input" data-validate = "Ingresá un e-mail válido: ejemplo@abc.xyz">Usuario:</label> 
-                                    <input type="text"  class="form-control" name="nombreUsuario">
+                                    <input type="text"  class="form-control" name="nombreUsuario" required>
                                 </p>
                                 <p>
                                     <label for = "contraUsuario" class="form-label wrap-input100 validate-input"  data-validate = "Debe ingresar su contraseña">Contraseña:</label> 
-                                    <input type="password"  class="form-control" name="contraUsuario">
+                                    <input type="password"  class="form-control" name="contraUsuario" required>
                                 </p>
                                 <br>  
                                 <div class="intro-button mx-auto">

@@ -1,3 +1,5 @@
+
+
 package Persistencia;
 
 import Logica.Habitacion;
@@ -18,14 +20,12 @@ public class HabitacionJpaController implements Serializable {
     public HabitacionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
     private EntityManagerFactory emf = null;
 
-     public HabitacionJpaController() {
-        EntityManagerFactory Persitence;
+    public HabitacionJpaController() {
         emf = Persistence.createEntityManagerFactory("HotelPU");
     }
-     
+      
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
