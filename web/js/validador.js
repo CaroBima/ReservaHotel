@@ -14,6 +14,8 @@ function validarEmpleado() {
     if(usuario === "" || contrasenia === "" || nombre ==="" || apellido ==="" || dni ==="" || direccion ==="" || fechaNac ==="" || cargo ==="") {
         alert("Todos los campos deben estar completos");
         return false;
+    }else{
+        
     }
 }
 

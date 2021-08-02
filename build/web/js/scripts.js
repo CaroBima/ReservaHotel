@@ -47,8 +47,8 @@ function cargarFechas() {
     if (mes < 10)
         mes = '0' + mes; //agrega cero si es menor de 10
 
-document.formAltaEmple.fechaCheckIn.value = (dia + "-" + mes + "-" + anio);
-document.formAltaEmple.fechaCheckIn.value = (dia + "-" + mes + "-" + anio);
+document.formAltaReserva.fechaCheckIn.value = (dia + "-" + mes + "-" + anio);
+document.formAltaReserva.fechaCheckOut.value = (dia + "-" + mes + "-" + anio);
 
 }
 

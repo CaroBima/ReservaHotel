@@ -36,14 +36,14 @@
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-            if(loginusuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -113,7 +113,7 @@
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" onload="cargarFechas();">
+                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" >
 
                                 <!-- Ingreso de datos del huesped -->
                                 <div class="row">
@@ -209,17 +209,17 @@
                                     </div>
                                 </div>
 
-                            <!--    <div class="row">
-                                    <div class="col">
-                                        <label for = "importeTotalReserva" class="form-label">Importe total: </label>
-                                        <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
+                                <!--    <div class="row">
+                                        <div class="col">
+                                            <label for = "importeTotalReserva" class="form-label">Importe total: </label>
+                                            <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
+                                        </div>
+                                        <div class="intro-button mx-auto">
+    
+                                            <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total" >
+                                        </div> 
                                     </div>
-                                    <div class="intro-button mx-auto">
-
-                                        <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total" >
-                                    </div> 
-                                </div>
-                             -->
+                                -->
 
                                 <br>
 
