@@ -1,9 +1,12 @@
 <%-- 
-    Document   : consultaEmpleado
-    Created on : 24 jul. 2021, 10:47:12
+    Document   : consultaHabitacion
+    Created on : 2 ago. 2021, 10:17:45
     Author     : Caro
 --%>
 
+<%@page import="Logica.Habitacion"%>
+<%@page import="java.util.List"%>
+<%@page import="Logica.Controladora"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,14 +32,14 @@
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-            if(loginusuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -45,7 +48,7 @@
             </h1>
         </header>
 
-               <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -55,46 +58,48 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- Menú de reservas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reservas
+                                Altas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
+                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- Menú de Habitaciones-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Habitaciones
+                                Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar habitación</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar habitación </a></li>
+                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
+                                <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
+                                <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- Menú de Empleado-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Empleados
+                                Editar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar</a></li>
+                                <li><a class="dropdown-item" href="modificarReserva">Reserva</a></li>
+                                <li><a class="dropdown-item" href="modificarCliente">Cliente</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion">Habitación</a></li>
+                                <li><a class="dropdown-item" href="modificarEmpleado">Empleado</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        
         <section class="page-section cta">
             <div class="container">
                 <div class="row">
@@ -102,16 +107,49 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Empleado</span>
+                                <span class="section-heading-lower">Consultar Habitaciones</span>
                             </h2>
 
-                            <!-- Formulario de reserva -->
-                            <form name="formConsultaEmpleado"  class="border p-3 form" action="SvConsultaEmpleado" method="POST">
+                            <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                             <tr>
+                                                <td>Tipo de habitación:</td>
+                                                <td>Nombre temático:</td>
+                                                <td>Piso:</td>
+                                                <td>Número de habitación:</td>
+                                                <td>Precio:</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                 <%  
+                                                    //recupero la lista de habitaciones para mostrarla en la tabla
+                                                    Controladora control = new Controladora();
+                                                    List<Habitacion> listaHabitaciones;
+                                                    listaHabitaciones = control.recuperarHabitaciones();
+                                                    if (listaHabitaciones != null) {
+                                                        for (Habitacion hab : listaHabitaciones) {
+                                                %>
+                                            <tr>    
+                                                <td><%= hab.getTipoHab()%></td>
 
+                                                <td><%= hab.getNombreTematica()%></td>
 
-                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
-                            </form>
+                                                <td><%= hab.getPiso()%></td>
 
+                                                <td><%= hab.getNroHabitacion()%></td>
+
+                                                <td><%= hab.getPrecioHabitacion()%></td>
+                                            </tr>
+                                            <%
+                                                    } //cierre del for
+                                                }//cierre del if
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
 
                         </div>
                     </div>

@@ -45,7 +45,7 @@
             </h1>
         </header>
 
-        <!-- Menú de navegación-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -55,39 +55,41 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- Menú de reservas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reservas
+                                Altas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
+                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- Menú de Habitaciones-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Habitaciones
+                                Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar habitación</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar habitación </a></li>
+                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
+                                <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
+                                <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- Menú de Empleado-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Empleados
+                                Editar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta</a></li>
-                                <li><a class="dropdown-item" href="#">Consultar</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar</a></li>
+                                <li><a class="dropdown-item" href="modificarReserva">Reserva</a></li>
+                                <li><a class="dropdown-item" href="modificarCliente">Cliente</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion">Habitación</a></li>
+                                <li><a class="dropdown-item" href="modificarEmpleado">Empleado</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -1,9 +1,13 @@
 <%-- 
-    Document   : confirmacionReserva
-    Created on : 1 ago. 2021, 13:24:11
+    Document   : consultaEmpleado
+    Created on : 24 jul. 2021, 10:47:12
     Author     : Caro
 --%>
 
+<%@page import="Logica.Empleado"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="Logica.Controladora"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Hotel Integrador</title>
+        <title>Nueva reserva</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -25,7 +29,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Gestion de reservas</title>
+        <title>Consulta de Empleados</title>
     </head>
     <body>
         <%
@@ -45,7 +49,7 @@
             </h1>
         </header>
 
-         <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -96,6 +100,7 @@
                 </div>
             </div>
         </nav>
+
         <section class="page-section cta">
             <div class="container">
                 <div class="row">
@@ -103,61 +108,54 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Nueva rerserva</span>
+                                <span class="section-heading-lower">Consultar Empleado</span>
                             </h2>
-                            <h4 >Los datos han sido guardados correctamente:</h4>
-                            <br>
+
+                            <!-- comienzo de la tabla que muestra el listado de empleados -->
                             <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>Nombre del huesped:</td>
-                                        <td><%= session.getAttribute("nombreHuesped")%></td>
-                                    </tr>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>Nombre y Apellido</td>
+                                            <td>Cargo</td>
+                                            <td>Dni</td>
+                                            <td>Fecha de nacimiento</td>
+                                            <td>Dirección</td>
+                                            <td>Usuario:</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%                                                     //recupero la lista de habitaciones para mostrarla en la tabla
+                                            Controladora control = new Controladora();
+                                            List<Empleado> listaEmpleados;
+                                            listaEmpleados = control.recuperarEmpleados();
+                                            if (listaEmpleados != null) {
+                                                for (Empleado emple : listaEmpleados) {
+                                                    if (!emple.getNombre().equals("admin")) {
+                                        %>
+                                        <tr>    
+                                            <td><%= emple.getNombre() + " " + emple.getApellido()%></td>
 
-                                    <tr>
-                                        <td>Apellido:</td>
-                                        <td><%= session.getAttribute("apellidoHuesped")%></td>
-                                    </tr>
+                                            <td><%= emple.getIdCargo().getNombreCargo()%></td>
 
-                                    <tr>
-                                        <td>Dni:</td>
-                                        <td><%= session.getAttribute("dniHuesped")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha de nacimiento:</td>
-                                        <td><%= session.getAttribute("dniHuesped")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dirección:</td>
-                                        <td><%= session.getAttribute("direccionHuesped")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Profesión:</td>
-                                        <td><%= session.getAttribute("profesionHuesped")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cantidad de personas:</td>
-                                        <td><%= session.getAttribute("cantidadPersonas")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Habitación reservada:</td>
-                                        <td><%= session.getAttribute("habitacionReserva")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha de Check In:</td>
-                                        <td><%= session.getAttribute("fechaCheckIn")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha de Check Out:</td>
-                                        <td><%= session.getAttribute("fechaCheckOut")%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Usuario que realizó la reserva:</td>
-                                        <td><%= session.getAttribute("usuario")%></td>
-                                    </tr>
-                                    
+                                            <td><%= emple.getDni()%></td>
+
+                                            <td><%= emple.getFechaNac()%></td>
+
+                                            <td><%= emple.getDireccion()%></td>
+
+                                            <td><%= emple.getUsuario().getNombreUsuario()%></td>
+                                        </tr>
+                                        <%
+                                                } //cierre del if que excluye al admin del listado  
+                                            } //cierre del for
+                                        } 
+                                        %>
+                                      
+                                    </tbody>
                                 </table>
                             </div>
+                            <!-- fin de la tabla de empleados -->
                         </div>
                     </div>
                 </div>

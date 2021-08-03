@@ -1,7 +1,6 @@
 package Logica;
 
 import Persistencia.ControladoraPersistencia;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,11 +76,11 @@ public class Controladora {
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
         //si el cargo no se encuentra en la base de datos, lo crea
         cargoEmple = buscarUnCargo(cargoEmpleado);
-        System.out.println(cargoEmple.getNombreCargo() + cargoEmple.getIdCargo());
+        
 
         //convierto la fecha en date
         Date fechaNac = parseFecha(fechaNacimiento);
-        System.out.println(fechaNac);
+     
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
@@ -105,7 +104,7 @@ public class Controladora {
 
         //traigo la lista de empleados
         listaEmple = controlPersis.recuperarEmpleados();
-        System.out.println("usuario por parametro " + usuario  );
+        
         //recorro la lista y recupero los usuarios. Verifico si el nombre de usuario 
         //coincide con el buscado y lo devuelvo
         if (!listaEmple.isEmpty()) {
@@ -120,6 +119,13 @@ public class Controladora {
             }
         }
         return empleado;
+    }
+    
+    public List recuperarEmpleados(){
+        List<Empleado> listaEmpleados;
+        listaEmpleados = controlPersis.recuperarEmpleados();
+        
+        return listaEmpleados;
     }
 
 //método para convertir el string en formato fecha para poder pasarlo a la controladora de persistencia
@@ -218,12 +224,17 @@ public class Controladora {
     public void agregarAdmin() {
         Empleado empleado = new Empleado();
         Usuario usuario = new Usuario();
-
+        Cargo cargo = new Cargo();
+        
         usuario.setNombreUsuario("admin");
         usuario.setContrasenia("admin");
+        
+        cargo =  buscarUnCargo("admin"); 
+        
         empleado.setNombre("admin");
         empleado.setApellido("admin");
         empleado.setUsuario(usuario);
+        empleado.setIdCargo(cargo);
 
         controlPersis.agregarAdmin(empleado);
     }
@@ -236,8 +247,7 @@ public class Controladora {
 
         if (listaUsuarios.isEmpty()) {
             agregarAdmin();
-            System.out.println("entra a agregar admin, lista vacia");
-
+            
         } else { //si la lista está vacía agrego el usuario admin / clave admin
 
             for (Usuario usu : listaUsuarios) {
