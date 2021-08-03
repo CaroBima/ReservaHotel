@@ -1,21 +1,20 @@
 <%-- 
     Document   : modificarHabitacion
-    Created on : 3 ago. 2021, 00:44:44
+    Created on : 3 ago. 2021, 12:37:02
     Author     : Caro
 --%>
 
+
 <%@page import="Logica.Habitacion"%>
-<%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Nueva reserva</title>
+        <title>Hotel Integrador</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -27,7 +26,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Consulta de Empleados</title>
+        <title>Gestion de reservas</title>
     </head>
     <body>
         <%
@@ -47,7 +46,7 @@
             </h1>
         </header>
 
-        <!-- MenÃº de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -57,7 +56,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- MenÃº de Altas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,12 +64,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- MenÃº de Consultas-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -82,17 +81,15 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- MenÃº de Ediciones-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <form action="SvModificarHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">HabitaciÃ³n</a></li>
-                                </form>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -108,67 +105,232 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Habitaciones</span>
+                                <span class="section-heading-lower">Modificar Habitación</span>
                             </h2>
 
-                            <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <td>Tipo de habitaciÃ³n:</td>
-                                            <td>Nombre temÃ¡tico:</td>
-                                            <td>Piso:</td>
-                                            <td>NÃºmero de habitaciÃ³n:</td>
-                                            <td>Precio</td>
-                                            <td>Eliminar</td>
-                                            <td>Modificar</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%  
-                                            HttpSession misesion = request.getSession();
-                                            
-                                            
-                                            List<Habitacion> listaHabitaciones;
-                                            listaHabitaciones = (List) request.getSession().getAttribute("listaHabitaciones");
-                                            if (listaHabitaciones != null) {
-                                                for (Habitacion hab : listaHabitaciones) {
-                                                    
-                                        %>
-                                        <tr>    
-                                            <td><%= hab.getTipoHab()%></td>
+                            <!-- Formulario de alta de nueva habitación -->
+                            <form action="SvModifHabitacion"  class="border p-3 form" method="get">
+                                <%                                    HttpSession misesion = request.getSession();
+                                    Habitacion habitacion = (Habitacion) misesion.getAttribute("habitacion");
+                                %>
+                                <h1>Modificar la habitación</h1>
 
-                                            <td><%= hab.getNombreTematica()%></td>
+                                <br>
 
-                                            <td><%= hab.getPiso()%></td>
-
-                                            <td><%= hab.getNroHabitacion()%></td>
-
-                                            <td><%= hab.getPrecioHabitacion()%></td>
-                                            
-                                            <% int idHab = hab.getIdHabitacion(); %>
-                                            
-                                            <td> 
-                                                <form name="frmEliminarHabitacion" action="SvEliminarHabitacion" method="POST" style="display:inline">
-                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
-                                                    <button type="submit" class="btn btn-outline-danger btn-xs" data-title="Delete" style="display:inline"><img src="assets/icons/trash.svg"></button> 
-                                                </form>        
-                                            </td>
-                                            <td>
-                                                <form name="frmEditarHabitacion" action="SvEditarHabitacion" method="POST" style="display:inline">
-                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
-                                                    <button type="submit" class="btn btn-outline-warning btn-xs" data-title="Edit" style="display:inline"><img src="assets/icons/pencil-square.svg"></button> 
-                                                </form>        
-                                            </td>
-                                        </tr>
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Ingreso del tipo de habitación -->
+                                        <label for = "tipoHabitacion" class="form-label">Tipo:</label>
+                                        <%  //verifico que valor corresponde al tipo de habitacion y marco el previamente cargado en la bd
+                                            if (habitacion.getTipoHab().equals("Single")) {
+                                        %>    
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Single" checked="checked" >Single
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
                                         <%
-                                                } //cierre del for
-                                            }//cierre del if
+                                        } else {
+                                            if (habitacion.getTipoHab().equals("Doble")) {
+                                        %> 
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble" checked="checked" >Doble
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                        <%  } else if (habitacion.getTipoHab().equals("Triple")) {
                                         %>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple" checked="checked" >Triple
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                        <% } else {
+                                        %>
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Single" >Single
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple" checked="checked" >Múltiple (8 pers. Máx.)
+                                        <% }
+                                            }
+                                        %>
+                                    </div>  
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Muestro nombre temático de la habitación ingresado previamente-->
+                                        <label for = "nombreTematico" class="form-label">Nombre temático:</label> 
+                                        <input type="text" class="form-control" name="nombreTematico" value="<%= habitacion.getNombreTematica()%>">
+                                    </div>
+
+                                    <div class="col">
+                                        <!-- Muestro el precio de la habitación recuperado-->
+                                        <label for = "precioHabitacion" class="form-label">Precio:</label> 
+                                        <input type="text" class="form-control" name="precioHabitacion" value="<%= habitacion.getPrecioHabitacion()%>">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Piso donde esta la habitación -->
+                                        <label for = "pisoHabitacion" class="form-label">Piso:</label> 
+                                        <select name="pisoHabitacion" class="form-control" required>
+                                            <%
+                                                //para que quede seleccionado por defecto el piso guardado
+                                                switch (habitacion.getPiso()) {
+                                                    case 1:
+
+                                            %>    
+                                            <option value="1" selected>1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%   
+                                                break;
+                                                case 2:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2" selected>2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                break;
+                                                case 3:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3" selected>3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                break;
+                                                case 4:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4" selected>4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                break;
+                                                case 5:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5" selected>5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                break;
+                                                case 6:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6" selected>6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                break;
+                                                case 7:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7" selected>7º Piso</option>
+                                            <option value="8">8º Piso</option>
+                                            <%
+                                                    break;
+                                                case 8:
+                                            %>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8" selected>8º Piso</option>
+                                            <%
+                                                }//cierre del switch
+                                            %>
+                                        </select>
+                                    </div> 
+
+                                    <!-- Ingreso del número de habitación -->
+                                    <div class="col">
+                                        <label for = "nroHabitacion" class="form-label">Número de Habitación:</label> 
+                                        <select name ="nroHabitacion" class="form-control" required>
+                                           <% 
+                                               //cargo como selected la habitacion que traigo de la base de datos
+                                            switch(habitacion.getNroHabitacion()){
+                                                case 1:
+                                           %>
+                                            <option value="1" selected>1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <% 
+                                                break;
+                                                case 2:
+                                            %>
+                                            <option value="1">1</option>
+                                            <option value="2" selected>2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <% 
+                                                break;
+                                                case 3:
+                                            %> 
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3" selected>3</option>
+                                            <option value="4">4</option>
+                                            <% 
+                                                break;
+                                                case 4:
+                                            %>
+                                             <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4" selected>4</option>
+                                         
+                                            <% 
+                                                }//cierre del switch de nro de habitacion
+                                            %>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <br>
+                                <div class="intro-button mx-auto">
+                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 
+                                </div>    
+
+                            </form>
 
 
                         </div>
@@ -182,8 +344,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <%
-            }
-        %>
+        <% }%>
     </body>
 </html>

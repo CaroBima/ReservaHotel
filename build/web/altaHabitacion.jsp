@@ -1,10 +1,10 @@
 <%-- 
-    Alta de una habitaciÃ³n
+    Alta de una habitación
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
@@ -43,7 +43,7 @@
             </h1>
         </header>
 
-             <!-- MenÃº de navegacion-->
+             <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -53,7 +53,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- MenÃº de Altas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,12 +61,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- MenÃº de Consultas-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -78,7 +78,7 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- MenÃº de Ediciones-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -86,7 +86,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                               <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -102,23 +102,23 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Alta de HabitaciÃ³n</span>
+                                <span class="section-heading-lower">Alta de Habitación</span>
                             </h2>
 
-                            <!-- Formulario de alta de nueva habitaciÃ³n -->
+                            <!-- Formulario de alta de nueva habitación -->
                             <form action="SvAltaHabitacion"  class="border p-3 form" method="POST">
-                                <h1>Nueva habitaciÃ³n</h1>
+                                <h1>Nueva habitación</h1>
                                 
                                 <br>
                                 
                                 <div class="row">
                                     <div class="col">
-                                        <!-- Ingreso del tipo de habitaciÃ³n -->
+                                        <!-- Ingreso del tipo de habitación -->
                                         <label for = "tipoHabitacion" class="form-label">Tipo:</label>
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
-                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">MÃºltiple (8 pers. MÃ¡x.)
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
                                     </div>  
                                 </div>
                                 
@@ -126,13 +126,13 @@
                                 
                                 <div class="row">
                                     <div class="col">
-                                        <!-- Ingreso del nombre temÃ¡tico de la habitaciÃ³n-->
-                                        <label for = "nombreTematico" class="form-label">Nombre temÃ¡tico:</label> 
+                                        <!-- Ingreso del nombre temático de la habitación-->
+                                        <label for = "nombreTematico" class="form-label">Nombre temático:</label> 
                                         <input type="text" class="form-control" name="nombreTematico" required>
                                     </div>
 
                                     <div class="col">
-                                        <!-- Ingreso del precio de la habitaciÃ³n-->
+                                        <!-- Ingreso del precio de la habitación-->
                                         <label for = "precioHabitacion" class="form-label">Precio:</label> 
                                         <input type="text" class="form-control" name="precioHabitacion" required>
                                     </div>
@@ -140,24 +140,24 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <!-- Ingreso del piso donde esta la habitaciÃ³n -->
+                                        <!-- Ingreso del piso donde esta la habitación -->
                                         <label for = "pisoHabitacion" class="form-label">Piso:</label> 
                                         <select name="pisoHabitacion" class="form-control" required>
                                             <option value="0" selected>-</option>
-                                            <option value="1">1Âº Piso</option>
-                                            <option value="2">2Âº Piso</option>
-                                            <option value="3">3Âº Piso</option>
-                                            <option value="4">4Âº Piso</option>
-                                            <option value="5">5Âº Piso</option>
-                                            <option value="6">6Âº Piso</option>
-                                            <option value="7">7Âº Piso</option>
-                                            <option value="8">8Âº Piso</option>
+                                            <option value="1">1º Piso</option>
+                                            <option value="2">2º Piso</option>
+                                            <option value="3">3º Piso</option>
+                                            <option value="4">4º Piso</option>
+                                            <option value="5">5º Piso</option>
+                                            <option value="6">6º Piso</option>
+                                            <option value="7">7º Piso</option>
+                                            <option value="8">8º Piso</option>
                                         </select>
                                     </div> 
 
-                                    <!-- Ingreso del nÃºmero de habitaciÃ³n -->
+                                    <!-- Ingreso del número de habitación -->
                                     <div class="col">
-                                        <label for = "nroHabitacion" class="form-label">NÃºmero de HabitaciÃ³n:</label> 
+                                        <label for = "nroHabitacion" class="form-label">Número de Habitación:</label> 
                                         <select name ="nroHabitacion" class="form-control" required>
                                             <option value="0" selected>-</option>
                                             <option value="1">1</option>

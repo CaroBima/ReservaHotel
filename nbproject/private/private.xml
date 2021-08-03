@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/web/js/scripts.js</file>
-            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/web/js/validador.js</file>
-            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/web/altaReserva.jsp</file>
+            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/src/java/Servlets/SvModifHabitacion.java</file>
+            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/src/java/Servlets/SvEdicionHabitacion.java</file>
+            <file>file:/F:/__Programacion/Codigos/Curso%20Polo%20Tic/Bima_Carolina_TpIntegrador/web/modificarHabitacion.jsp</file>
         </group>
     </open-files>
 </project-private>

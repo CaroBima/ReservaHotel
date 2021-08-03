@@ -7,9 +7,9 @@
 <%@page import="Logica.Habitacion"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controladora"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
@@ -48,7 +48,7 @@
             </h1>
         </header>
 
-        <!-- MenÃº de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -58,7 +58,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- MenÃº de Altas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,12 +66,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- MenÃº de Consultas-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -83,7 +83,7 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- MenÃº de Ediciones-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -91,7 +91,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -115,10 +115,10 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                              <tr>
-                                                <td>Tipo de habitaciÃ³n:</td>
-                                                <td>Nombre temÃ¡tico:</td>
+                                                <td>Tipo de habitación:</td>
+                                                <td>Nombre temático:</td>
                                                 <td>Piso:</td>
-                                                <td>NÃºmero de habitaciÃ³n:</td>
+                                                <td>Número de habitación:</td>
                                                 <td>Precio:</td>
                                             </tr>
                                         </thead>

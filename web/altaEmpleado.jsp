@@ -6,10 +6,10 @@
 <%@page import="Logica.Cargo"%>
 <%@page import="Logica.Controladora"%>
 <%@page import ="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
@@ -49,7 +49,7 @@
             </h1>
         </header>
 
-              <!-- MenÃº de navegacion-->
+              <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -59,7 +59,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- MenÃº de Altas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,12 +67,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- MenÃº de Consultas-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -84,7 +84,7 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- MenÃº de Ediciones-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -92,7 +92,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -121,7 +121,7 @@
                                         <input type="text" class="form-control" id="usuarioEmpleado" name="usuarioEmpleado">
                                     </div>   
                                     <div class="col">
-                                        <label for = "contraseniaEmpleado" class="form-label">ContraseÃ±a:</label> 
+                                        <label for = "contraseniaEmpleado" class="form-label">Contraseña:</label> 
                                         <input type="password"  class="form-control" id="contraseniaEmpleado" name="contraseniaEmpleado" >
                                     </div>
                                 </div> 
@@ -145,7 +145,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <label for = "direccionEmpleado" class="form-label">DirecciÃ³n: </label>
+                                        <label for = "direccionEmpleado" class="form-label">Dirección: </label>
                                         <input type="text"  class="form-control" id="direccionEmpleado" name="direccionEmpleado" >
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                                 }
                                             %>
                                         </select>
-                                        <input type="button" id="btnNuevoCarg" name="btnNuevoCargo" class="btn btn-primary btn-xs" value="AÃ±adir cargo" onclick='ingresoCargo()'> 
+                                        <input type="button" id="btnNuevoCarg" name="btnNuevoCargo" class="btn btn-primary btn-xs" value="Añadir cargo" onclick='ingresoCargo()'> 
 
                                     </div>
                                 </div>

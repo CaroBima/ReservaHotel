@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "SvModificarHabitacion", urlPatterns = {"/SvModificarHabitacion"})
-public class SvModificarHabitacion extends HttpServlet {
+public class SvEdicionHabitacion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class SvModificarHabitacion extends HttpServlet {
         
         misesion.setAttribute("listaHabitaciones", listaHabitaciones);
         
-        response.sendRedirect("modificarHabitacion.jsp");
+        response.sendRedirect("edicionHabitacion.jsp");
     }
 
    

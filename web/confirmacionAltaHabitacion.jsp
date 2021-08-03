@@ -4,9 +4,9 @@
     Author     : Caro
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
@@ -45,7 +45,7 @@
             </h1>
         </header>
 
-          <!-- MenÃº de navegacion-->
+          <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -55,7 +55,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- MenÃº de Altas-->
+                        <!-- Menú de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,12 +63,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- MenÃº de Consultas-->
+                        <!-- Menú de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -80,7 +80,7 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- MenÃº de Ediciones-->
+                        <!-- Menú de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -88,7 +88,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                   <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">HabitaciÃ³n</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -104,19 +104,19 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Alta de habitaciÃ³n</span>
+                                <span class="section-heading-lower">Alta de habitación</span>
                             </h2>
                             <h4 >Los datos han sido guardados correctamente:</h4>
                             <br>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        <td>Tipo de habitaciÃ³n:</td>
+                                        <td>Tipo de habitación:</td>
                                         <td><%= session.getAttribute("tipoHabitacion")%></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Nombre temÃ¡tico:</td>
+                                        <td>Nombre temático:</td>
                                         <td><%= session.getAttribute("nombreTematico")%></td>
                                     </tr>
 
@@ -125,7 +125,7 @@
                                         <td><%= session.getAttribute("pisoHabitacion")%></td>
                                     </tr>
                                     <tr>
-                                        <td>NÃºmero de habitaciÃ³n:</td>
+                                        <td>Número de habitación:</td>
                                         <td><%= session.getAttribute("nroHabitacion")%></td>
                                     </tr>
 

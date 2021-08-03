@@ -1,10 +1,11 @@
 <%-- 
-    Document   : index
-    Created on : 24 jul. 2021, 10:50:18
+    Document   : modificarHabitacion
+    Created on : 3 ago. 2021, 00:44:44
     Author     : Caro
 --%>
 
-<%@page import="Logica.Controladora"%>
+<%@page import="Logica.Habitacion"%>
+<%@page import="java.util.List"%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Hotel Integrador</title>
+        <title>Nueva reserva</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -26,17 +27,18 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Gestion de reservas</title>
+        <title>Consulta de Empleados</title>
     </head>
     <body>
         <%
-        HttpSession misesion = request.getSession();
-        String usuario = (String) misesion.getAttribute("usuario");
-      
-            if(usuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -45,7 +47,7 @@
             </h1>
         </header>
 
-          <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -85,11 +87,11 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <form action="SvModificarHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
+                                <form action="SvEdicionHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Habitación</a></li>
                                 </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
@@ -106,15 +108,69 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Empleado</span>
+                                <span class="section-heading-lower">Consultar Habitaciones</span>
                             </h2>
 
-                            <!-- Formulario de reserva -->
-                            <form name="formConsultaEmpleado"  class="border p-3 form" action="SvConsultaEmpleado" method="POST">
+                            <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>Tipo de habitación:</td>
+                                            <td>Nombre temático:</td>
+                                            <td>Piso:</td>
+                                            <td>Número de habitación:</td>
+                                            <td>Precio</td>
+                                            <td>Eliminar</td>
+                                            <td>Modificar</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%  
+                                            HttpSession misesion = request.getSession();
+                                            
+                                            //recorro la lista para cargar los valores en la tabla
+                                            List<Habitacion> listaHabitaciones;
+                                            listaHabitaciones = (List) request.getSession().getAttribute("listaHabitaciones");
+                                            if (listaHabitaciones != null) {
+                                                for (Habitacion hab : listaHabitaciones) {
+                                                    
+                                        %>
+                                        <tr>    
+                                            <td><%= hab.getTipoHab()%></td>
 
+                                            <td><%= hab.getNombreTematica()%></td>
 
-                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
-                            </form>
+                                            <td><%= hab.getPiso()%></td>
+
+                                            <td><%= hab.getNroHabitacion()%></td>
+
+                                            <td><%= hab.getPrecioHabitacion()%></td>
+                                            
+                                            <% int idHab = hab.getIdHabitacion(); 
+                                                System.out.println("Id habitacion desde jsp " + idHab);
+                                            %>
+                                            
+                                            <td> 
+                                                <form name="frmEliminarHabitacion" action="SvEliminarHabitacion" method="POST" style="display:inline">
+                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
+                                                    <button type="submit" class="btn btn-outline-danger btn-xs" data-title="Delete" style="display:inline"><img src="assets/icons/trash.svg"></button> 
+                                                </form>        
+                                            </td>
+                                            <td>
+                                                <form name="frmEditarHabitacion" action="SvModifHabitacion" method="POST" style="display:inline">
+                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
+                                                    <button type="submit" class="btn btn-outline-warning btn-xs" data-title="Edit" style="display:inline"><img src="assets/icons/pencil-square.svg"></button> 
+                                                </form>        
+                                            </td>
+                                        </tr>
+                                        <%
+                                                } //cierre del for
+                                            }//cierre del if
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
 
 
                         </div>
@@ -128,9 +184,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-     <%
-         }   
-     %>   
+        <%
+            }
+        %>
     </body>
 </html>
-

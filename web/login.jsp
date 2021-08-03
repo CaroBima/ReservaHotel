@@ -4,10 +4,10 @@
     Author     : Caro
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" type="image/x-icon" href="assets/hotel.svg" />
@@ -43,17 +43,17 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Iniciar SesiÃ³n:</span>
+                                <span class="section-heading-lower">Iniciar Sesión:</span>
                             </h2>
 
                             <form name="formlogin" class="border p-3 form" action="SvLogin" method="POST">
                                 <br>
                                 <p>
-                                    <label for = "nombreUsuario" class="form-label wrap-input100 validate-input" data-validate = "IngresÃ¡ un e-mail vÃ¡lido: ejemplo@abc.xyz">Usuario:</label> 
+                                    <label for = "nombreUsuario" class="form-label wrap-input100 validate-input" data-validate = "Ingresá un e-mail válido: ejemplo@abc.xyz">Usuario:</label> 
                                     <input type="text"  class="form-control" name="nombreUsuario" required>
                                 </p>
                                 <p>
-                                    <label for = "contraUsuario" class="form-label wrap-input100 validate-input"  data-validate = "Debe ingresar su contraseÃ±a">ContraseÃ±a:</label> 
+                                    <label for = "contraUsuario" class="form-label wrap-input100 validate-input"  data-validate = "Debe ingresar su contraseña">Contraseña:</label> 
                                     <input type="password"  class="form-control" name="contraUsuario" required>
                                 </p>
                                 <br>  
