@@ -110,7 +110,8 @@
 
                             <!-- Formulario de alta de nueva habitación -->
                             <form action="SvModifHabitacion"  class="border p-3 form" method="get">
-                                <%                                    HttpSession misesion = request.getSession();
+                                <%                                    
+                                    HttpSession misesion = request.getSession();
                                     Habitacion habitacion = (Habitacion) misesion.getAttribute("habitacion");
                                 %>
                                 <h1>Modificar la habitación</h1>
@@ -119,6 +120,7 @@
 
                                 <div class="row">
                                     <div class="col">
+                                        
                                         <!-- Ingreso del tipo de habitación -->
                                         <label for = "tipoHabitacion" class="form-label">Tipo:</label>
                                         <%  //verifico que valor corresponde al tipo de habitacion y marco el previamente cargado en la bd
@@ -176,7 +178,7 @@
                                         <label for = "pisoHabitacion" class="form-label">Piso:</label> 
                                         <select name="pisoHabitacion" class="form-control" required>
                                             <%
-                                                //para que quede seleccionado por defecto el piso guardado
+                                                //para que quede seleccionado por defecto el piso que estaba guardado
                                                 switch (habitacion.getPiso()) {
                                                     case 1:
 
@@ -322,9 +324,11 @@
                                             %>
                                         </select>
                                     </div>
+                                <!-- Guardo el id de la habitacion -->
+                                    <input type="hidden" name="idHabitacion" value="<%=habitacion.getIdHabitacion() %>" >
                                 </div>
 
-
+                                            
                                 <br>
                                 <div class="intro-button mx-auto">
                                     <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 

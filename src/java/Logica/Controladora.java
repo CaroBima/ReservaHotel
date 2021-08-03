@@ -158,6 +158,10 @@ public class Controladora {
         controlPersis.crearHabitacion(habitacion);
 
     }
+    
+    public void modificarHabitacion(Habitacion habitacion){
+        controlPersis.modificarHabitacion(habitacion);
+    }
 
     public void borrarHabitacion(int idHabitacion){
         controlPersis.borrarHabitacion(idHabitacion);

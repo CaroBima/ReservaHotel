@@ -26,6 +26,15 @@ public class ControladoraPersistencia {
         controlHabitacion.create(cuarto);
     }
     
+    public void modificarHabitacion(Habitacion habitacion){
+        HabitacionJpaController control = new HabitacionJpaController();
+        try {
+            control.edit(habitacion);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     //recupera una lista de habitaciones
     public List<Habitacion> recuperarHabitaciones(){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
