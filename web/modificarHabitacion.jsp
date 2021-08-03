@@ -87,10 +87,12 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
+                                <form action="SvModificarHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -126,12 +128,13 @@
                                     <tbody>
                                         <%  
                                             HttpSession misesion = request.getSession();
-
+                                            
+                                            
                                             List<Habitacion> listaHabitaciones;
                                             listaHabitaciones = (List) request.getSession().getAttribute("listaHabitaciones");
                                             if (listaHabitaciones != null) {
                                                 for (Habitacion hab : listaHabitaciones) {
-                                                    int idHab = hab.getIdHabitacion();
+                                                    
                                         %>
                                         <tr>    
                                             <td><%= hab.getTipoHab()%></td>
@@ -143,16 +146,18 @@
                                             <td><%= hab.getNroHabitacion()%></td>
 
                                             <td><%= hab.getPrecioHabitacion()%></td>
-
+                                            
+                                            <% int idHab = hab.getIdHabitacion(); %>
+                                            
                                             <td> 
                                                 <form name="frmEliminarHabitacion" action="SvEliminarHabitacion" method="POST" style="display:inline">
-                                                    <input type="hiden" name="idHabitacion" value="<%=idHab %>">
+                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
                                                     <button type="submit" class="btn btn-outline-danger btn-xs" data-title="Delete" style="display:inline"><img src="assets/icons/trash.svg"></button> 
                                                 </form>        
                                             </td>
                                             <td>
                                                 <form name="frmEditarHabitacion" action="SvEditarHabitacion" method="POST" style="display:inline">
-                                                    <input type="hiden" name="idHabitacion" value="<%=idHab %>">
+                                                    <input  type="Hidden" name="idHabitacion" value="<%=idHab%>">
                                                     <button type="submit" class="btn btn-outline-warning btn-xs" data-title="Edit" style="display:inline"><img src="assets/icons/pencil-square.svg"></button> 
                                                 </form>        
                                             </td>
