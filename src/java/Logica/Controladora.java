@@ -159,6 +159,11 @@ public class Controladora {
 
     }
 
+    public void borrarHabitacion(int idHabitacion){
+        controlPersis.borrarHabitacion(idHabitacion);
+    }
+    
+    
     public double calcularMontoTotal(Date fCheckIn, Date fCheckout, Habitacion habitacion) {
         double montoTotal = 0;
         double montoPorDia = 0;

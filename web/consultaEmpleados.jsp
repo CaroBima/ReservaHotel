@@ -90,10 +90,10 @@
                                 Editar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="modificarReserva">Reserva</a></li>
-                                <li><a class="dropdown-item" href="modificarCliente">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion">Habitación</a></li>
-                                <li><a class="dropdown-item" href="modificarEmpleado">Empleado</a></li>
+                                  <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                                <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
+                                <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -121,7 +121,7 @@
                                             <td>Dni</td>
                                             <td>Fecha de nacimiento</td>
                                             <td>Dirección</td>
-                                            <td>Usuario:</td>
+                                            <td>Usuario</td>
                                         </tr>
                                     </thead>
                                     <tbody>

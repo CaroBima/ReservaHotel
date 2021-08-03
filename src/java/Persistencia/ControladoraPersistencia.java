@@ -6,7 +6,10 @@ import Logica.Empleado;
 import Logica.Habitacion;
 import Logica.Reserva;
 import Logica.Usuario;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladoraPersistencia {
     
@@ -23,6 +26,7 @@ public class ControladoraPersistencia {
         controlHabitacion.create(cuarto);
     }
     
+    //recupera una lista de habitaciones
     public List<Habitacion> recuperarHabitaciones(){
         HabitacionJpaController controlHabitacion = new HabitacionJpaController();
         List<Habitacion> listaHab;
@@ -38,6 +42,15 @@ public class ControladoraPersistencia {
         habitacion = controlHabitacion.findHabitacion(idHabitacion);
         
         return habitacion;
+    }
+    
+    public void borrarHabitacion(int idHabitacion){
+        try {
+            HabitacionJpaController controlHabitacion = new HabitacionJpaController();
+            controlHabitacion.destroy(idHabitacion);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

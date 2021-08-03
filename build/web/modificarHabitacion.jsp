@@ -1,9 +1,11 @@
 <%-- 
-    Document   : consultaReserva
-    Created on : 2 ago. 2021, 10:51:19
+    Document   : modificarHabitacion
+    Created on : 3 ago. 2021, 00:44:44
     Author     : Caro
 --%>
 
+<%@page import="Logica.Habitacion"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,18 +27,18 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Consulta de reservas</title>
+        <title>Consulta de Empleados</title>
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-            if(loginusuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -45,7 +47,7 @@
             </h1>
         </header>
 
-          <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -86,7 +88,7 @@
                                 Editar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                                <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
                                 <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
@@ -107,12 +109,61 @@
                                 <span class="section-heading-lower">Consultar Habitaciones</span>
                             </h2>
 
-                            <!-- Formulario de reserva -->
-                            <form name="formConsultaReservas"  class="border p-3 form" action="SvConsultaReserva" method="POST">
+                            <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>Tipo de habitación:</td>
+                                            <td>Nombre temático:</td>
+                                            <td>Piso:</td>
+                                            <td>Número de habitación:</td>
+                                            <td>Precio</td>
+                                            <td>Eliminar</td>
+                                            <td>Modificar</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%  
+                                            HttpSession misesion = request.getSession();
 
+                                            List<Habitacion> listaHabitaciones;
+                                            listaHabitaciones = (List) request.getSession().getAttribute("listaHabitaciones");
+                                            if (listaHabitaciones != null) {
+                                                for (Habitacion hab : listaHabitaciones) {
+                                                    int idHab = hab.getIdHabitacion();
+                                        %>
+                                        <tr>    
+                                            <td><%= hab.getTipoHab()%></td>
 
-                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
-                            </form>
+                                            <td><%= hab.getNombreTematica()%></td>
+
+                                            <td><%= hab.getPiso()%></td>
+
+                                            <td><%= hab.getNroHabitacion()%></td>
+
+                                            <td><%= hab.getPrecioHabitacion()%></td>
+
+                                            <td> 
+                                                <form name="frmEliminarHabitacion" action="SvEliminarHabitacion" method="POST" style="display:inline">
+                                                    <input type="hiden" name="idHabitacion" value="<%=idHab %>">
+                                                    <button type="submit" class="btn btn-outline-danger btn-xs" data-title="Delete" style="display:inline"><img src="assets/icons/trash.svg"></button> 
+                                                </form>        
+                                            </td>
+                                            <td>
+                                                <form name="frmEditarHabitacion" action="SvEditarHabitacion" method="POST" style="display:inline">
+                                                    <input type="hiden" name="idHabitacion" value="<%=idHab %>">
+                                                    <button type="submit" class="btn btn-outline-warning btn-xs" data-title="Edit" style="display:inline"><img src="assets/icons/pencil-square.svg"></button> 
+                                                </form>        
+                                            </td>
+                                        </tr>
+                                        <%
+                                                } //cierre del for
+                                            }//cierre del if
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
 
 
                         </div>
