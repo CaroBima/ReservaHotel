@@ -4,6 +4,7 @@ package Persistencia;
 import Logica.Cargo;
 import Logica.Empleado;
 import Logica.Habitacion;
+import Logica.Huesped;
 import Logica.Reserva;
 import Logica.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
@@ -14,10 +15,28 @@ import java.util.logging.Logger;
 public class ControladoraPersistencia {
     
     //métodos para la reserva
-    
     public void crearReserva(Reserva reserva){
         ReservaJpaController controlReserva = new ReservaJpaController();
         controlReserva.create(reserva);
+    }
+    
+    public List recuperarReservas(){
+        ReservaJpaController controlReserva = new ReservaJpaController();
+        List<Reserva> listaReservas;
+        listaReservas = controlReserva.findReservaEntities();
+        
+        return listaReservas;
+    
+    }
+    
+    //devuelve la lista de huespedes
+    public List recuperarHuespedes(){
+        List <Huesped> listaHuesped;
+        HuespedJpaController controlHuesped = new HuespedJpaController();
+        
+        listaHuesped = controlHuesped.findHuespedEntities();
+        
+        return listaHuesped;
     }
     
     //metodos para la Habitación

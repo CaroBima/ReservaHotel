@@ -50,7 +50,7 @@ public class SvAltaEmpleado extends HttpServlet {
         String fechaNacEmpleado = request.getParameter("fechaNacEmpleado");  //ver como hacer con date
         String cargoEmpleado = request.getParameter("cargoEmpleado");
         
-        System.out.println("cargo: " + cargoEmpleado);
+        
 
         //traigo la sesion y asigno  los atributos para abrir en cualquier JSP
         request.getSession().setAttribute("usuarioEmpleado", usuarioEmpleado);

@@ -74,7 +74,7 @@
                                 Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaReserva.jsp">Reservas</a></li>
                                 <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
                                 <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>

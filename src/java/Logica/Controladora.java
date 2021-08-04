@@ -67,6 +67,18 @@ public class Controladora {
         controlPersis.crearReserva(reserva);
     }
 
+    //recuperar listado de reservas
+    public List recuperarReservas(){
+        Reserva reserva = new Reserva();
+        List<Reserva> listaReservas;
+        
+        listaReservas = controlPersis.recuperarReservas();
+        
+        return listaReservas;
+    }
+    
+    
+    
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado) {
         Empleado empleado = new Empleado();
@@ -143,7 +155,13 @@ public class Controladora {
     }
     
     
-
+    //devuelve la lista de huespedes registrados
+    public List recuperarHuespedes(){
+        List<Huesped> listaHuesped;
+        listaHuesped = controlPersis.recuperarHuespedes();
+        return listaHuesped;
+    }
+    
     
 //Métodos para la habitación
     public void crearHabitación(String nombreTematico, int nroHabitacion, int pisoHabitacion, String tipoHabitación, double precio) {

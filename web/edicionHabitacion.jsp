@@ -147,8 +147,8 @@
 
                                             <td><%= hab.getPrecioHabitacion()%></td>
                                             
-                                            <% int idHab = hab.getIdHabitacion(); 
-                                                System.out.println("Id habitacion desde jsp " + idHab);
+                                            <% 
+                                                int idHab = hab.getIdHabitacion(); 
                                             %>
                                             
                                             <td> 

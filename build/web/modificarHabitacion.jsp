@@ -4,7 +4,7 @@
     Author     : Caro
 --%>
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Logica.Habitacion"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,7 +46,7 @@
             </h1>
         </header>
 
-        <!-- Menú de navegacion-->
+        <!-- MenÃº de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -56,7 +56,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- Menú de Altas-->
+                        <!-- MenÃº de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,12 +64,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- Menú de Consultas-->
+                        <!-- MenÃº de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
@@ -81,7 +81,7 @@
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- Menú de Ediciones-->
+                        <!-- MenÃº de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -89,7 +89,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
+                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">HabitaciÃ³n</a></li>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -105,23 +105,23 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Modificar Habitación</span>
+                                <span class="section-heading-lower">Modificar HabitaciÃ³n</span>
                             </h2>
 
-                            <!-- Formulario de alta de nueva habitación -->
+                            <!-- Formulario de alta de nueva habitaciÃ³n -->
                             <form action="SvModifHabitacion"  class="border p-3 form" method="get">
                                 <%                                    
                                     HttpSession misesion = request.getSession();
                                     Habitacion habitacion = (Habitacion) misesion.getAttribute("habitacion");
                                 %>
-                                <h1>Modificar la habitación</h1>
+                                <h1>Modificar la habitaciÃ³n</h1>
 
                                 <br>
 
                                 <div class="row">
                                     <div class="col">
                                         
-                                        <!-- Ingreso del tipo de habitación -->
+                                        <!-- Ingreso del tipo de habitaciÃ³n -->
                                         <label for = "tipoHabitacion" class="form-label">Tipo:</label>
                                         <%  //verifico que valor corresponde al tipo de habitacion y marco el previamente cargado en la bd
                                             if (habitacion.getTipoHab().equals("Single")) {
@@ -129,7 +129,7 @@
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Single" checked="checked" >Single
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
-                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">MÃºltiple (8 pers. MÃ¡x.)
                                         <%
                                         } else {
                                             if (habitacion.getTipoHab().equals("Doble")) {
@@ -137,19 +137,19 @@
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble" checked="checked" >Doble
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
-                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">MÃºltiple (8 pers. MÃ¡x.)
                                         <%  } else if (habitacion.getTipoHab().equals("Triple")) {
                                         %>
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Single">Single
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple" checked="checked" >Triple
-                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">Múltiple (8 pers. Máx.)
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple">MÃºltiple (8 pers. MÃ¡x.)
                                         <% } else {
                                         %>
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Single" >Single
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Doble">Doble
                                         <input type="radio" class="radio-control" name="tipoHabitacion" value="Triple">Triple
-                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple" checked="checked" >Múltiple (8 pers. Máx.)
+                                        <input type="radio" class="radio-control" name="tipoHabitacion" value="Multiple" checked="checked" >MÃºltiple (8 pers. MÃ¡x.)
                                         <% }
                                             }
                                         %>
@@ -160,13 +160,13 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <!-- Muestro nombre temático de la habitación ingresado previamente-->
-                                        <label for = "nombreTematico" class="form-label">Nombre temático:</label> 
+                                        <!-- Muestro nombre temÃ¡tico de la habitaciÃ³n ingresado previamente-->
+                                        <label for = "nombreTematico" class="form-label">Nombre temÃ¡tico:</label> 
                                         <input type="text" class="form-control" name="nombreTematico" value="<%= habitacion.getNombreTematica()%>">
                                     </div>
 
                                     <div class="col">
-                                        <!-- Muestro el precio de la habitación recuperado-->
+                                        <!-- Muestro el precio de la habitaciÃ³n recuperado-->
                                         <label for = "precioHabitacion" class="form-label">Precio:</label> 
                                         <input type="text" class="form-control" name="precioHabitacion" value="<%= habitacion.getPrecioHabitacion()%>">
                                     </div>
@@ -174,7 +174,7 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <!-- Piso donde esta la habitación -->
+                                        <!-- Piso donde esta la habitaciÃ³n -->
                                         <label for = "pisoHabitacion" class="form-label">Piso:</label> 
                                         <select name="pisoHabitacion" class="form-control" required>
                                             <%
@@ -183,107 +183,107 @@
                                                     case 1:
 
                                             %>    
-                                            <option value="1" selected>1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1" selected>1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%   
                                                 break;
                                                 case 2:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2" selected>2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2" selected>2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                 break;
                                                 case 3:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3" selected>3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3" selected>3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                 break;
                                                 case 4:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4" selected>4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4" selected>4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                 break;
                                                 case 5:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5" selected>5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5" selected>5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                 break;
                                                 case 6:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6" selected>6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6" selected>6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                 break;
                                                 case 7:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7" selected>7º Piso</option>
-                                            <option value="8">8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7" selected>7Âº Piso</option>
+                                            <option value="8">8Âº Piso</option>
                                             <%
                                                     break;
                                                 case 8:
                                             %>
-                                            <option value="1">1º Piso</option>
-                                            <option value="2">2º Piso</option>
-                                            <option value="3">3º Piso</option>
-                                            <option value="4">4º Piso</option>
-                                            <option value="5">5º Piso</option>
-                                            <option value="6">6º Piso</option>
-                                            <option value="7">7º Piso</option>
-                                            <option value="8" selected>8º Piso</option>
+                                            <option value="1">1Âº Piso</option>
+                                            <option value="2">2Âº Piso</option>
+                                            <option value="3">3Âº Piso</option>
+                                            <option value="4">4Âº Piso</option>
+                                            <option value="5">5Âº Piso</option>
+                                            <option value="6">6Âº Piso</option>
+                                            <option value="7">7Âº Piso</option>
+                                            <option value="8" selected>8Âº Piso</option>
                                             <%
                                                 }//cierre del switch
                                             %>
                                         </select>
                                     </div> 
 
-                                    <!-- Ingreso del número de habitación -->
+                                    <!-- Ingreso del nÃºmero de habitaciÃ³n -->
                                     <div class="col">
-                                        <label for = "nroHabitacion" class="form-label">Número de Habitación:</label> 
+                                        <label for = "nroHabitacion" class="form-label">NÃºmero de HabitaciÃ³n:</label> 
                                         <select name ="nroHabitacion" class="form-control" required>
                                            <% 
                                                //cargo como selected la habitacion que traigo de la base de datos

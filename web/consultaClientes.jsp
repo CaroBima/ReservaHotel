@@ -1,13 +1,13 @@
 <%-- 
-    Document   : consultaReserva
-    Created on : 2 ago. 2021, 10:51:19
+    Document   : consultaClientes
+    Created on : 3 ago. 2021, 21:37:56
     Author     : Caro
 --%>
 
-
-<%@page import="Logica.Reserva"%>
+<%@page import="Logica.Huesped"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controladora"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -48,7 +48,7 @@
             </h1>
         </header>
 
-         <!-- Menú de navegacion-->
+         <!-- MenÃº de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -58,7 +58,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- Menú de Altas-->
+                        <!-- MenÃº de Altas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,24 +66,24 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva HabitaciÃ³n</a></li>
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
                             </ul>
                         </li>
 
-                        <!-- Menú de Consultas-->
+                        <!-- MenÃº de Consultas-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaReserva.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
                                 <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
                                 <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
                             </ul>
                         </li>
-                        <!-- Menú de Ediciones-->
+                        <!-- MenÃº de Ediciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
@@ -92,7 +92,7 @@
                                 <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
                                 <form action="SvModificarHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
+                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">HabitaciÃ³n</a></li>
                                 </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
@@ -109,7 +109,7 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar reservas</span>
+                                <span class="section-heading-lower">Consultar Empleado</span>
                             </h2>
 
                             <!-- comienzo de la tabla que muestra el listado de empleados -->
@@ -120,34 +120,30 @@
                                             <td>Nombre y Apellido</td>
                                             <td>Dni</td>
                                             <td>Fecha de nacimiento</td>
-                                            <td>Dirección</td>
+                                            <td>DirecciÃ³n</td>
                                             <td>Profesion</td>
-                                            <td>Cat. Personas</td>
-                                            <td>Habitacion</td>
-                                            <td>CheckIn</td>
-                                            <td>CheckOut</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%                                                     
-                                            //recupero la lista de habitaciones para mostrarla en la tabla
+                                        <%                                                     //recupero la lista de habitaciones para mostrarla en la tabla
                                             Controladora control = new Controladora();
-                                            List<Reserva> listaReservas;
-                                            listaReservas = control.recuperarReservas();
-                                            if (listaReservas != null) {
-                                                for (Reserva reser : listaReservas) {
+                                            List<Huesped> listaHuesped;
+                                            listaHuesped = control.recuperarHuespedes();
+                                            if (listaHuesped != null) {
+                                                for (Huesped huesp : listaHuesped) {
                                                     
                                         %>
                                         <tr>    
-                                            <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido() %></td>
-                                            <td><%= reser.getHuesped().getDni() %></td>
-                                            <td><%= reser.getHuesped().getFechaNac()  %></td>
-                                            <td><%= reser.getHuesped().getDireccion() %></td>
-                                            <td><%= reser.getHuesped().getProfesion() %></td>
-                                            <td><%= reser.getCantPersonas() %></td>
-                                            <td><%= reser.getIdHabitación().getNombreTematica() %></td>
-                                            <td><%= reser.getFechaCheckIn() %></td>
-                                            <td><%= reser.getFechaCheckOut() %></td>
+                                            <td><%= huesp.getNombre() + " " + huesp.getApellido()%></td>
+
+                                            <td><%= huesp.getDni()%></td>
+
+                                            <td><%= huesp.getFechaNac()%></td>
+
+                                            <td><%= huesp.getDireccion()%></td>
+                                              
+                                            <td><%= huesp.getProfesion() %></td>
+                                            
                                         </tr>
                                         <%
                                                

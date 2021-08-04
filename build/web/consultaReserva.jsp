@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="Logica.Reserva"%>
+<%@page import="java.util.List"%>
+<%@page import="Logica.Controladora"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -25,18 +28,18 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Consulta de reservas</title>
+        <title>Consulta de Empleados</title>
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
-        String loginusuario = (String) sesion.getAttribute("usuario");
-        
-        //verifico si el usuario admin esta creado y si no lo agrego
-            if(loginusuario == null){
+            HttpSession sesion = request.getSession();
+            String loginusuario = (String) sesion.getAttribute("usuario");
+
+            //verifico si el usuario admin esta creado y si no lo agrego
+            if (loginusuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -45,7 +48,7 @@
             </h1>
         </header>
 
-          <!-- Menú de navegacion-->
+         <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -74,7 +77,7 @@
                                 Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaReserva.jsp">Reservas</a></li>
                                 <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
                                 <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
@@ -86,9 +89,11 @@
                                 Editar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                                <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
+                                <form action="SvModificarHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -104,17 +109,56 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Habitaciones</span>
+                                <span class="section-heading-lower">Consultar reservas</span>
                             </h2>
 
-                            <!-- Formulario de reserva -->
-                            <form name="formConsultaReservas"  class="border p-3 form" action="SvConsultaReserva" method="POST">
-
-
-                                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Buscar</a></div>
-                            </form>
-
-
+                            <!-- comienzo de la tabla que muestra el listado de empleados -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>Nombre y Apellido</td>
+                                            <td>Dni</td>
+                                            <td>Fecha de nacimiento</td>
+                                            <td>Dirección</td>
+                                            <td>Profesion</td>
+                                            <td>Cat. Personas</td>
+                                            <td>Habitacion</td>
+                                            <td>CheckIn</td>
+                                            <td>CheckOut</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%                                                     
+                                            //recupero la lista de habitaciones para mostrarla en la tabla
+                                            Controladora control = new Controladora();
+                                            List<Reserva> listaReservas;
+                                            listaReservas = control.recuperarReservas();
+                                            if (listaReservas != null) {
+                                                for (Reserva reser : listaReservas) {
+                                                    
+                                        %>
+                                        <tr>    
+                                            <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido() %></td>
+                                            <td><%= reser.getHuesped().getDni() %></td>
+                                            <td><%= reser.getHuesped().getFechaNac()  %></td>
+                                            <td><%= reser.getHuesped().getDireccion() %></td>
+                                            <td><%= reser.getHuesped().getProfesion() %></td>
+                                            <td><%= reser.getCantPersonas() %></td>
+                                            <td><%= reser.getIdHabitación().getNombreTematica() %></td>
+                                            <td><%= reser.getFechaCheckIn() %></td>
+                                            <td><%= reser.getFechaCheckOut() %></td>
+                                        </tr>
+                                        <%
+                                               
+                                            } //cierre del for
+                                        } 
+                                        %>
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- fin de la tabla de empleados -->
                         </div>
                     </div>
                 </div>
