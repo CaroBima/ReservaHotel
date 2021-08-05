@@ -28,6 +28,24 @@ public class ControladoraPersistencia {
         return listaReservas;
     
     }
+    public void borrarReserva(int idReserva){
+        ReservaJpaController controlReserva = new ReservaJpaController();
+        try {
+            controlReserva.destroy(idReserva);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //recupero una reserva por su id y la devuelvo
+    public Reserva buscarUnaReserva(int idReserva){
+        ReservaJpaController controlReserva =  new ReservaJpaController();
+        Reserva reserva = new Reserva();
+        
+        reserva = controlReserva.findReserva(idReserva);
+        
+        return reserva;
+    }
     
     //devuelve la lista de huespedes
     public List recuperarHuespedes(){

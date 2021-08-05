@@ -77,7 +77,6 @@ public class SvAltaReserva extends HttpServlet {
         try {
             fechaNac = formato.parse(fecha);
         } catch (ParseException ex) {
-            System.out.println("error parseo fecha");
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
         return fechaNac;

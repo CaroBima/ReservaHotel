@@ -129,16 +129,18 @@
                                             Controladora control = new Controladora();
                                             List<Huesped> listaHuesped;
                                             listaHuesped = control.recuperarHuespedes();
+                                            String fechaNacimiento;
                                             if (listaHuesped != null) {
                                                 for (Huesped huesp : listaHuesped) {
-                                                    
+                                                    //le doy formato a la fecha para mostrarla
+                                                    fechaNacimiento = control.formatearFecha(huesp.getFechaNac());
                                         %>
                                         <tr>    
                                             <td><%= huesp.getNombre() + " " + huesp.getApellido()%></td>
 
                                             <td><%= huesp.getDni()%></td>
 
-                                            <td><%= huesp.getFechaNac()%></td>
+                                            <td><%= fechaNacimiento %></td>
 
                                             <td><%= huesp.getDireccion()%></td>
                                               

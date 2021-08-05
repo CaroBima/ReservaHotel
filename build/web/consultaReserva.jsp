@@ -117,7 +117,7 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <td>Nombre y Apellido</td>
+                                            <td>Nombre del cliente</td>
                                             <td>Dni</td>
                                             <td>Fecha de nacimiento</td>
                                             <td>Dirección</td>
@@ -126,6 +126,7 @@
                                             <td>Habitacion</td>
                                             <td>CheckIn</td>
                                             <td>CheckOut</td>
+                                            <td>Monto Total</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,20 +135,27 @@
                                             Controladora control = new Controladora();
                                             List<Reserva> listaReservas;
                                             listaReservas = control.recuperarReservas();
+                                            String fechaCheckIn;
+                                            String fechaCheckOut;
+                                            String fechaNacimiento;
+                                            
                                             if (listaReservas != null) {
                                                 for (Reserva reser : listaReservas) {
-                                                    
+                                                   fechaCheckIn =  control.formatearFecha(reser.getFechaCheckIn());
+                                                   fechaCheckOut =  control.formatearFecha(reser.getFechaCheckOut());
+                                                   fechaNacimiento = control.formatearFecha(reser.getHuesped().getFechaNac());
                                         %>
                                         <tr>    
                                             <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido() %></td>
                                             <td><%= reser.getHuesped().getDni() %></td>
-                                            <td><%= reser.getHuesped().getFechaNac()  %></td>
+                                            <td><%= fechaNacimiento %></td>
                                             <td><%= reser.getHuesped().getDireccion() %></td>
                                             <td><%= reser.getHuesped().getProfesion() %></td>
                                             <td><%= reser.getCantPersonas() %></td>
                                             <td><%= reser.getIdHabitación().getNombreTematica() %></td>
-                                            <td><%= reser.getFechaCheckIn() %></td>
-                                            <td><%= reser.getFechaCheckOut() %></td>
+                                            <td><%= fechaCheckIn %></td>
+                                            <td><%= fechaCheckOut  %></td>
+                                            <td><%= reser.getMontoTotalReserva() %></td>
                                         </tr>
                                         <%
                                                
@@ -158,7 +166,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- fin de la tabla de empleados -->
+                            <!-- fin de la tabla de reservas -->
                         </div>
                     </div>
                 </div>

@@ -129,9 +129,11 @@
                                             Controladora control = new Controladora();
                                             List<Empleado> listaEmpleados;
                                             listaEmpleados = control.recuperarEmpleados();
+                                            String fechaNacimiento;
                                             if (listaEmpleados != null) {
                                                 for (Empleado emple : listaEmpleados) {
                                                     if (!emple.getNombre().equals("admin")) {
+                                                        fechaNacimiento = control.formatearFecha(emple.getFechaNac());
                                         %>
                                         <tr>    
                                             <td><%= emple.getNombre() + " " + emple.getApellido()%></td>
@@ -140,7 +142,7 @@
 
                                             <td><%= emple.getDni()%></td>
 
-                                            <td><%= emple.getFechaNac()%></td>
+                                            <td><%= fechaNacimiento %></td>
 
                                             <td><%= emple.getDireccion()%></td>
 

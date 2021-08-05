@@ -1,4 +1,4 @@
-
+//permite realizar la modificacion de los datos de una habitacion, guarda los datos modificados
 
 package Servlets;
 
@@ -34,7 +34,7 @@ public class SvModifHabitacion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //recuero los datos para pasar las modificaciones a la controladora
+        //recupero los datos para pasar las modificaciones a la controladora
         int idHab = parseInt(request.getParameter("idHabitacion"));
         String tipoHabitacion = request.getParameter("tipoHabitacion");
         String nombreTematico = request.getParameter("nombreTematico");
@@ -42,6 +42,7 @@ public class SvModifHabitacion extends HttpServlet {
         int pisoHabitacion = parseInt(request.getParameter("pisoHabitacion"));
         int nroHabitacion = parseInt(request.getParameter("nroHabitacion"));
         
+        //creo la habitacion para pasarla por parametros a la controladora
         Habitacion habitacion = new Habitacion();
         
         habitacion.setIdHabitacion(idHab);
@@ -53,6 +54,7 @@ public class SvModifHabitacion extends HttpServlet {
         
        Controladora control = new Controladora();
        
+       //modifico la habitacion
        control.modificarHabitacion(habitacion);
        
        request.getSession().setAttribute("listaHabitaciones", control.recuperarHabitaciones());
@@ -66,6 +68,7 @@ public class SvModifHabitacion extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        //obtengo el numero de habitacion
         int idHabitacion = parseInt(request.getParameter("idHabitacion"));
         
         

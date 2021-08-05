@@ -1,4 +1,6 @@
-
+/*
+Permite editar una reserva seleccionada en modificarReserva
+ */
 package Servlets;
 
 import Logica.Controladora;
@@ -12,14 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "SvConsultaReserva", urlPatterns = {"/SvConsultaReserva"})
-public class SvConsultaReserva extends HttpServlet {
 
 
+
+@WebServlet(name = "SvEditarReserva", urlPatterns = {"/SvEditarReserva"})
+public class SvEditarReserva extends HttpServlet {
+
+ 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
 
@@ -27,14 +31,12 @@ public class SvConsultaReserva extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        //cargo la lista de reservas para mostrarlas
+        processRequest(request, response);
+        
         Controladora control = new Controladora();
         List<Reserva> listaReservas = control.recuperarReservas();
         
         HttpSession misesion = request.getSession();
-        
-        
         misesion.setAttribute("listaReservas", listaReservas);
         
         response.sendRedirect("edicionReservas.jsp");

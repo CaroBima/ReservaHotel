@@ -1,9 +1,11 @@
 <%-- 
-    Document   : consultaReserva
-    Created on : 2 ago. 2021, 10:51:19
+    Document   : edicionReservas
+    Created on : 4 ago. 2021, 18:13:12
     Author     : Caro
---%>
 
+
+permite listar las reservas y elegir si se quiere modificar o borrar alguna de ellas
+--%>
 
 <%@page import="Logica.Reserva"%>
 <%@page import="java.util.List"%>
@@ -28,7 +30,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Consulta de Empleados</title>
+        <title>Nueva reserva</title>
     </head>
     <body>
         <%
@@ -48,7 +50,7 @@
             </h1>
         </header>
 
-         <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -77,7 +79,7 @@
                                 Consulta
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaReserva.jsp">Reservas</a></li>
+                                <li><a class="dropdown-item" href="consultaReservas.jsp">Reservas</a></li>
                                 <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
                                 <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
@@ -88,11 +90,13 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <form action="SvEditarReserva" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Reserva</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <form action="SvModificarHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
+                                <form action="SvEdicionHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Habitación</a></li>
                                 </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
@@ -109,64 +113,78 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar reservas</span>
+                                <span class="section-heading-lower">Editar Reserva</span>
                             </h2>
 
-                            <!-- comienzo de la tabla que muestra el listado de empleados -->
+
+                            <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <td>Nombre del cliente</td>
+                                            <td>Nombre del Cliente</td>
                                             <td>Dni</td>
-                                            <td>Fecha de nacimiento</td>
-                                            <td>Dirección</td>
-                                            <td>Profesion</td>
-                                            <td>Cat. Personas</td>
+                                            <td>Cant. de pers.</td>
                                             <td>Habitacion</td>
-                                            <td>CheckIn</td>
-                                            <td>CheckOut</td>
-                                            <td>Monto Total</td>
+                                            <td>Tipo de habitación</td>
+                                            <td>Fecha de CheckIn</td>
+                                            <td>Fecha de CheckOut</td>
+                                            <td>Monto total</td>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%                                                     
-                                            //recupero la lista de habitaciones para mostrarla en la tabla
-                                            Controladora control = new Controladora();
+                                        <%                                            
+                                            HttpSession misesion = request.getSession();
+
+                                            //Cargo los valores de la tabla de habitaciones en el combobox
                                             List<Reserva> listaReservas;
-                                            listaReservas = control.recuperarReservas();
-                                            String fechaCheckIn;
-                                            String fechaCheckOut;
-                                            String fechaNacimiento;
-                                            
+                                            Controladora control = new Controladora();
+                                            listaReservas = (List) misesion.getAttribute("listaReservas");
+                                            System.out.println("antes del if del jsp");
                                             if (listaReservas != null) {
-                                                for (Reserva reser : listaReservas) {
-                                                   fechaCheckIn =  control.formatearFecha(reser.getFechaCheckIn());
-                                                   fechaCheckOut =  control.formatearFecha(reser.getFechaCheckOut());
-                                                   fechaNacimiento = control.formatearFecha(reser.getHuesped().getFechaNac());
+                                                System.out.println("entra al if, lista no vacia");
+                                                for (Reserva res : listaReservas) {
+                                                    String fechaChekIn = control.formatearFecha(res.getFechaCheckIn() );
+                                                    String fechaChekOut = control.formatearFecha(res.getFechaCheckOut() );
                                         %>
                                         <tr>    
-                                            <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido() %></td>
-                                            <td><%= reser.getHuesped().getDni() %></td>
-                                            <td><%= fechaNacimiento %></td>
-                                            <td><%= reser.getHuesped().getDireccion() %></td>
-                                            <td><%= reser.getHuesped().getProfesion() %></td>
-                                            <td><%= reser.getCantPersonas() %></td>
-                                            <td><%= reser.getIdHabitación().getNombreTematica() %></td>
-                                            <td><%= fechaCheckIn %></td>
-                                            <td><%= fechaCheckOut  %></td>
-                                            <td><%= reser.getMontoTotalReserva() %></td>
+                                            <td><%= (res.getHuesped().getNombre() + " " + res.getHuesped().getApellido()) %></td>
+                                            <td><%= res.getHuesped().getDni() %></td>
+                                            <td><%= res.getCantPersonas() %></td>
+                                            <td><%= res.getIdHabitación().getNombreTematica() %></td>
+                                            <td><%= res.getIdHabitación().getTipoHab() %></td>
+                                            <td><%= fechaChekIn  %></td>
+                                            <td><%= fechaChekOut  %></td>
+                                            <td><%= res.getMontoTotalReserva()  %></td>
+
+                                            <%
+                                                int idReserv = res.getIdReserva() ;
+                                            %>
+
+                                            <td> 
+                                                <form name="frmEliminarReserva" action="SvEliminarReserva" method="POST" style="display:inline">
+                                                    <input  type="Hidden" name="idReserva" value="<%=idReserv%>">
+                                                    <button type="submit" class="btn btn-outline-danger btn-xs" data-title="Delete" style="display:inline"><img src="assets/icons/trash.svg"></button> 
+                                                </form>        
+                                            </td>
+                                            <td>
+                                                <form name="frmEditarReserva" action="SvModificarReserva" method="POST" style="display:inline">
+                                                    <!<!-- redirecciona a modificar reserva para realizar la modificacion, pasando el id de la reserva a modificar -->
+                                                    <input  type="Hidden" name="idReserva" value="<%=idReserv%>">
+                                                    <button type="submit" class="btn btn-outline-warning btn-xs" data-title="Edit" style="display:inline"><img src="assets/icons/pencil-square.svg"></button> 
+                                                </form>       
+                                                    
+                                            </td>
                                         </tr>
                                         <%
-                                               
-                                            } //cierre del for
-                                        } 
+                                                } //cierre del for
+                                            }//cierre del if
                                         %>
-                                      
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- fin de la tabla de reservas -->
+
                         </div>
                     </div>
                 </div>
@@ -174,6 +192,7 @@
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
         </footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -3,6 +3,7 @@ package Logica;
 import Persistencia.ControladoraPersistencia;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +26,6 @@ public class Controladora {
         double montoTot;
         int idHab;
         Date fechaHoy = new Date();
-        
 
         //convierto los strings en date y float
         cantidadPers = Integer.parseInt(cantidadPersonas);
@@ -68,17 +68,26 @@ public class Controladora {
     }
 
     //recuperar listado de reservas
-    public List recuperarReservas(){
+    public List recuperarReservas() {
         Reserva reserva = new Reserva();
         List<Reserva> listaReservas;
-        
+
         listaReservas = controlPersis.recuperarReservas();
-        
+
         return listaReservas;
     }
     
+    //recupero una reserva por su id y la devuelvo
+    public Reserva buscarUnaReserva(int idReserva){
+        Reserva reser = new Reserva();
+        reser = controlPersis.buscarUnaReserva(idReserva);
+        return reser;
+    }
     
-    
+    public void borrarReserva(int idReserva){
+        controlPersis.borrarReserva(idReserva);
+    }
+
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado) {
         Empleado empleado = new Empleado();
@@ -88,11 +97,10 @@ public class Controladora {
         //busco el cargo de empleado en la base de datos utilizando el metodo definido mas abajo
         //si el cargo no se encuentra en la base de datos, lo crea
         cargoEmple = buscarUnCargo(cargoEmpleado);
-        
 
         //convierto la fecha en date
         Date fechaNac = parseFecha(fechaNacimiento);
-     
+
         //tomo los datos de usuario y contraseña y los guardo en un objeto usuario para pasarlo por parametro
         usuario.setNombreUsuario(usuarioEmpleado);
         usuario.setContrasenia(contrasenia);
@@ -116,7 +124,7 @@ public class Controladora {
 
         //traigo la lista de empleados
         listaEmple = controlPersis.recuperarEmpleados();
-        
+
         //recorro la lista y recupero los usuarios. Verifico si el nombre de usuario 
         //coincide con el buscado y lo devuelvo
         if (!listaEmple.isEmpty()) {
@@ -127,16 +135,16 @@ public class Controladora {
                         empleado = e;
                         return empleado;
                     }
-                } 
+                }
             }
         }
         return empleado;
     }
-    
-    public List recuperarEmpleados(){
+
+    public List recuperarEmpleados() {
         List<Empleado> listaEmpleados;
         listaEmpleados = controlPersis.recuperarEmpleados();
-        
+
         return listaEmpleados;
     }
 
@@ -153,16 +161,25 @@ public class Controladora {
         formato.format(fechaParse);
         return fechaParse;
     }
-    
-    
+
+    public String formatearFecha(Date fecha) {
+        String fechaFormateada;
+        
+        //le doy el formato a la fecha para poder devolverla y mostrarla
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        fechaFormateada = formato.format(fecha);
+        
+        return fechaFormateada;
+
+    }
+
     //devuelve la lista de huespedes registrados
-    public List recuperarHuespedes(){
+    public List recuperarHuespedes() {
         List<Huesped> listaHuesped;
         listaHuesped = controlPersis.recuperarHuespedes();
         return listaHuesped;
     }
-    
-    
+
 //Métodos para la habitación
     public void crearHabitación(String nombreTematico, int nroHabitacion, int pisoHabitacion, String tipoHabitación, double precio) {
         Habitacion habitacion = new Habitacion();
@@ -176,16 +193,15 @@ public class Controladora {
         controlPersis.crearHabitacion(habitacion);
 
     }
-    
-    public void modificarHabitacion(Habitacion habitacion){
+
+    public void modificarHabitacion(Habitacion habitacion) {
         controlPersis.modificarHabitacion(habitacion);
     }
 
-    public void borrarHabitacion(int idHabitacion){
+    public void borrarHabitacion(int idHabitacion) {
         controlPersis.borrarHabitacion(idHabitacion);
     }
-    
-    
+
     public double calcularMontoTotal(Date fCheckIn, Date fCheckout, Habitacion habitacion) {
         double montoTotal = 0;
         double montoPorDia = 0;
@@ -193,7 +209,7 @@ public class Controladora {
 
         //calculo la cantidad de dias
         int milisegundosPorDia = 86400000;
-        cantidadDias = (int) ((fCheckIn.getTime() - fCheckout.getTime()) / milisegundosPorDia);
+        cantidadDias = (int) ((fCheckout.getTime() - fCheckIn.getTime()) / milisegundosPorDia);
 
         //recupero el costo de la habitacion y calculo el total para retornarlo
         montoPorDia = habitacion.getPrecioHabitacion();
@@ -206,6 +222,30 @@ public class Controladora {
     public List<Habitacion> recuperarHabitaciones() {
 
         return controlPersis.recuperarHabitaciones();
+    }
+    
+    //devuelve las habitaciones disponibles entre las fechas seleccionadas
+    public List<Habitacion> buscarHabitacionesDisponibles(Date fCheckIn, Date fCheckOut){
+        List<Habitacion> listaHabDisponibles = new ArrayList();
+        List<Reserva> listaReservas;
+        //traigo las reservas guardadas
+        listaReservas = controlPersis.recuperarReservas();
+           
+        //verifico que la lista no este vacía y la recorro
+            if(listaReservas != null){
+                for( Reserva reser : listaReservas){
+                    //comparo si la fecha de checkin nueva es posterio a la fecha de la reserva 
+                    //guardada o si la fecha de checkOut nueva es anterior a la fecha de 
+                    //reserva guardada
+                    if( (fCheckIn.compareTo(reser.getFechaCheckOut())>= 0) || (fCheckOut.compareTo(reser.getFechaCheckIn())<=0) ){
+                        //agrego la habitacion disponible a la lista de habitaciones a retornar
+                        listaHabDisponibles.add(reser.getIdHabitación());
+                    }
+                    
+                }
+            }
+       
+        return listaHabDisponibles;
     }
 
     //recupera la habitacion segun su id de habitacion
@@ -252,12 +292,12 @@ public class Controladora {
         Empleado empleado = new Empleado();
         Usuario usuario = new Usuario();
         Cargo cargo = new Cargo();
-        
+
         usuario.setNombreUsuario("admin");
         usuario.setContrasenia("admin");
-        
-        cargo =  buscarUnCargo("admin"); 
-        
+
+        cargo = buscarUnCargo("admin");
+
         empleado.setNombre("admin");
         empleado.setApellido("admin");
         empleado.setUsuario(usuario);
@@ -274,7 +314,7 @@ public class Controladora {
 
         if (listaUsuarios.isEmpty()) {
             agregarAdmin();
-            
+
         } else { //si la lista está vacía agrego el usuario admin / clave admin
 
             for (Usuario usu : listaUsuarios) {

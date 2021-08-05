@@ -88,10 +88,12 @@
                                 Editar
                             </a>
                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                                 <form action="SvModificarReserva" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvModificarReserva">Reserva</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <form action="SvEdicionHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Habitación</a></li>
+                                <form action="SvModificarHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvModificarHabitacion">Habitación</a></li>
                                 </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
@@ -108,7 +110,7 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Habitaciones</span>
+                                <span class="section-heading-lower">Editar Habitaciones</span>
                             </h2>
 
                             <!-- comienzo de la tabla que muestra el listado de las habitaciones -->
@@ -131,7 +133,7 @@
                                             
                                             //recorro la lista para cargar los valores en la tabla
                                             List<Habitacion> listaHabitaciones;
-                                            listaHabitaciones = (List) request.getSession().getAttribute("listaHabitaciones");
+                                            listaHabitaciones = (List) misesion.getAttribute("listaHabitaciones");
                                             if (listaHabitaciones != null) {
                                                 for (Habitacion hab : listaHabitaciones) {
                                                     

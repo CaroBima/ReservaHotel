@@ -1,19 +1,19 @@
+//permite eliminar una reserva
 
 package Servlets;
 
 import Logica.Controladora;
-import Logica.Reserva;
 import java.io.IOException;
-import java.util.List;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "SvConsultaReserva", urlPatterns = {"/SvConsultaReserva"})
-public class SvConsultaReserva extends HttpServlet {
+
+@WebServlet(name = "SvEliminarReserva", urlPatterns = {"/SvEliminarReserva"})
+public class SvEliminarReserva extends HttpServlet {
 
 
     
@@ -27,18 +27,7 @@ public class SvConsultaReserva extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        //cargo la lista de reservas para mostrarlas
-        Controladora control = new Controladora();
-        List<Reserva> listaReservas = control.recuperarReservas();
-        
-        HttpSession misesion = request.getSession();
-        
-        
-        misesion.setAttribute("listaReservas", listaReservas);
-        
-        response.sendRedirect("edicionReservas.jsp");
-        
+        processRequest(request, response);
     }
 
 
@@ -47,9 +36,17 @@ public class SvConsultaReserva extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        int idReserva = parseInt(request.getParameter("idReserva"));
+        
+        Controladora control = new Controladora();
+        control.borrarReserva(idReserva);
+        
+        request.getSession().setAttribute("listaReservas", control.recuperarReservas());
+        response.sendRedirect("edicionReservas.jsp");
     }
 
-
+   
     
     @Override
     public String getServletInfo() {

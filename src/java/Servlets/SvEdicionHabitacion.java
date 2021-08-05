@@ -1,3 +1,4 @@
+//actualiza la lista y redirecciona al jsp de edicion nuevamente, para editar o borrar mas campos
 
 package Servlets;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "SvModificarHabitacion", urlPatterns = {"/SvModificarHabitacion"})
+@WebServlet(name = "SvEdicionHabitacion", urlPatterns = {"/SvEdicionHabitacion"})
 public class SvEdicionHabitacion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +27,7 @@ public class SvEdicionHabitacion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        //actualizo la lista de habitaciones para mostrarla
         Controladora control = new Controladora();
         List<Habitacion> listaHabitaciones = control.recuperarHabitaciones();
         
