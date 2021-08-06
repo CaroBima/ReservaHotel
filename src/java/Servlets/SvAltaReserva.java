@@ -1,3 +1,6 @@
+//Sv para gestionar el alta de la reserva, validar los datos y guardarlos. En el
+//caso de que haya algun error no filtrado por el js avisa para que sea corregido
+
 package Servlets;
 
 import Logica.Controladora;
@@ -54,9 +57,10 @@ public class SvAltaReserva extends HttpServlet {
         request.getSession().setAttribute("usuario", usuario);
         
         
+        
+        
         Controladora control = new Controladora();
-        
-        
+              
         control.crearReserva(nombreHuesped, apellidoHuesped, dniHuesped, fechaNacHuesped,  direccionHuesped, profesionHuesped, cantidadPersonas, habitacionReserva, fechaCheckIn,  fechaCheckOut, usuario);
 
         //redirecciono a la página de confirmacion
@@ -73,7 +77,7 @@ public class SvAltaReserva extends HttpServlet {
     //Para convertir las fechas
     public Date parseFecha(String fecha) {
         Date fechaNac = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         try {
             fechaNac = formato.parse(fecha);
         } catch (ParseException ex) {

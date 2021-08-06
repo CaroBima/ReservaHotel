@@ -79,7 +79,7 @@ public class Controladora {
     
     //recupero una reserva por su id y la devuelvo
     public Reserva buscarUnaReserva(int idReserva){
-        Reserva reser = new Reserva();
+        Reserva reser;
         reser = controlPersis.buscarUnaReserva(idReserva);
         return reser;
     }
@@ -152,7 +152,7 @@ public class Controladora {
     public Date parseFecha(String fechaAParsear) {
         Date fechaParse = new Date();
 
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         try {
             fechaParse = formato.parse(fechaAParsear);
         } catch (ParseException ex) {
@@ -162,11 +162,12 @@ public class Controladora {
         return fechaParse;
     }
 
+    //permite darle el formato a la fecha
     public String formatearFecha(Date fecha) {
         String fechaFormateada;
         
         //le doy el formato a la fecha para poder devolverla y mostrarla
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         fechaFormateada = formato.format(fecha);
         
         return fechaFormateada;
@@ -239,6 +240,7 @@ public class Controladora {
                     //reserva guardada
                     if( (fCheckIn.compareTo(reser.getFechaCheckOut())>= 0) || (fCheckOut.compareTo(reser.getFechaCheckIn())<=0) ){
                         //agrego la habitacion disponible a la lista de habitaciones a retornar
+                        System.out.println("llega a comparar habitaciones y guarda la disponible");
                         listaHabDisponibles.add(reser.getIdHabitación());
                     }
                     
