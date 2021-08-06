@@ -74,7 +74,6 @@ function validarReserva(){
    //verifico si es mayor de 18 años para poder ser titular de la reserva
     if(calcularEdad(fNacim)<18){ 
         alert("Debe tener al menos 18 a\u00f1os para poder ser titular de la reserva");
-        console.log(fNacim);
         return false;
     }
 }
@@ -98,7 +97,7 @@ function validarHabitacion(){
     
     //compruebo que el precio este escrito en números y separado por punto
     if(isNaN(precioHab)){
-        alert("El precio debe estar expresado en n\u00fameros. En caso de tener decimales, separarlos con punto y no con coma");
+        alert("El precio debe estar expresado en n\u00fameros. En caso de tener decimales, sep\u00e1relos con punto y no con coma");
         return false;
     }
     
