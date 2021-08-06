@@ -23,6 +23,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
+        <script src="js/validador.js"></script>
         <title>Gestion de reservas</title>
     </head>
     <body>
@@ -83,10 +84,14 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li><a class="dropdown-item" href="modificarReserva.jsp">Reserva</a></li>
+                               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <form action="SvEditarReserva" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Reserva</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
-                                <li><a class="dropdown-item" href="modificarHabitacion.jsp">Habitación</a></li>
+                                <form action="SvEdicionHabitacion" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Habitación</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
                             </ul>
                         </li>
@@ -106,7 +111,7 @@
                             </h2>
 
                             <!-- Formulario de alta de nueva habitación -->
-                            <form action="SvAltaHabitacion"  class="border p-3 form" method="POST">
+                            <form name="frmAltaHabitacion" action="SvAltaHabitacion"  class="border p-3 form" method="POST">
                                 <h1>Nueva habitación</h1>
                                 
                                 <br>
@@ -134,7 +139,7 @@
                                     <div class="col">
                                         <!-- Ingreso del precio de la habitación-->
                                         <label for = "precioHabitacion" class="form-label">Precio:</label> 
-                                        <input type="text" class="form-control" name="precioHabitacion" required>
+                                        <input type="text" class="form-control" name="precioHabitacion" placeholder="00.00"  required>
                                     </div>
                                 </div>
 
@@ -171,7 +176,7 @@
 
                                 <br>
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 
+                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarHabitacion();" > 
                                 </div>    
 
                             </form>

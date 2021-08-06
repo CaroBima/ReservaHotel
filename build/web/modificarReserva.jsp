@@ -114,7 +114,7 @@ permite modificar la reserva seleccionada en edicionReservas.jsp
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar reservas</span>
+                                <span class="section-heading-lower">Cambiar reservas</span>
                             </h2>
 
                             <!-- Formulario de reserva -->
@@ -280,22 +280,7 @@ permite modificar la reserva seleccionada en edicionReservas.jsp
                                             %>
                                         </select>
                                     </div>
-
-                                <!-- Fecha de chek in -->
-                                <div class="row">
-                                    <div class="col">
-                                        <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
-                                        <input type="date" class="form-control" name="fechaCheckIn" value="<%=fCheckIn%>">
-                                    </div>
-
-                                    <!-- Fecha de chek out -->    
-                                    <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut" value="<%=fCheckOut%>">
-                                    </div>
-                                </div>
-                                                                        
-                                    <div class="col">
+                                               <div class="col">
                                         <!-- Seleccion de habitación que se va a reservar -->
                                         <label for = "habitacionReserva" class="form-label">Habitaciones disponibles:</label> 
                                         <select name ="habitacionReserva" class="form-control">
@@ -317,9 +302,32 @@ permite modificar la reserva seleccionada en edicionReservas.jsp
                                         </select>
                                     </div>
                                 </div>
-
-
-
+                                <!-- Fecha de chek in -->
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "fechaCheckIn" class="form-label" '>Fecha de CheckIn: </label>
+                                        <input type="text" class="form-control" name="fechaCheckIn" value="<%=fCheckIn%>" disabled>
+                                    </div>
+                                     <div class="col">
+                                        <label for = "fechaCheckIn" class="form-label" '>Nueva Fecha de CheckIn: </label>
+                                        <input type="date" class="form-control" name="fechaCheckIn">
+                                    </div>
+                                </div>
+                                    
+                                    
+                                <div class="row">
+                                    <!-- Fecha de chek out -->   
+                                    <div class="col">
+                                        <label for = "fechaCheckOut" class="form-label" '>Fecha de CheckOut: </label>
+                                        <input type="text" class="form-control" name="fechaCheckOut" value="<%=fCheckOut%>" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for = "fechaCheckOut" class="form-label" >Nueva fecha de Check-Out: </label>
+                                        <input type="date" class="form-control" name="fechaCheckOut">
+                                    </div>
+                                </div>
+                                                                        
+                         
                                 <!--    <div class="row">
                                         <div class="col">
                                             <label for = "importeTotalReserva" class="form-label">Importe total: </label>

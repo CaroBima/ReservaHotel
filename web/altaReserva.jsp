@@ -32,6 +32,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
+        <script src="js/validador.js"></script>
         <title>Nueva reserva</title>
     </head>
     <body>
@@ -226,7 +227,7 @@
                                 <br>
 
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar"> 
+                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
                                 </div>    
                             </form>
 

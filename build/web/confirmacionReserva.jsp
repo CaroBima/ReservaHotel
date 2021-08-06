@@ -125,7 +125,7 @@
                                     </tr>
                                     <tr>
                                         <td>Fecha de nacimiento:</td>
-                                        <td><%= session.getAttribute("dniHuesped")%></td>
+                                        <td><%= session.getAttribute("fechaNacHuesped")%></td>
                                     </tr>
                                     <tr>
                                         <td>Dirección:</td>
