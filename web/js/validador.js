@@ -27,7 +27,7 @@ function validarEmpleado() {
 //validacion de los datos del formulario de alta de una reserva
 function validarReserva() {
     var nombre, apellido, dni, fNacim, direccion, profesion, cantPersonas, habitacion, fCheckin, fCheckout;
-    
+
     //recupero los datos del jsp de alta de reserva
     nombre = document.formAltaReserva.nombreHuesped.value;
     apellido = document.formAltaReserva.apellidoHuesped.value;
@@ -63,32 +63,82 @@ function validarReserva() {
         alert("Debe tener al menos 18 a\u00f1os para poder ser titular de la reserva");
         return false;
     }
-    
-    //obtengo la fecha del día para validar la que se esta ingresando de checkin
-    var fechaHoy = new Date();
-    dia = '0'+ fechaHoy.getDate();
-    mes = '0'+ (fechaHoy.getMonth() +1);
-    anio = fechaHoy.getFullYear()
-    fHoy = anio + '-' + mes +'-' + dia;
-   
-  
-    //verifica que la fecha de checkin sea a futuro, que no se cargue una fecha pasada
-    if(compararFechas(fHoy, fCheckin)){
-        alert("La fecha de CheckIn no puede ser anterior a la fecha de hoy"); 
-        return false;
-    } 
-    
-    //comparo si la fecha de check in es anterior a la de check out
-    if (compararFechas(fCheckin, fCheckout)){ 
-        alert("La fecha de CheckOut no puede ser anterior al CheckIn"); 
-        return false;
-    } 
-   
-    //calcular el monto total y lo muestra preguntando si se desea guardar la reserva o no
-    if(calcularMontoTotal(fCheckin, fCheckout)=== false){
+
+
+//verifico que la capacidad de la habitacion sea mayor que la cantidad de huespedes
+    var capacidad; //para guardar la capacidad seleccionada
+    var comboCap = document.formAltaReserva.habitacionReserva;
+    var seleccionado = comboCap.options[comboCap.selectedIndex].text; //recupero el texto del select
+
+    //compruebo la capacidad de la habitacion buscando en el string recuperado del 
+    // combo (en el combo se muestra nombre tematico, capacidad y precio)
+    var simple = seleccionado.indexOf('Single');
+    var doble = seleccionado.indexOf('Doble');
+    var triple = seleccionado.indexOf('Triple');
+    var multiple = seleccionado.indexOf('Múltiple');
+
+    //verifico que capacidad tiene, si es !== a -1 quiere decir que esa es la capacidad
+    if (simple !== -1) {
+        capacidad = 1;
+    }
+    if (doble !== -1) {
+        capacidad = 2;
+    }
+    if (triple !== -1) {
+        capacidad = 3;
+    }
+    if (multiple !== -1) {
+        capacidad = 8;
+    }
+
+    var cantpers = parseInt(cantPersonas);
+    var capac = parseInt(capacidad);
+
+    //comparo para ver si la cantidad de personas seleccionada es mayor a la capacidad de la habitacion
+    if (cantpers > capac) {
+        alert('La cantidad de personas supera la capacidad de la habitacion');
         return false;
     }
-        
+
+
+
+
+//obtengo la fecha del día para validar la que se esta ingresando de checkin
+    var fechaHoy = new Date();
+    dia = '0' + fechaHoy.getDate();
+    mes = '0' + (fechaHoy.getMonth() + 1);
+    anio = fechaHoy.getFullYear();
+    fHoy = anio + '-' + mes + '-' + dia;
+
+
+    //verifica que la fecha de checkin sea a futuro, que no se cargue una fecha pasada
+    if (compararFechas(fHoy, fCheckin)) {
+        alert("La fecha de CheckIn no puede ser anterior a la fecha de hoy");
+        return false;
+    }
+
+    //comparo si la fecha de check in es anterior a la de check out
+    if (compararFechas(fCheckin, fCheckout)) {
+        alert("La fecha de CheckOut no puede ser anterior al CheckIn");
+        return false;
+    }
+
+    //compruebo si las fechas son iguales
+    var ingreso = new Date(fCheckin).getTime();
+    var salida = new Date(fCheckout).getTime();
+    if (ingreso === salida) {
+        alert("La fecha de CheckIn no puede ser igual a la de CheckOut");
+        return false;
+    }
+
+
+    //calcular el monto total y lo muestra preguntando si se desea guardar la reserva o no
+    if (calcularMontoTotal(fCheckin, fCheckout) === false) {
+        return false;
+    }
+
+
+
 }
 
 
@@ -126,9 +176,43 @@ function validarHabitacion() {
         alert("Debe seleccionar el n\u00famero de habitaci\u00f3n");
         return false;
     }
-    
-    
+
+
 }
+
+//verifico que la cantidad de huespedes no supere la capacidad de la habitacion
+function verificarCantHuespXReserva(cantPersonas) {
+    //traer los textos del select, buscar con indexOf si tienen single, double,
+    // etc y comparar de acuerdo a eso con la cant de huespedes ingresada
+    /* Para obtener el texto del select donde esta el precio */
+
+    var capacidad; //para guardar la capacidad seleccionada
+    var comboCap = document.formAltaReserva.habitacionReserva;
+    var seleccionado = comboCap.options[comboCap.selectedIndex].text; //recupero el texto del select
+
+    if (seleccionado.indexOf('Single')) {
+        capacidad = 1;
+    } else if (seleccionado.indexOf('Doble')) {
+        capacidad = 2;
+    } else if (seleccionado.indexOf('Triple')) {
+        capacidad = 3;
+    } else if (seleccionado.indexOf('Múltiple')) {
+        capacidad = 8;
+    }
+
+    alert(capacidad + " " + cantPersonas);
+
+    if (cantPersonas > capacidad) {
+        alert('La cantidad de personas supera la capacidad de la habitacion');
+        return false;
+    }
+    if (canPersonas <= capacidad) {
+        return true;
+    }
+
+
+}
+
 
 //permite calcular la edad para verificar si la persona es mayor de 18 años
 function calcularEdad(fechaNac) {
@@ -143,64 +227,60 @@ function calcularEdad(fechaNac) {
 }
 
 //calcula el monto total de la reserva
-function calcularMontoTotal(fCheckin, fCheckout){
- 
-/* Para obtener el texto del select donde esta el precio */
-var combo = document.formAltaReserva.habitacionReserva;
-var seleccionado = combo.options[combo.selectedIndex].text; //recupero el texto del select
+function calcularMontoTotal(fCheckin, fCheckout) {
 
-var regex = /(\d+)/g; // para obtener solo los numeros del string 
-var valorHab = seleccionado.match(regex); //obtengo los numeros del string
+    /* Para obtener el texto del select donde esta el precio */
+    var combo = document.formAltaReserva.habitacionReserva;
+    var seleccionado = combo.options[combo.selectedIndex].text; //recupero el texto del select
+
+    var regex = /(\d+)/g; // para obtener solo los numeros del string 
+    var valorHab = seleccionado.match(regex); //obtengo los numeros del string
 
 //obtendo los tiempos en milisengundos para poder restarlos
-var ingreso = new Date(fCheckin).getTime(); 
-var salida   = new Date(fCheckout).getTime();
+    var ingreso = new Date(fCheckin).getTime();
+    var salida = new Date(fCheckout).getTime();
 
-var diferencia =  salida - ingreso; //me da el tiempo en milisegundos
-var dias = diferencia/(1000*60*60*24); //calculo la cantidad  de dias
+    var diferencia = salida - ingreso; //me da el tiempo en milisegundos
+    var dias = diferencia / (1000 * 60 * 60 * 24); //calculo la cantidad  de dias
 
-var montototal = dias * parseInt(valorHab); //calculo el monto total
+    var montototal = dias * parseInt(valorHab); //calculo el monto total
 
-opcion = confirm("El monto total de la reserva es de $" + montototal + ". ¿Desea generar la reserva?.");
+    opcion = confirm("El monto total de la reserva es de $" + montototal + ". ¿Desea generar la reserva?.");
 
-return opcion;
-       
+    return opcion;
+
 }
 
 //permite comparar entre dos fechas, para ver si la fecha 1 es anterior a la segunda
-function compararFechas(fecha, fecha2){  
-    var xMonth=fecha.substring(3, 5);  
-    var xDay=fecha.substring(0, 2);  
-    var xYear=fecha.substring(6,10);  
-    var yMonth=fecha2.substring(3, 5);  
-    var yDay=fecha2.substring(0, 2);  
-    var yYear=fecha2.substring(6,10);  
-    if (xYear> yYear)  
-    {  
-        return(true)  
-    }  
-    else  
-    {  
-      if (xYear == yYear)  
-      {   
-        if (xMonth> yMonth)  
-        {  
-            return(true)  
-        }  
-        else  
-        {   
-          if (xMonth == yMonth)  
-          {  
-            if (xDay> yDay)  
-              return(true);  
-            else  
-              return(false);  
-          }  
-          else  
-            return(false);  
-        }  
-      }  
-      else  
-        return(false);  
-    }  
+function compararFechas(fecha, fecha2) {
+    var xMonth = fecha.substring(3, 5);
+    var xDay = fecha.substring(0, 2);
+    var xYear = fecha.substring(6, 10);
+    var yMonth = fecha2.substring(3, 5);
+    var yDay = fecha2.substring(0, 2);
+    var yYear = fecha2.substring(6, 10);
+    if (xYear > yYear)
+    {
+        return(true);
+    } else
+    {
+        if (xYear === yYear)
+        {
+            if (xMonth > yMonth)
+            {
+                return(true);
+            } else
+            {
+                if (xMonth === yMonth)
+                {
+                    if (xDay > yDay)
+                        return(true);
+                    else
+                        return(false);
+                } else
+                    return(false);
+            }
+        } else
+            return(false);
+    }
 }
