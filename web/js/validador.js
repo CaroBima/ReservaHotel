@@ -28,7 +28,6 @@ function validarEmpleado() {
 function validarReserva() {
     var nombre, apellido, dni, fNacim, direccion, profesion, cantPersonas, habitacion, fCheckin, fCheckout;
     
-    
     //recupero los datos del jsp de alta de reserva
     nombre = document.formAltaReserva.nombreHuesped.value;
     apellido = document.formAltaReserva.apellidoHuesped.value;
@@ -59,19 +58,18 @@ function validarReserva() {
         return false;
     }
 
-    
     //verifico si es mayor de 18 años para poder ser titular de la reserva
     if (calcularEdad(fNacim) < 18) {
         alert("Debe tener al menos 18 a\u00f1os para poder ser titular de la reserva");
         return false;
     }
     
-   //obtengo la fecha del día para validar la que se esta ingresando de checkin
-   var fechaHoy = new Date();
-   dia = '0'+ fechaHoy.getDate();
-   mes = '0'+ (fechaHoy.getMonth() +1);
-   anio = fechaHoy.getFullYear()
-   fHoy = anio + '-' + mes +'-' + dia;
+    //obtengo la fecha del día para validar la que se esta ingresando de checkin
+    var fechaHoy = new Date();
+    dia = '0'+ fechaHoy.getDate();
+    mes = '0'+ (fechaHoy.getMonth() +1);
+    anio = fechaHoy.getFullYear()
+    fHoy = anio + '-' + mes +'-' + dia;
    
   
     //verifica que la fecha de checkin sea a futuro, que no se cargue una fecha pasada
@@ -80,14 +78,18 @@ function validarReserva() {
         return false;
     } 
     
-    
     //comparo si la fecha de check in es anterior a la de check out
     if (compararFechas(fCheckin, fCheckout)){ 
         alert("La fecha de CheckOut no puede ser anterior al CheckIn"); 
         return false;
     } 
+   
+    //calcular el monto total y lo muestra preguntando si se desea guardar la reserva o no
+    if(calcularMontoTotal(fCheckin, fCheckout)=== false){
+        return false;
+    }
+        
 }
-
 
 
 //validacion de los datos del alta de una nueva habitacion
@@ -124,7 +126,8 @@ function validarHabitacion() {
         alert("Debe seleccionar el n\u00famero de habitaci\u00f3n");
         return false;
     }
-
+    
+    
 }
 
 //permite calcular la edad para verificar si la persona es mayor de 18 años
@@ -139,6 +142,30 @@ function calcularEdad(fechaNac) {
     return edad;
 }
 
+//calcula el monto total de la reserva
+function calcularMontoTotal(fCheckin, fCheckout){
+ 
+/* Para obtener el texto del select donde esta el precio */
+var combo = document.formAltaReserva.habitacionReserva;
+var seleccionado = combo.options[combo.selectedIndex].text; //recupero el texto del select
+
+var regex = /(\d+)/g; // para obtener solo los numeros del string 
+var valorHab = seleccionado.match(regex); //obtengo los numeros del string
+
+//obtendo los tiempos en milisengundos para poder restarlos
+var ingreso = new Date(fCheckin).getTime(); 
+var salida   = new Date(fCheckout).getTime();
+
+var diferencia =  salida - ingreso; //me da el tiempo en milisegundos
+var dias = diferencia/(1000*60*60*24); //calculo la cantidad  de dias
+
+var montototal = dias * parseInt(valorHab); //calculo el monto total
+
+opcion = confirm("El monto total de la reserva es de $" + montototal + ". ¿Desea generar la reserva?.");
+
+return opcion;
+       
+}
 
 //permite comparar entre dos fechas, para ver si la fecha 1 es anterior a la segunda
 function compararFechas(fecha, fecha2){  

@@ -84,6 +84,24 @@ public class Controladora {
         return reser;
     }
     
+    //permite recuperar las reservas realizadas en una fecha determinada
+    public List recuperarReservaXFecha(Date fechaConsulta){
+        List<Reserva> listaReservas;
+        List<Reserva> reservasXFecha = new ArrayList();
+        listaReservas = controlPersis.recuperarReservas();
+        
+        //recorro la lista de reservas buscando aquellas cuya fecha coincidan con la buscada
+        if(listaReservas != null){
+            for( Reserva reser : listaReservas){
+                if(reser.getFechaReserva().compareTo(fechaConsulta) == 0){
+                    reservasXFecha.add(reser);
+                }
+            }
+        }
+        
+        return reservasXFecha;
+    }
+    
     public void borrarReserva(int idReserva){
         controlPersis.borrarReserva(idReserva);
     }
