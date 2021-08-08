@@ -109,7 +109,7 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar Empleado</span>
+                                <span class="section-heading-lower">Listado de clientes</span>
                             </h2>
 
                             <!-- comienzo de la tabla que muestra el listado de empleados -->

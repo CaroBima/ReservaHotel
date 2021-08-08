@@ -48,7 +48,7 @@
             </h1>
         </header>
 
-         <!-- Menú de navegacion-->
+    <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -58,51 +58,65 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
 
-                        <!-- Menú de Altas-->
+                        <!-- Menú de Reservas-->
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Altas
+                                Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
-                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
+                                <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
+                                <form action="SvEditarReserva" method="GET">
+                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
+                                </form>
+                                
+                                
                             </ul>
                         </li>
 
-                        <!-- Menú de Consultas-->
+                        <!-- Menú de Clientes-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Consulta
+                                Clientes
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaReserva.jsp">Reservas</a></li>
-                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Habitaciones</a></li>
-                                <li><a class="dropdown-item" href="consultaEmpleados.jsp">Empleados</a></li>
-                                <li><a class="dropdown-item" href="consultaClientes.jsp">Clientes</a></li>
+                                <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huespedes</a></li>
+                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+                                
                             </ul>
                         </li>
-                        <!-- Menú de Ediciones-->
+                        
+                        <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Editar
+                                Habitaciones
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <form action="SvEditarReserva" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Reserva</a></li>
-                                </form>
-                                <li><a class="dropdown-item" href="modificarCliente.jsp">Cliente</a></li>
+                                <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
+                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Habitación</a></li>
+                                    <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-                                <li><a class="dropdown-item" href="modificarEmpleado.jsp">Empleado</a></li>
+                               
+                            </ul>
+                        </li>
+                        
+                           <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Empleados
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
+                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Editar empleados</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
 
         <section class="page-section cta">
             <div class="container">
@@ -111,11 +125,12 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Consultar reservas</span>
+                                <span class="section-heading-lower">Listado de reservas</span>
                             </h2>
 
-                            <!-- comienzo de la tabla que muestra el listado de empleados -->
+                            <!-- comienzo de la tabla que muestra el listado de reservas -->
                             <div class="table-responsive">
+                       
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>

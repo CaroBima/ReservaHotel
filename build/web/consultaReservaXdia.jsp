@@ -1,13 +1,12 @@
 <%-- 
-    Document   : consultaReserva
-    Created on : 2 ago. 2021, 10:51:19
+    Document   : consultaReservaXdia
+    Created on : 7 ago. 2021, 16:41:15
     Author     : Caro
 --%>
 
-
+<%@page import="Logica.Controladora"%>
 <%@page import="Logica.Reserva"%>
 <%@page import="java.util.List"%>
-<%@page import="Logica.Controladora"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -16,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Nueva reserva</title>
+        <title>Hotel Integrador</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -28,18 +27,17 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <title>Consulta de Empleados</title>
+        <title>Gestion de reservas</title>
     </head>
     <body>
         <%
-            HttpSession sesion = request.getSession();
-            String loginusuario = (String) sesion.getAttribute("usuario");
-
-            //verifico si el usuario admin esta creado y si no lo agrego
-            if (loginusuario == null) {
+        HttpSession misesion = request.getSession();
+        String usuario = (String) misesion.getAttribute("usuario");
+      
+            if(usuario == null){
                 response.sendRedirect("login.jsp");
-            } else {
-
+            }else{
+               
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -48,7 +46,7 @@
             </h1>
         </header>
 
-    <!-- Menú de navegacion-->
+         <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -67,7 +65,10 @@
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
-                                <form action="SvEditarReserva" method="GET">
+                                <form action="SvConsultaReservaxDia" method="GET">
+                                    <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
+                                </form>
+                                 <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
                                 </form>
                                 
@@ -78,10 +79,10 @@
                         <!-- Menú de Clientes-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Clientes
+                                Huéspedes
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huespedes</a></li>
+                                <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
                                 
                             </ul>
@@ -109,14 +110,13 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaEmpleado.jsp">Alta de Empleado</a></li>
-                                 <li><a class="dropdown-item" href="modificarEmpleado.jsp">Editar empleados</a></li>
+                                <li><a class="dropdown-item" href="consultaEmpleados.jsp">Lista de Empleados</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
 
         <section class="page-section cta">
             <div class="container">
@@ -125,9 +125,25 @@
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Listado de reservas</span>
+                                <span class="section-heading-lower">Consultar reservas</span>
                             </h2>
 
+                         
+                            
+                            <!-- Formulario de busqueda de reserva x fecha -->
+                            <form name="frmConsultaReservaxDia"  class="border p-3 form" action="SvConsultaReservaxDia" method="POST">
+                                
+                               <div class="row">
+                                    <div class="col">
+                                        <label for = "fechaReserva" class="form-label">Seleccione la fecha:</label> 
+                                        <input type="date"  class="form-control" id="fechaReserva" name="fechaReserva" >
+                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar"> 
+                                    </div>
+
+                                   
+                                </div>    
+                             
+                            
                             <!-- comienzo de la tabla que muestra el listado de reservas -->
                             <div class="table-responsive">
                        
@@ -148,16 +164,20 @@
                                     </thead>
                                     <tbody>
                                         <%                                                     
-                                            //recupero la lista de habitaciones para mostrarla en la tabla
+                                            HttpSession sesion = request.getSession();
                                             Controladora control = new Controladora();
+                                            //recorro la lista para cargar los valores en la tabla
+                                            
                                             List<Reserva> listaReservas;
-                                            listaReservas = control.recuperarReservas();
+                                            listaReservas = (List) sesion.getAttribute("listaReservas");
+                                            
                                             String fechaCheckIn;
                                             String fechaCheckOut;
                                             String fechaNacimiento;
                                             
                                             if (listaReservas != null) {
                                                 for (Reserva reser : listaReservas) {
+                                                   //formateo las fechas para poder mostrarlas
                                                    fechaCheckIn =  control.formatearFecha(reser.getFechaCheckIn());
                                                    fechaCheckOut =  control.formatearFecha(reser.getFechaCheckOut());
                                                    fechaNacimiento = control.formatearFecha(reser.getHuesped().getFechaNac());
@@ -177,13 +197,15 @@
                                         <%
                                                
                                             } //cierre del for
-                                        } 
+                                        }//cierre del if 
                                         %>
                                       
                                     </tbody>
                                 </table>
                             </div>
                             <!-- fin de la tabla de reservas -->
+                           </form>
+
                         </div>
                     </div>
                 </div>
@@ -200,3 +222,5 @@
         %>
     </body>
 </html>
+
+              

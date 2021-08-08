@@ -1,17 +1,11 @@
 <%-- 
-    Document   : altaReserva
-    Created on : 22 jul. 2021, 20:58:35
+    Document   : altaReserxHab
+    Created on : 7 ago. 2021, 11:41:47
     Author     : Caro
 --%>
 
-<%@page import="java.util.Date"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Logica.Controladora"%>
 <%@page import="Logica.Habitacion"%>
 <%@page import="java.util.List"%>
-
-
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -93,7 +87,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Editar
                             </a>
-                          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Reserva</a></li>
                                 </form>
@@ -121,19 +115,31 @@
 
                             <!-- Formulario de reserva -->
                             <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" >
-
+                                <%
+                                    HttpSession misesion = request.getSession();
+                                    String nombre = (String) request.getAttribute("nombreHuesped");
+                                    String apellido = (String) request.getAttribute("nombreHuesped");
+                                    String dniH = (String) request.getAttribute("dniHuesped");
+                                    String fechaNac = (String) request.getAttribute("fechaNacHuesped");
+                                    String direccion = (String) request.getAttribute("direccionHuesped");
+                                    String profesion = (String) request.getAttribute("profesionHuesped");
+                                    String cantidadPersonas = (String) request.getAttribute("cantidadPersonas");
+                                    String checkin = (String) request.getAttribute("fechaCheckIn");
+                                    String checkout = (String) request.getAttribute("fechaCheckOut");
+                                    String usuario = (String) request.getAttribute("usuario"); 
+                                %>
                                 <!-- Ingreso de datos del huesped -->
                                 <div class="row">
                                     <!-- Ingreso de nombre del huesped -->
                                     <div class="col">
                                         <label for = "nombreHuesped" class="form-label" >Nombre: </label>
-                                        <input type="text" class="form-control" name="nombreHuesped" required>
+                                        <input type="text" class="form-control" name="nombreHuesped" value="<%=nombre%>;">
                                     </div>
 
                                     <!-- Ingreso del apellido -->
                                     <div class="col">
                                         <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
-                                        <input type="text" class="form-control" name="apellidoHuesped" required>
+                                        <input type="text" class="form-control" name="apellidoHuesped" value="<%=apellido%>;">
                                     </div>
                                 </div>
 
@@ -141,13 +147,13 @@
                                     <!-- Ingreso del dni del huesped -->
                                     <div class="col">
                                         <label for = "dniHuesped" class="form-label" >Número de dni: </label>
-                                        <input type="text" class="form-control" name="dniHuesped" required>
+                                        <input type="text" class="form-control" name="dniHuesped" value="<%=dniH%>;">
                                     </div>
 
                                     <!-- Fecha de nacimiento del huesped -->
                                     <div class="col">
                                         <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
-                                        <input type="date" class="form-control" name="fechaNacHuesped" required>
+                                        <input type="text" class="form-control" name="fechaNacHuesped" value="<%=fechaNac%>;" disabled>
                                     </div>
                                 </div>
 
@@ -155,14 +161,14 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "direccionHuesped" class="form-label" >Dirección: </label>
-                                        <input type="text" class="form-control" name="direccionHuesped" required>
+                                        <input type="text" class="form-control" name="direccionHuesped" value="<%=direccion%>;">
                                     </div>
 
                                     <!-- Ingreso de Profesion -->
 
                                     <div class="col">
                                         <label for = "profesionHuesped" class="form-label">Profesión: </label>
-                                        <input type="text" class="form-control"  name="profesionHuesped" required>
+                                        <input type="text" class="form-control"  name="profesionHuesped" value="<%=profesion%>;">
                                     </div>
                                 </div>
 
@@ -170,17 +176,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "cantidadPersonas" class="form-label">Cantidad de personas:</label> 
-                                        <select name ="cantidadPersonas" class="form-control">
-                                            <option value="-" selected>-</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                        </select>
+                                        <input type="text" name ="cantidadPersonas" class="form-control" value="<%=cantidadPersonas%>;">
+                                            
                                     </div>
 
                                     <div class="col">
@@ -188,13 +185,14 @@
                                         <label for = "habitacionReserva" class="form-label">Habitaciones disponibles:</label> 
                                         <select name ="habitacionReserva" class="form-control">
                                             <option value="-">-</option>
-                                            <%                                                //Cargo los valores de la tabla de habitaciones en el combobox
-                                                Controladora control = new Controladora();
-                                                List<Habitacion> listaHabitacion = new ArrayList();
+                                            <%   
+                                                //Cargo los valores de la tabla de habitaciones en el combobox
+                                                
+                                                List<Habitacion> listaHabDisp = (List) misesion.getAttribute("listaHabDisponibles");
                                                 Habitacion habitacion = new Habitacion();
-                                                listaHabitacion = control.recuperarHabitaciones();
-                                                for (int i = 0; i < listaHabitacion.size(); i++) {
-                                                    habitacion = listaHabitacion.get(i);
+                                                
+                                                for (int i = 0; i < listaHabDisp.size(); i++) {
+                                                    habitacion = listaHabDisp.get(i);
                                                     out.println("<option value=\"" + habitacion.getIdHabitacion() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
                                                 }
                                             %>
@@ -206,13 +204,13 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
-                                        <input type="date" class="form-control" name="fechaCheckIn">
+                                        <input type="text" class="form-control" name="fechaCheckIn" value="<%=checkin%>;" disabled>
                                     </div>
 
                                     <!-- Fecha de chek out -->    
                                     <div class="col">
                                         <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut">
+                                        <input type="date" class="form-control" name="fechaCheckOut" value="<%=checkin%>;" disabled>
                                     </div>
                                 </div>
 

@@ -1,10 +1,12 @@
 package Logica;
 
 import Persistencia.ControladoraPersistencia;
+import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,43 +71,116 @@ public class Controladora {
 
     //recuperar listado de reservas
     public List recuperarReservas() {
-        Reserva reserva = new Reserva();
         List<Reserva> listaReservas;
 
         listaReservas = controlPersis.recuperarReservas();
 
         return listaReservas;
     }
-    
+
     //recupero una reserva por su id y la devuelvo
-    public Reserva buscarUnaReserva(int idReserva){
+    public Reserva buscarUnaReserva(int idReserva) {
         Reserva reser;
         reser = controlPersis.buscarUnaReserva(idReserva);
         return reser;
     }
-    
-    //permite recuperar las reservas realizadas en una fecha determinada
-    public List recuperarReservaXFecha(Date fechaConsulta){
+
+    //verifica si la habitacion está disponible en la fecha seleccionada y si
+    //no lo está devuelve una lista de habitaciones que si lo estan
+    public List verificarDisponibilidad(String fechaCheckIn, String fechaCheckOut, int habitacionReserva) {
         List<Reserva> listaReservas;
-        List<Reserva> reservasXFecha = new ArrayList();
+        List<Habitacion> listaHabDisponibles = new ArrayList();
+        Date ingreso;
+        Date egreso;
+
+        //recupero la lista de reservas y de habitaciones
         listaReservas = controlPersis.recuperarReservas();
-        
+        //listaHabDisponibles = controlPersis.recuperarHabitaciones();
+
+        //convierto los datos en el formato necesario para buscarlos 
+        ingreso = parseFecha(fechaCheckIn);
+        egreso = parseFecha(fechaCheckOut);
+
+        //recorro la lista de reservas comparando las fechas de ingreso/egreso si las 
+        //fechas se superponen quito la habitacion de la lista de habitaciones disponibles
+        if (listaReservas != null) {
+            Iterator<Reserva> iterador = listaReservas.iterator();
+            if (listaReservas != null) {
+                while (iterador.hasNext()) {
+                    Reserva reser = iterador.next();
+                     if ((reser.getFechaCheckOut().after(ingreso)) || reser.getFechaCheckIn().before(egreso)) { //busco las reservas en donde coincida el id de la habitacion
+                        if (reser.getIdHabitación().getIdHabitacion() != habitacionReserva){ //compruebo si las fechas no se superponen
+                            Habitacion hab = reser.getIdHabitación();
+                            listaHabDisponibles.add(hab);
+                        }
+                    }
+                }
+            }
+
+        }
+        return listaHabDisponibles;
+    }
+
+    //permite recuperar las reservas realizadas en una fecha determinada
+    public List recuperarReservaXFecha(String fechaCons) {
+        List<Reserva> listaReservas;
+        //List<Reserva> reservasXFecha = new ArrayList();
+        listaReservas = controlPersis.recuperarReservas();
+
+        //convierto la fecha para poder usarla
+        Date fechaConsulta = parseFecha(fechaCons);
+
         //recorro la lista de reservas buscando aquellas cuya fecha coincidan con la buscada
-        if(listaReservas != null){
-            for( Reserva reser : listaReservas){
-                if(reser.getFechaReserva().compareTo(fechaConsulta) == 0){
-                    reservasXFecha.add(reser);
+        Iterator<Reserva> iterador = listaReservas.iterator();
+        if (listaReservas != null) {
+            while (iterador.hasNext()) {
+                Reserva res = iterador.next();
+                //le doy formato a la fecha para poder compararla con la otra
+                String fechaRes = formatearFecha(res.getFechaReserva());
+                Date fechaR = parseFecha(fechaRes);
+                //Borro de la lista las reservas que no coinciden con la de la fecha buscada
+                if (fechaR.compareTo(fechaConsulta) != 0) {
+                    iterador.remove();
+                }
+            }
+
+        }
+
+        return listaReservas;
+    }
+
+    //borra una reserva de acuerdo a su id
+    public void borrarReserva(int idReserva) {
+        controlPersis.borrarReserva(idReserva);
+    }
+
+ //Permite buscar las reservas realizadas por un determinado empleado
+ public List recuperarReservasxEmpleado(String idEmpleado){
+     List<Reserva> listaReservas;
+     int idEmple = parseInt(idEmpleado);
+     
+     
+      //traigo la lista de reservas
+     listaReservas = controlPersis.recuperarReservas();
+     
+     //recorro la lista borrando de la misma las reservas que no sean de ese empleado 
+     Iterator<Reserva> iterador = listaReservas.iterator();
+      if (listaReservas != null) {
+            while (iterador.hasNext()) {
+                Reserva res = iterador.next();
+                int idEmLista = res.getIdEmpleado().getIdPersona();
+                
+                //Borro las reservas que no corresponden a ese empleado
+                if (idEmple != idEmLista) {
+                    iterador.remove();
                 }
             }
         }
         
-        return reservasXFecha;
-    }
+    return listaReservas;
+ }   
     
-    public void borrarReserva(int idReserva){
-        controlPersis.borrarReserva(idReserva);
-    }
-
+ 
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado) {
         Empleado empleado = new Empleado();
@@ -159,6 +234,7 @@ public class Controladora {
         return empleado;
     }
 
+    //devuelve una lista de empleados
     public List recuperarEmpleados() {
         List<Empleado> listaEmpleados;
         listaEmpleados = controlPersis.recuperarEmpleados();
@@ -170,7 +246,7 @@ public class Controladora {
     public Date parseFecha(String fechaAParsear) {
         Date fechaParse = new Date();
 
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
             fechaParse = formato.parse(fechaAParsear);
         } catch (ParseException ex) {
@@ -183,11 +259,11 @@ public class Controladora {
     //permite darle el formato a la fecha
     public String formatearFecha(Date fecha) {
         String fechaFormateada;
-        
+
         //le doy el formato a la fecha para poder devolverla y mostrarla
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         fechaFormateada = formato.format(fecha);
-        
+
         return fechaFormateada;
 
     }
@@ -242,29 +318,29 @@ public class Controladora {
 
         return controlPersis.recuperarHabitaciones();
     }
-    
+
     //devuelve las habitaciones disponibles entre las fechas seleccionadas
-    public List<Habitacion> buscarHabitacionesDisponibles(Date fCheckIn, Date fCheckOut){
+    public List<Habitacion> buscarHabitacionesDisponibles(Date fCheckIn, Date fCheckOut) {
         List<Habitacion> listaHabDisponibles = new ArrayList();
         List<Reserva> listaReservas;
         //traigo las reservas guardadas
         listaReservas = controlPersis.recuperarReservas();
-           
+
         //verifico que la lista no este vacía y la recorro
-            if(listaReservas != null){
-                for( Reserva reser : listaReservas){
-                    //comparo si la fecha de checkin nueva es posterio a la fecha de la reserva 
-                    //guardada o si la fecha de checkOut nueva es anterior a la fecha de 
-                    //reserva guardada
-                    if( (fCheckIn.compareTo(reser.getFechaCheckOut())>= 0) || (fCheckOut.compareTo(reser.getFechaCheckIn())<=0) ){
-                        //agrego la habitacion disponible a la lista de habitaciones a retornar
-                        System.out.println("llega a comparar habitaciones y guarda la disponible");
-                        listaHabDisponibles.add(reser.getIdHabitación());
-                    }
-                    
+        if (listaReservas != null) {
+            for (Reserva reser : listaReservas) {
+                //comparo si la fecha de checkin nueva es posterio a la fecha de la reserva 
+                //guardada o si la fecha de checkOut nueva es anterior a la fecha de 
+                //reserva guardada
+                if ((fCheckIn.compareTo(reser.getFechaCheckOut()) >= 0) || (fCheckOut.compareTo(reser.getFechaCheckIn()) <= 0)) {
+                    //agrego la habitacion disponible a la lista de habitaciones a retornar
+                    System.out.println("llega a comparar habitaciones y guarda la disponible");
+                    listaHabDisponibles.add(reser.getIdHabitación());
                 }
+
             }
-       
+        }
+
         return listaHabDisponibles;
     }
 

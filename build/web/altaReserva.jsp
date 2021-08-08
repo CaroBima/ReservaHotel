@@ -216,18 +216,6 @@
                                     </div>
                                 </div>
 
-                                <!--    <div class="row">
-                                        <div class="col">
-                                            <label for = "importeTotalReserva" class="form-label">Importe total: </label>
-                                            <input type="text" name="importeTotalReserva" class="form-control" value= "$0.0" disabled>
-                                        </div>
-                                        <div class="intro-button mx-auto">
-    
-                                            <input type="submit" class="btn btn-primary btn-xs" value="Calcular Total" >
-                                        </div> 
-                                    </div>
-                                -->
-
                                 <br>
 
                                 <div class="intro-button mx-auto">
