@@ -272,6 +272,8 @@ public class Controladora {
     public List recuperarHuespedes() {
         List<Huesped> listaHuesped;
         listaHuesped = controlPersis.recuperarHuespedes();
+        
+       
         return listaHuesped;
     }
 

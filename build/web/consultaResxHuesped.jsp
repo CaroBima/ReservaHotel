@@ -67,7 +67,7 @@
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxEmp">Buscar reserva por empleado</a></li>
                                 </form>
                                 <form action="SvConsResxHuesped" method="GET">
-                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por fecha</a></li>
+                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
                                  <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
@@ -132,7 +132,7 @@
                          
                             
                             <!-- Formulario de busqueda de reserva x fecha -->
-                            <form name="frmConsResxEmp"  class="border p-3 form" action="SvConsResxEmp" method="POST">
+                            <form name="frmConsResxHuesped"  class="border p-3 form" action="SvConsResxHuesped" method="POST">
                                 
                                <div class="row">
                                     <div class="col">
@@ -147,6 +147,7 @@
                                                 Huesped huesped = new Huesped();
                                                 
                                                 if(listaHuespedes != null){
+                                                System.out.println("la lista no es nula");
                                                 for (int i = 0; i < listaHuespedes.size(); i++) {
                                                     huesped = listaHuespedes.get(i);
                                                         out.println("<option value=\"" + huesped.getIdPersona() + "\" " + ">" + huesped.getNombre() + " " + huesped.getApellido() + "</option>");

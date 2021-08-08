@@ -71,7 +71,7 @@
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxEmp">Buscar reserva por empleado</a></li>
                                 </form>
                                 <form action="SvConsResxHuesped" method="GET">
-                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por fecha</a></li>
+                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
                                  <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
