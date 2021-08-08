@@ -1,7 +1,6 @@
 package Logica;
 
 import Persistencia.ControladoraPersistencia;
-import Persistencia.ReservaJpaController;
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

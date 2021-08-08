@@ -68,6 +68,12 @@
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
                                 </form>
+                                <form action="SvConsResxEmp" method="GET">
+                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxEmp">Buscar reserva por empleado</a></li>
+                                </form>
+                                <form action="SvConsResxHuesped" method="GET">
+                                    <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
+                                </form>
                                  <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
                                 </form>
@@ -117,7 +123,7 @@
                 </div>
             </div>
         </nav>
-
+         
         <section class="page-section cta">
             <div class="container">
                 <div class="row">
