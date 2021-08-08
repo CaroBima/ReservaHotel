@@ -65,6 +65,25 @@ public class SvConsResxHuesped extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        String idHuesped = request.getParameter("CboHuesped");
+        String fechaDesde = request.getParameter("fechaDesde");
+        String fechaHasta = request.getParameter("fechaHasta");
+        
+        System.out.println("desde " + fechaDesde);
+        System.out.println("hasta " + fechaHasta);
+        
+        Controladora control = new Controladora();
+        List<Reserva> listaReservas;
+        
+        listaReservas = control.recuperarReservasxHuesped(idHuesped, fechaDesde, fechaHasta);
+        
+         HttpSession sesion = request.getSession();
+       
+        sesion.setAttribute("listaReservas", listaReservas);
+        
+        response.sendRedirect("consultaResxHuesped.jsp");
+        
     }
 
  

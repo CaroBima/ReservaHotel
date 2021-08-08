@@ -1,6 +1,7 @@
 package Logica;
 
 import Persistencia.ControladoraPersistencia;
+import Persistencia.ReservaJpaController;
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -108,8 +109,8 @@ public class Controladora {
             if (listaReservas != null) {
                 while (iterador.hasNext()) {
                     Reserva reser = iterador.next();
-                     if ((reser.getFechaCheckOut().after(ingreso)) || reser.getFechaCheckIn().before(egreso)) { //busco las reservas en donde coincida el id de la habitacion
-                        if (reser.getIdHabitación().getIdHabitacion() != habitacionReserva){ //compruebo si las fechas no se superponen
+                    if ((reser.getFechaCheckOut().after(ingreso)) || reser.getFechaCheckIn().before(egreso)) { //busco las reservas en donde coincida el id de la habitacion
+                        if (reser.getIdHabitación().getIdHabitacion() != habitacionReserva) { //compruebo si las fechas no se superponen
                             Habitacion hab = reser.getIdHabitación();
                             listaHabDisponibles.add(hab);
                         }
@@ -154,33 +155,77 @@ public class Controladora {
         controlPersis.borrarReserva(idReserva);
     }
 
- //Permite buscar las reservas realizadas por un determinado empleado
- public List recuperarReservasxEmpleado(String idEmpleado){
-     List<Reserva> listaReservas;
-     int idEmple = parseInt(idEmpleado);
-     
-     
-      //traigo la lista de reservas
-     listaReservas = controlPersis.recuperarReservas();
-     
-     //recorro la lista borrando de la misma las reservas que no sean de ese empleado 
-     Iterator<Reserva> iterador = listaReservas.iterator();
-      if (listaReservas != null) {
+    //Permite buscar las reservas realizadas por un determinado empleado
+    public List recuperarReservasxEmpleado(String idEmpleado) {
+        List<Reserva> listaReservas;
+        int idEmple = parseInt(idEmpleado);
+
+        //traigo la lista de reservas
+        listaReservas = controlPersis.recuperarReservas();
+
+        //recorro la lista borrando de la misma las reservas que no sean de ese empleado 
+        Iterator<Reserva> iterador = listaReservas.iterator();
+        if (listaReservas != null) {
             while (iterador.hasNext()) {
                 Reserva res = iterador.next();
                 int idEmLista = res.getIdEmpleado().getIdPersona();
-                
+
                 //Borro las reservas que no corresponden a ese empleado
                 if (idEmple != idEmLista) {
                     iterador.remove();
                 }
             }
         }
+
+        return listaReservas;
+    }
+
+    public List recuperarReservasxHuesped(String idHuesped, String fechaDesde, String fechaHasta) {
+        List<Reserva> listaReservas;
+        List<Reserva> listaReserxHuesped = new ArrayList();
+        //convierto los datos que traigo por parametro
+        int idHues = parseInt(idHuesped);
+        Date fDesde = parseFecha(fechaDesde);
+        Date fHasta = parseFecha(fechaHasta);
         
-    return listaReservas;
- }   
-    
- 
+        //recupero la lista de reservas
+        listaReservas = controlPersis.recuperarReservas();
+        
+        //recorro la lista borrando de la misma las reservas que no sean de ese huesped 
+        Iterator<Reserva> iterador = listaReservas.iterator();
+        if (listaReservas != null) {
+            while (iterador.hasNext()) {
+                Reserva res = iterador.next();
+                int idHuespedLista = res.getHuesped().getIdPersona();
+
+                //Borro las reservas que no corresponden a ese huesped
+                if (idHues != idHuespedLista) {
+                    iterador.remove();
+                }
+            }
+        }
+        
+        //filtro la lista por fecha desde y hasta
+        Iterator<Reserva> iterador2 = listaReservas.iterator();
+        
+            while (iterador2.hasNext()){
+                Reserva res = iterador2.next();
+               // Date fCheckIn = res.getFechaCheckIn();
+                //le doy formato a la fecha para poder compararla con la otra
+                String fechaRes = formatearFecha(res.getFechaCheckIn());
+                Date fechaR = parseFecha(fechaRes);
+                
+                if(!(fechaR.after(fDesde) && fechaR.before(fHasta))){
+                } else {
+                   listaReserxHuesped.add(res);
+                    System.out.println("entra a barrer porque don barredora es");
+                }
+           }
+      
+        
+        return listaReserxHuesped;
+    }
+
 //Métodos para el empleado
     public void crearEmpleado(String usuarioEmpleado, String contrasenia, String nombreEmpleado, String apellidoEmpleado, String dniEmpleado, String direccionEmpleado, String fechaNacimiento, String cargoEmpleado) {
         Empleado empleado = new Empleado();
@@ -272,8 +317,7 @@ public class Controladora {
     public List recuperarHuespedes() {
         List<Huesped> listaHuesped;
         listaHuesped = controlPersis.recuperarHuespedes();
-        
-       
+
         return listaHuesped;
     }
 

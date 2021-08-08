@@ -26,13 +26,13 @@
     </head>
     <body>
         <%
-        HttpSession misesion = request.getSession();
-        String usuario = (String) misesion.getAttribute("usuario");
-      
-            if(usuario == null){
+            HttpSession misesion = request.getSession();
+            String usuario = (String) misesion.getAttribute("usuario");
+
+            if (usuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -69,11 +69,11 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                 <form action="SvEditarReserva" method="GET">
+                                <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
                                 </form>
-                                
-                                
+
+
                             </ul>
                         </li>
 
@@ -84,11 +84,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
-                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
-                                
+                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+
                             </ul>
                         </li>
-                        
+
                         <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,15 +96,15 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
+                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-                               
+
                             </ul>
                         </li>
-                        
-                           <li class="nav-item dropdown">
+
+                        <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Empleados
@@ -129,102 +129,119 @@
                                 <span class="section-heading-lower">Consultar reservas</span>
                             </h2>
 
-                         
-                            
+
+
                             <!-- Formulario de busqueda de reserva x fecha -->
                             <form name="frmConsResxHuesped"  class="border p-3 form" action="SvConsResxHuesped" method="POST">
-                                
-                               <div class="row">
+
+                                <div class="row">
                                     <div class="col">
-                                        <label for = "CboHuesped" class="form-label">Seleccione el empleado cuyas reservas desea consultar:</label> 
-                                         <select name ="CboHuesped" class="form-control">
+                                        <label for = "CboHuesped" class="form-label">Seleccione el huésped:</label> 
+                                        <select name ="CboHuesped" class="form-control">
                                             <option value="-">-</option>
-                                            <%                                                
-                                                //Cargo los huespedes en el combobox
+                                            <%                                                //Cargo los huespedes en el combobox
                                                 HttpSession sesion = request.getSession();
-                                                
-                                                List<Huesped> listaHuespedes =  (List) sesion.getAttribute("listaHuespedes");
+
+                                                List<Huesped> listaHuespedes = (List) sesion.getAttribute("listaHuespedes");
                                                 Huesped huesped = new Huesped();
-                                                
-                                                if(listaHuespedes != null){
-                                                System.out.println("la lista no es nula");
-                                                for (int i = 0; i < listaHuespedes.size(); i++) {
-                                                    huesped = listaHuespedes.get(i);
+
+                                                if (listaHuespedes != null) {
+                                                    for (int i = 0; i < listaHuespedes.size(); i++) {
+                                                        huesped = listaHuespedes.get(i);
                                                         out.println("<option value=\"" + huesped.getIdPersona() + "\" " + ">" + huesped.getNombre() + " " + huesped.getApellido() + "</option>");
-                                                        
+
                                                     }
                                                 }
                                             %>
                                         </select>
-                                       
-                                        <input type="submit" id="btnBuscar" name="btnBuscar" class="btn btn-primary btn-xs" value="Buscar"> 
-                                     </div>
-
+                                    </div>
                                    
-                                </div>    
-                             
-                            
-                            <!-- comienzo de la tabla que muestra el listado de reservas -->
-                            <div class="table-responsive">
-                       
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <td>Nombre del cliente</td>
-                                            <td>Dni</td>
-                                            <td>Fecha de nacimiento</td>
-                                            <td>Dirección</td>
-                                            <td>Profesion</td>
-                                            <td>Cat. Personas</td>
-                                            <td>Habitacion</td>
-                                            <td>CheckIn</td>
-                                            <td>CheckOut</td>
-                                            <td>Monto Total</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%                                                     
-                                          
-                                          
-                                            //recorro la lista para cargar los valores en la tabla
-                                            
-                                            List<Reserva> listaReservas;
-                                            listaReservas = (List) sesion.getAttribute("listaReservas");
-                                            Controladora control = new Controladora();
-                                            String fechaCheckIn;
-                                            String fechaCheckOut;
-                                            String fechaNacimiento;
-                                            
-                                            if (listaReservas != null) {
-                                                for (Reserva reser : listaReservas) {
-                                                   //formateo las fechas para poder mostrarlas
-                                                   fechaCheckIn =  control.formatearFecha(reser.getFechaCheckIn());
-                                                   fechaCheckOut =  control.formatearFecha(reser.getFechaCheckOut());
-                                                   fechaNacimiento = control.formatearFecha(reser.getHuesped().getFechaNac());
-                                        %>
-                                        <tr>    
-                                            <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido() %></td>
-                                            <td><%= reser.getHuesped().getDni() %></td>
-                                            <td><%= fechaNacimiento %></td>
-                                            <td><%= reser.getHuesped().getDireccion() %></td>
-                                            <td><%= reser.getHuesped().getProfesion() %></td>
-                                            <td><%= reser.getCantPersonas() %></td>
-                                            <td><%= reser.getIdHabitación().getNombreTematica() %></td>
-                                            <td><%= fechaCheckIn %></td>
-                                            <td><%= fechaCheckOut  %></td>
-                                            <td><%= reser.getMontoTotalReserva() %></td>
-                                        </tr>
-                                        <%
-                                               
-                                            } //cierre del for
-                                        }//cierre del if 
-                                        %>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "fechaDesde" class="form-label">Buscar desde:</label> 
+                                        <input type="date"  class="form-control" id="fechaReserva" name="fechaDesde" >
+                                        
+                                    </div>
+                                     <div class="col">
+                                        <label for = "fechaHasta" class="form-label">Hasta:</label> 
+                                        <input type="date"  class="form-control" id="fechaReserva" name="fechaHasta" >
+                                        
+                                    </div>
+                                     
+                                </div>  
+                                   <div class="row">
+                                         <div class="col">
+                                        
+                                        </div>
+                                        <div class="col">
+                                        <br>
+                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar"> 
+                                        </div>
                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- fin de la tabla de reservas -->
-                           </form>
+                                    </div>
+
+
+
+
+                                <!-- comienzo de la tabla que muestra el listado de reservas -->
+                                <div class="table-responsive">
+
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre del cliente</td>
+                                                <td>Dni</td>
+                                                <td>Fecha de nacimiento</td>
+                                                <td>Dirección</td>
+                                                <td>Profesion</td>
+                                                <td>Cat. Personas</td>
+                                                <td>Habitacion</td>
+                                                <td>CheckIn</td>
+                                                <td>CheckOut</td>
+                                                <td>Monto Total</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                //recorro la lista para cargar los valores en la tabla
+                                                List<Reserva> listaReservas;
+                                                listaReservas = (List) sesion.getAttribute("listaReservas");
+                                                Controladora control = new Controladora();
+                                                String fechaCheckIn;
+                                                String fechaCheckOut;
+                                                String fechaNacimiento;
+
+                                                if (listaReservas != null) {
+                                                    for (Reserva reser : listaReservas) {
+                                                        //formateo las fechas para poder mostrarlas
+                                                        fechaCheckIn = control.formatearFecha(reser.getFechaCheckIn());
+                                                        fechaCheckOut = control.formatearFecha(reser.getFechaCheckOut());
+                                                        fechaNacimiento = control.formatearFecha(reser.getHuesped().getFechaNac());
+                                            %>
+                                            <tr>    
+                                                <td><%= reser.getHuesped().getNombre() + " " + reser.getHuesped().getApellido()%></td>
+                                                <td><%= reser.getHuesped().getDni()%></td>
+                                                <td><%= fechaNacimiento%></td>
+                                                <td><%= reser.getHuesped().getDireccion()%></td>
+                                                <td><%= reser.getHuesped().getProfesion()%></td>
+                                                <td><%= reser.getCantPersonas()%></td>
+                                                <td><%= reser.getIdHabitación().getNombreTematica()%></td>
+                                                <td><%= fechaCheckIn%></td>
+                                                <td><%= fechaCheckOut%></td>
+                                                <td><%= reser.getMontoTotalReserva()%></td>
+                                            </tr>
+                                            <%
+
+                                                    } //cierre del for
+                                                }//cierre del if 
+                                            %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- fin de la tabla de reservas -->
+                            </form>
 
                         </div>
                     </div>
@@ -243,4 +260,3 @@
     </body>
 </html>
 
-            
