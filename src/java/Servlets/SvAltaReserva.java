@@ -1,11 +1,12 @@
 //Sv para gestionar el alta de la reserva, validar los datos y guardarlos. En el
 //caso de que haya algun error no filtrado por el js avisa para que sea corregido
+
 package Servlets;
 
 import Logica.Controladora;
 import Logica.Habitacion;
+import Logica.Huesped;
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,11 +29,56 @@ public class SvAltaReserva extends HttpServlet {
 
     }
 
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+        
+        //recupero la lista de habitaciones para mostrarla en la tabla
+        Controladora control = new Controladora();
+        List<Habitacion> listaHabitaciones;
+        listaHabitaciones = control.recuperarHabitaciones();
+        
+        
+        
+        
+        //paso la lista a la sesion
+        HttpSession misesion = request.getSession();
+        
+        misesion.setAttribute("listaHabitaciones", listaHabitaciones);
+        
+        response.sendRedirect("altaReserva.jsp");
+    }
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
 
+        String fechaCheckIn = request.getParameter("fechaCheckIn");
+        String fechaCheckOut = request.getParameter("fechaCheckOut");
+        String cantidadPersonas = request.getParameter("cantidadPersonas");
+        
+         Controladora control = new Controladora();
+        List<Habitacion> listaHabitaciones;
+        listaHabitaciones = control.buscarHabitacionesDisponibles(fechaCheckIn, fechaCheckOut, cantidadPersonas);
+        
+        List<Huesped> listaHuespedes = control.recuperarHuespedes();
+         
+        //paso la lista a la sesion
+        HttpSession misesion = request.getSession();
+        
+        misesion.setAttribute("listaHabitaciones", listaHabitaciones);
+        misesion.setAttribute("fechaCheckIn", fechaCheckIn);
+        misesion.setAttribute("fechaCheckOut", fechaCheckOut);
+        misesion.setAttribute("cantidadPersonas", cantidadPersonas);
+        misesion.setAttribute("listaHuespedes", listaHuespedes);
+        
+        response.sendRedirect("altaReserxHab.jsp");
+        
+        /*
         //traigo los datos del JSP
         String nombreHuesped = request.getParameter("nombreHuesped");
         String apellidoHuesped = request.getParameter("apellidoHuesped");

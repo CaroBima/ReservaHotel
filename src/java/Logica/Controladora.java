@@ -112,6 +112,7 @@ public class Controladora {
                         if (reser.getIdHabitación().getIdHabitacion() != habitacionReserva) { //compruebo si las fechas no se superponen
                             Habitacion hab = reser.getIdHabitación();
                             listaHabDisponibles.add(hab);
+                            System.out.println("agrega hab " + hab.getNombreTematica());
                         }
                     }
                 }
@@ -119,6 +120,81 @@ public class Controladora {
 
         }
         return listaHabDisponibles;
+    }
+
+    public List buscarHabitacionesDisponibles(String fCheckin, String fCheckout, String cantidadPersonas) {
+
+        Date checkin = parseFecha(fCheckin);
+        Date checkout = parseFecha(fCheckout);
+        int cantPers = parseInt(cantidadPersonas);
+
+        List<Habitacion> listaHabitaciones = controlPersis.recuperarHabitaciones();
+        List<Reserva> listaReservas = controlPersis.recuperarReservas();
+        List<Reserva> listaResxFecha = new ArrayList();
+
+        //recupero la habitacion cuya capacidad coincida con la de huespedes
+        Iterator<Habitacion> iterador = listaHabitaciones.iterator();
+        if (listaHabitaciones != null) {
+            while (iterador.hasNext()) {
+                Habitacion hab = iterador.next();
+                //verifico de acuerdo al tipo la cantidad de huespedes (en la base de datos guardo single, doble, etc)
+                String cantHues = hab.getTipoHab();
+                int cantidadH = 0;
+                switch (cantHues) {
+                    case "Single":
+                        cantidadH = 1;
+                        break;
+                    case "Doble":
+                        cantidadH = 2;
+                        break;
+                    case "Triple":
+                        cantidadH = 3;
+                        break;
+                    case "Multiple":
+                        cantidadH = 8;
+                        break;
+                }
+
+                //Si la cantidad de huéspedes es mayor a la capacidad de la habitacion, borro la habitacion de la lista
+                if (cantPers > cantidadH) {
+                    iterador.remove();
+                }
+            }
+        }
+
+        //armo una lista de reservas cuyas fechas coincidan con la de checkin y checkout
+        Iterator<Reserva> iteradorRes = listaReservas.iterator();
+
+        while (iteradorRes.hasNext()) {
+            Reserva res = iteradorRes.next();
+            //le doy formato a la fecha para poder compararla con la otra
+            String fechaRes = formatearFecha(res.getFechaCheckIn());
+            Date fechaR = parseFecha(fechaRes);
+
+            if (!(fechaR.after(checkin) && fechaR.before(checkout))) {
+            } else {
+                listaResxFecha.add(res);
+
+            }
+        }
+
+        //verifico las habitaciones ocupadas que se guardaron de acuerdo a la fecha y las borro   
+        Iterator<Reserva> iterRes = listaResxFecha.iterator();
+        Iterator<Habitacion> iterHab = listaHabitaciones.iterator();
+        //recorro las listas comparando las habitaciones y borrando las habitaciones reservadas de la lista de habitacionees que voy a devolver
+        while (iterRes.hasNext()) {
+            Reserva res = iterRes.next();
+            int idHabRes = res.getIdHabitación().getIdHabitacion();
+            while (iterHab.hasNext()) {
+                Habitacion hab = iterHab.next();
+                int idHab = hab.getIdHabitacion();
+                if(idHabRes == idHab){
+                    iterHab.remove();
+                }
+            }
+        }
+
+        return listaHabitaciones;
     }
 
     //permite recuperar las reservas realizadas en una fecha determinada
@@ -186,10 +262,10 @@ public class Controladora {
         int idHues = parseInt(idHuesped);
         Date fDesde = parseFecha(fechaDesde);
         Date fHasta = parseFecha(fechaHasta);
-        
+
         //recupero la lista de reservas
         listaReservas = controlPersis.recuperarReservas();
-        
+
         //recorro la lista borrando de la misma las reservas que no sean de ese huesped 
         Iterator<Reserva> iterador = listaReservas.iterator();
         if (listaReservas != null) {
@@ -203,25 +279,23 @@ public class Controladora {
                 }
             }
         }
-        
+
         //filtro la lista por fecha desde y hasta
         Iterator<Reserva> iterador2 = listaReservas.iterator();
-        
-            while (iterador2.hasNext()){
-                Reserva res = iterador2.next();
-               // Date fCheckIn = res.getFechaCheckIn();
-                //le doy formato a la fecha para poder compararla con la otra
-                String fechaRes = formatearFecha(res.getFechaCheckIn());
-                Date fechaR = parseFecha(fechaRes);
-                
-                if(!(fechaR.after(fDesde) && fechaR.before(fHasta))){
-                } else {
-                   listaReserxHuesped.add(res);
-                    System.out.println("entra a barrer porque don barredora es");
-                }
-           }
-      
-        
+
+        while (iterador2.hasNext()) {
+            Reserva res = iterador2.next();
+            // Date fCheckIn = res.getFechaCheckIn();
+            //le doy formato a la fecha para poder compararla con la otra
+            String fechaRes = formatearFecha(res.getFechaCheckIn());
+            Date fechaR = parseFecha(fechaRes);
+
+            if (!(fechaR.after(fDesde) && fechaR.before(fHasta))) {
+            } else {
+                listaReserxHuesped.add(res);
+            }
+        }
+
         return listaReserxHuesped;
     }
 

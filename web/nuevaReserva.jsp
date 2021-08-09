@@ -1,12 +1,11 @@
 <%-- 
-    Document   : altaReserxHab
-    Created on : 7 ago. 2021, 11:41:47
+    Document   : nuevaReserva
+    Created on : 9 ago. 2021, 09:54:48
     Author     : Caro
 --%>
 
-<%@page import="Logica.Huesped"%>
-<%@page import="Logica.Habitacion"%>
-<%@page import="java.util.List"%>
+
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Nueva reserva</title>
+        <title>Hotel Integrador</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -27,16 +26,14 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <script src="js/validador.js"></script>
-        <title>Nueva reserva</title>
+        <title>Gestion de reservas</title>
     </head>
     <body>
         <%
-            HttpSession sesion = request.getSession();
-            String loginusuario = (String) sesion.getAttribute("usuario");
+            HttpSession misesion = request.getSession();
+            String usuario = (String) misesion.getAttribute("usuario");
 
-            //verifico si el usuario admin esta creado y si no lo agrego
-            if (loginusuario == null) {
+            if (usuario == null) {
                 response.sendRedirect("login.jsp");
             } else {
 
@@ -65,7 +62,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
+                                <form action="SvAltaReserva" method="GET">
+                                    <li><a class="dropdown-item" href="SvAltaReserva">Nueva Reserva</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -135,84 +134,35 @@
                                 <!--<span class="section-heading-upper">Nueva Reserva</span>-->
                                 <span class="section-heading-lower">Nueva Reserva</span>
                             </h2>
-
-                            <!-- Formulario de reserva -->
-                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" >
-                                <!-- Recupero los datos de la sesion, Muestro los datos de reserva seleccionados y las habitaciones disponibles para esas fechas -->
-                                <%                                    HttpSession misesion = request.getSession();
-                                    List<Habitacion> listaHabitacion = (List) misesion.getAttribute("listaHabitaciones");
-                                    String fChekIn = (String) misesion.getAttribute("fechaCheckIn");
-                                    String fChekOut = (String) misesion.getAttribute("fechaCheckOut");
-                                    String cantPers = (String) misesion.getAttribute("cantidadPersonas");
-                                    List<Huesped> listaHuespedes = (List) misesion.getAttribute("listaHuespedes");
-                                    Habitacion habitacion = new Habitacion();
-
-                                %>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for = "fechaCheckIn" class="form-label" >CheckIn: </label>
-                                        <input type="text" class="form-control" name="fechaCheckIn" value="<%=fChekIn%>" disabled>
-                                    </div>
-
-                                    <!-- Ingreso del apellido -->
-                                    <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >CheckOut: </label>
-                                        <input type="text" class="form-control" name="fechaCheckOut" value="<%=fChekOut%>" disabled>
-                                    </div>
-
-
-                                </div>
-                                <div class="row"> 
-                                    <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >Personas: </label>
-                                        <input type="text" class="form-control" name="fechaCheckOut" value="<%=cantPers%>" disabled>
-                                    </div>
-                                    <div class="col">
-                                        <!-- Seleccion de habitación que se va a reservar -->
-                                        <label for = "habitacionReserva" class="form-label">Habitaciones:</label> 
-                                        <select name ="habitacionReserva" class="form-control">
-                                            <option value="-">-</option>
-                                            <%
-                                                for (int i = 0; i < listaHabitacion.size(); i++) {
-                                                    habitacion = listaHabitacion.get(i);
-                                                    out.println("<option value=\"" + habitacion.getIdHabitacion() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
-                                                }
-                                            %>
-                                        </select>
-                                    </div>
-                                </div>
-                                    <!--ingreso los datos del cliente-->
-                                     <label for = "seleccionHuesped" class="form-label">Huesped:</label> 
-                                        <select name ="seleccionHuesped" class="form-control">
-                                            <option value="-">-</option>
-                                            <%
-                                                Huesped huesped = new Huesped();
-                                                for (int i = 0; i < listaHuespedes.size(); i++) {
-                                                    huesped = listaHuespedes.get(i);
-                                                    out.println("<option value=\"" + huesped.getIdPersona() + "\" " + ">" + huesped.getNombre() + " " + huesped.getApellido() + " - " + huesped.getDni() + "</option>");
-                                                }
-                                            %>
-                                        </select>
-                                    
-                                <br>   
-                                    <!-- Boton de guardado -->   
-                                <div class="row"> 
+                            <div class="row"> 
+                                <div class="col">
                                     <div class="intro-button mx-auto">
-                                        <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
-                                    </div>    
+                                         <form action="SvAltaHuesped" method="GET">
+                                        <input type="submit" name="btnNvohuesped" class="btn btn-primary btn-xl" value="Cargar nuevo Huesped">
+                                         </form>
+                                    </div>  
+                                    <br>
+                                    <div class="intro-button mx-auto">
+                                            <input type="submit" name="btnHuespedExistente" class="btn btn-primary btn-xl" value=" Reserva para Huesped Existente"> 
+                                    </div> 
                                 </div>
-                            </form>
+                            </div>
 
-                            </section>
-                            <footer class="footer text-faded text-center py-5">
-                                <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
-                            </footer>
 
-                            <!-- Bootstrap core JS-->
-                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-                            <!-- Core theme JS-->
-                            <script src="js/scripts.js"></script>
-                            <%            }
-                            %>
-                            </body>
-                            </html>
+
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <%         }
+        %>   
+    </body>
+</html>
+

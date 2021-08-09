@@ -1,12 +1,11 @@
 <%-- 
-    Document   : altaReserxHab
-    Created on : 7 ago. 2021, 11:41:47
+    Document   : nuevoHuesped
+    Created on : 9 ago. 2021, 10:03:03
     Author     : Caro
 --%>
 
-<%@page import="Logica.Huesped"%>
-<%@page import="Logica.Habitacion"%>
-<%@page import="java.util.List"%>
+
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Nueva reserva</title>
+        <title>Hotel Integrador</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -27,19 +26,17 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
         <script src="js/scripts.js"></script>
-        <script src="js/validador.js"></script>
-        <title>Nueva reserva</title>
+        <title>Gestion de reservas</title>
     </head>
     <body>
         <%
-            HttpSession sesion = request.getSession();
-            String loginusuario = (String) sesion.getAttribute("usuario");
-
-            //verifico si el usuario admin esta creado y si no lo agrego
-            if (loginusuario == null) {
+        HttpSession misesion = request.getSession();
+        String usuario = (String) misesion.getAttribute("usuario");
+      
+            if(usuario == null){
                 response.sendRedirect("login.jsp");
-            } else {
-
+            }else{
+               
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -48,7 +45,7 @@
             </h1>
         </header>
 
-        <!-- Menú de navegacion-->
+          <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -65,7 +62,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
+                                
+                                <li><a class="dropdown-item" href="nuevaReserva.jsp">Nueva Reserva</a></li>
+                                
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -76,11 +75,11 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                <form action="SvEditarReserva" method="GET">
+                                 <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
                                 </form>
-
-
+                                
+                                
                             </ul>
                         </li>
 
@@ -91,11 +90,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
-                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
-
+                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+                                
                             </ul>
                         </li>
-
+                        
                         <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -103,15 +102,15 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
+                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-
+                               
                             </ul>
                         </li>
-
-                        <li class="nav-item dropdown">
+                        
+                           <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Empleados
@@ -131,88 +130,76 @@
                 <div class="row">
                     <div class="col-xl-9 mx-auto">
                         <div class="cta-inner bg-faded text-center rounded">
-                            <h2 class="section-heading mb-4">
-                                <!--<span class="section-heading-upper">Nueva Reserva</span>-->
-                                <span class="section-heading-lower">Nueva Reserva</span>
-                            </h2>
-
-                            <!-- Formulario de reserva -->
-                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" >
-                                <!-- Recupero los datos de la sesion, Muestro los datos de reserva seleccionados y las habitaciones disponibles para esas fechas -->
-                                <%                                    HttpSession misesion = request.getSession();
-                                    List<Habitacion> listaHabitacion = (List) misesion.getAttribute("listaHabitaciones");
-                                    String fChekIn = (String) misesion.getAttribute("fechaCheckIn");
-                                    String fChekOut = (String) misesion.getAttribute("fechaCheckOut");
-                                    String cantPers = (String) misesion.getAttribute("cantidadPersonas");
-                                    List<Huesped> listaHuespedes = (List) misesion.getAttribute("listaHuespedes");
-                                    Habitacion habitacion = new Habitacion();
-
-                                %>
+                                 <!-- Formulario de reserva -->
+                            <form name="formAltaHuesped"  class="border p-3 form" action="SvAltaHuesped" method="Post" >
+                                <!-- Ingreso de datos del huesped -->
                                 <div class="row">
+                                    <!-- Ingreso de nombre del huesped -->
                                     <div class="col">
-                                        <label for = "fechaCheckIn" class="form-label" >CheckIn: </label>
-                                        <input type="text" class="form-control" name="fechaCheckIn" value="<%=fChekIn%>" disabled>
+                                        <label for = "nombreHuesped" class="form-label" >Nombre: </label>
+                                        <input type="text" class="form-control" name="nombreHuesped" required>
                                     </div>
 
                                     <!-- Ingreso del apellido -->
                                     <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >CheckOut: </label>
-                                        <input type="text" class="form-control" name="fechaCheckOut" value="<%=fChekOut%>" disabled>
+                                        <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
+                                        <input type="text" class="form-control" name="apellidoHuesped" required>
                                     </div>
-
-
                                 </div>
-                                <div class="row"> 
+                                
+
+                                <div class="row">
+                                    <!-- Ingreso del dni del huesped -->
                                     <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >Personas: </label>
-                                        <input type="text" class="form-control" name="fechaCheckOut" value="<%=cantPers%>" disabled>
+                                        <label for = "dniHuesped" class="form-label" >Número de dni: </label>
+                                        <input type="text" class="form-control" name="dniHuesped" required>
                                     </div>
+
+                                    <!-- Fecha de nacimiento del huesped -->
                                     <div class="col">
-                                        <!-- Seleccion de habitación que se va a reservar -->
-                                        <label for = "habitacionReserva" class="form-label">Habitaciones:</label> 
-                                        <select name ="habitacionReserva" class="form-control">
-                                            <option value="-">-</option>
-                                            <%
-                                                for (int i = 0; i < listaHabitacion.size(); i++) {
-                                                    habitacion = listaHabitacion.get(i);
-                                                    out.println("<option value=\"" + habitacion.getIdHabitacion() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
-                                                }
-                                            %>
-                                        </select>
+                                        <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
+                                        <input type="date" class="form-control" name="fechaNacHuesped" required>
                                     </div>
                                 </div>
-                                    <!--ingreso los datos del cliente-->
-                                     <label for = "seleccionHuesped" class="form-label">Huesped:</label> 
-                                        <select name ="seleccionHuesped" class="form-control">
-                                            <option value="-">-</option>
-                                            <%
-                                                Huesped huesped = new Huesped();
-                                                for (int i = 0; i < listaHuespedes.size(); i++) {
-                                                    huesped = listaHuespedes.get(i);
-                                                    out.println("<option value=\"" + huesped.getIdPersona() + "\" " + ">" + huesped.getNombre() + " " + huesped.getApellido() + " - " + huesped.getDni() + "</option>");
-                                                }
-                                            %>
-                                        </select>
-                                    
-                                <br>   
-                                    <!-- Boton de guardado -->   
-                                <div class="row"> 
-                                    <div class="intro-button mx-auto">
-                                        <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
-                                    </div>    
+
+                                <!-- ingreso de dirección -->
+                                <div class="row">
+                                    <div class="col">
+                                        <label for = "direccionHuesped" class="form-label" >Dirección: </label>
+                                        <input type="text" class="form-control" name="direccionHuesped" required>
+                                    </div>
+
+                                    <!-- Ingreso de Profesion -->
+
+                                    <div class="col">
+                                        <label for = "profesionHuesped" class="form-label">Profesión: </label>
+                                        <input type="text" class="form-control"  name="profesionHuesped" required>
+                                    </div>
                                 </div>
-                            </form>
 
-                            </section>
-                            <footer class="footer text-faded text-center py-5">
-                                <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
-                            </footer>
+                                 <br>
 
-                            <!-- Bootstrap core JS-->
-                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-                            <!-- Core theme JS-->
-                            <script src="js/scripts.js"></script>
-                            <%            }
-                            %>
-                            </body>
-                            </html>
+                                <div class="intro-button mx-auto">
+                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
+                                </div> 
+                            </form>    
+                                
+
+                            
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+     <%
+         }   
+     %>   
+    </body>
+</html>
+

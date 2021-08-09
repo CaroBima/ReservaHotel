@@ -53,7 +53,7 @@
             </h1>
         </header>
 
-          <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -70,7 +70,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
+                                <form action="SvAltaReserva" method="GET">
+                                    <li><a class="dropdown-item" href="SvAltaReserva">Nueva Reserva</a></li>
+                                </form>
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -81,11 +83,11 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                 <form action="SvEditarReserva" method="GET">
+                                <form action="SvEditarReserva" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
                                 </form>
-                                
-                                
+
+
                             </ul>
                         </li>
 
@@ -96,11 +98,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
-                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
-                                
+                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+
                             </ul>
                         </li>
-                        
+
                         <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,15 +110,15 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
+                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-                               
+
                             </ul>
                         </li>
-                        
-                           <li class="nav-item dropdown">
+
+                        <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Empleados
@@ -142,52 +144,20 @@
                             </h2>
 
                             <!-- Formulario de reserva -->
-                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="POST" >
-
-                                <!-- Ingreso de datos del huesped -->
-                                <div class="row">
-                                    <!-- Ingreso de nombre del huesped -->
-                                    <div class="col">
-                                        <label for = "nombreHuesped" class="form-label" >Nombre: </label>
-                                        <input type="text" class="form-control" name="nombreHuesped" required>
-                                    </div>
-
-                                    <!-- Ingreso del apellido -->
-                                    <div class="col">
-                                        <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
-                                        <input type="text" class="form-control" name="apellidoHuesped" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <!-- Ingreso del dni del huesped -->
-                                    <div class="col">
-                                        <label for = "dniHuesped" class="form-label" >Número de dni: </label>
-                                        <input type="text" class="form-control" name="dniHuesped" required>
-                                    </div>
-
-                                    <!-- Fecha de nacimiento del huesped -->
-                                    <div class="col">
-                                        <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
-                                        <input type="date" class="form-control" name="fechaNacHuesped" required>
-                                    </div>
-                                </div>
-
-                                <!-- ingreso de dirección -->
+                            <form name="formAltaReserva"  class="border p-3 form" action="SvAltaReserva" method="Post" >
+                                <!-- Fecha de chek in -->
                                 <div class="row">
                                     <div class="col">
-                                        <label for = "direccionHuesped" class="form-label" >Dirección: </label>
-                                        <input type="text" class="form-control" name="direccionHuesped" required>
+                                        <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
+                                        <input type="date" class="form-control" name="fechaCheckIn">
                                     </div>
 
-                                    <!-- Ingreso de Profesion -->
-
+                                    <!-- Fecha de chek out -->    
                                     <div class="col">
-                                        <label for = "profesionHuesped" class="form-label">Profesión: </label>
-                                        <input type="text" class="form-control"  name="profesionHuesped" required>
+                                        <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
+                                        <input type="date" class="form-control" name="fechaCheckOut">
                                     </div>
                                 </div>
-
                                 <!-- Ingreso de Cantidad de personas -->
                                 <div class="row">
                                     <div class="col">
@@ -204,51 +174,23 @@
                                             <option value="8">8</option>
                                         </select>
                                     </div>
-
                                     <div class="col">
-                                        <!-- Seleccion de habitación que se va a reservar -->
-                                        <label for = "habitacionReserva" class="form-label">Habitaciones disponibles:</label> 
-                                        <select name ="habitacionReserva" class="form-control">
-                                            <option value="-">-</option>
-                                            <%                                                //Cargo los valores de la tabla de habitaciones en el combobox
-                                                Controladora control = new Controladora();
-                                                List<Habitacion> listaHabitacion = new ArrayList();
-                                                Habitacion habitacion = new Habitacion();
-                                                listaHabitacion = control.recuperarHabitaciones();
-                                                for (int i = 0; i < listaHabitacion.size(); i++) {
-                                                    habitacion = listaHabitacion.get(i);
-                                                    out.println("<option value=\"" + habitacion.getIdHabitacion() + "\" " + ">" + habitacion.getNombreTematica() + " - " + habitacion.getTipoHab() + " - $" + habitacion.getPrecioHabitacion() + "</option>");
-                                                }
-                                            %>
-                                        </select>
+                                        <br>
+                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar habitaciones disponibles"> 
                                     </div>
                                 </div>
-
-                                <!-- Fecha de chek in -->
-                                <div class="row">
-                                    <div class="col">
-                                        <label for = "fechaCheckIn" class="form-label" '>Fecha de Check-In: </label>
-                                        <input type="date" class="form-control" name="fechaCheckIn">
-                                    </div>
-
-                                    <!-- Fecha de chek out -->    
-                                    <div class="col">
-                                        <label for = "fechaCheckOut" class="form-label" >Fecha de Check-Out: </label>
-                                        <input type="date" class="form-control" name="fechaCheckOut">
-                                    </div>
-                                </div>
-
-                                <br>
-
-                                <div class="intro-button mx-auto">
-                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
-                                </div>    
-                            </form>
-
 
                         </div>
+                        <br>
+                        <div class="intro-button mx-auto">
+                            <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();" method="POST"> 
+                        </div>  
+                        </form>
+
+
                     </div>
                 </div>
+            </div>
         </section>
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
@@ -258,8 +200,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <%
-            }
+        <%            }
         %>
     </body>
 </html>

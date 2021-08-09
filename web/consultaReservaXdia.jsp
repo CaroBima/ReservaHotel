@@ -172,7 +172,7 @@
                                         <%                                                     
                                             HttpSession sesion = request.getSession();
                                             Controladora control = new Controladora();
-                                            //recorro la lista para cargar los valores en la tabla
+                                          
                                             
                                             List<Reserva> listaReservas;
                                             listaReservas = (List) sesion.getAttribute("listaReservas");
@@ -180,7 +180,7 @@
                                             String fechaCheckIn;
                                             String fechaCheckOut;
                                             String fechaNacimiento;
-                                            
+                                            //recorro la lista para cargar los valores en la tabla
                                             if (listaReservas != null) {
                                                 for (Reserva reser : listaReservas) {
                                                    //formateo las fechas para poder mostrarlas

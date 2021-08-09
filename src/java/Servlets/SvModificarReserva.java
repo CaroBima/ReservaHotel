@@ -7,7 +7,6 @@ import Logica.Controladora;
 import Logica.Reserva;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +52,7 @@ public class SvModificarReserva extends HttpServlet {
         //busco la reserva por su id y la traigo
         Reserva reservaMod = control.buscarUnaReserva(idReserva);
         
-        //le doy formato a las fechas para pasarlos
+        //paso las fechas a string
         String fNacimiento = control.formatearFecha(reservaMod.getHuesped().getFechaNac());
         String fChechIn = control.formatearFecha(reservaMod.getFechaCheckIn());
         String fCheckOut = control.formatearFecha(reservaMod.getFechaCheckOut());
