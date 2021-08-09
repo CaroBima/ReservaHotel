@@ -44,8 +44,7 @@
                 <span class="site-heading-lower">Integrador</span>
             </h1>
         </header>
-
-         <!-- Menú de navegacion-->
+   <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -62,7 +61,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="altaReserva.jsp">Nueva Reserva</a></li>
+                                
+                                <li><a class="dropdown-item" href="nuevaReserva.jsp">Nueva Reserva</a></li>
+                                
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -73,9 +74,7 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                 <form action="SvEditarReserva" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
-                                </form>
+                             
                                 
                                 
                             </ul>
@@ -135,6 +134,10 @@
                             <h4 >Los datos han sido guardados correctamente:</h4>
                             <br>
                             <div class="table-responsive">
+                                <%
+                                     HttpSession misesion = request.getSession();
+                                     String habitacReser = (String) misesion.getAttribute("habitacionReserva");
+                                 %>
                                 <table class="table table-striped">
                                     <tr>
                                         <td>Nombre del huesped:</td>

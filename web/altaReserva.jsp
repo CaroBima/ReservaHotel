@@ -53,7 +53,7 @@
             </h1>
         </header>
 
-        <!-- Menú de navegacion-->
+       <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -70,9 +70,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <form action="SvAltaReserva" method="GET">
-                                    <li><a class="dropdown-item" href="SvAltaReserva">Nueva Reserva</a></li>
-                                </form>
+                                
+                                <li><a class="dropdown-item" href="nuevaReserva.jsp">Nueva Reserva</a></li>
+                                
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -83,11 +83,9 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                <form action="SvEditarReserva" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
-                                </form>
-
-
+                             
+                                
+                                
                             </ul>
                         </li>
 
@@ -98,11 +96,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
-                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
-
+                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+                                
                             </ul>
                         </li>
-
+                        
                         <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -110,15 +108,15 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
+                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-
+                               
                             </ul>
                         </li>
-
-                        <li class="nav-item dropdown">
+                        
+                           <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Empleados
@@ -176,17 +174,68 @@
                                     </div>
                                     <div class="col">
                                         <br>
-                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar habitaciones disponibles"> 
+                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar habitaciones disponibles" onclick ="return validarRes();"> 
                                     </div>
                                 </div>
 
                         </div>
-                        <br>
-                        <div class="intro-button mx-auto">
-                            <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();" method="POST"> 
-                        </div>  
-                        </form>
 
+                        </form>
+                        <script>
+                            function validarRes() {
+                                var cantPersonas, fCheckin, fCheckout;
+
+                                //recupero los datos del jsp de alta de reserva
+
+                                cantPersonas = document.formAltaReserva.cantidadPersonas.value;
+                                fCheckin = document.formAltaReserva.fechaCheckIn.value;
+                                fCheckout = document.formAltaReserva.fechaCheckOut.value;
+
+                                //compruebo que no queden campos vacíos
+                                if (cantPersonas === "" || fCheckin === "" || fCheckout === "") {
+                                    alert("Todos los campos deben estar completos");
+                                    return false;
+                                }
+
+
+                                //compruebo que se encuentre selecionada la cantidad de personas que se van a hospedar
+                                if (cantPersonas === "-") {
+                                    alert("Debe seleccionar la cantidad de personas que se van a hospedar");
+                                    return false;
+                                }
+
+//obtengo la fecha del día para validar la que se esta ingresando de checkin
+                                var fechaHoy = new Date();
+                                dia = '0' + fechaHoy.getDate();
+                                mes = '0' + (fechaHoy.getMonth() + 1);
+                                anio = fechaHoy.getFullYear();
+                                fHoy = anio + '-' + mes + '-' + dia;
+
+
+                                //verifica que la fecha de checkin sea a futuro, que no se cargue una fecha pasada
+                                if (compararFechas(fHoy, fCheckin)) {
+                                    alert("La fecha de CheckIn no puede ser anterior a la fecha de hoy");
+                                    return false;
+                                }
+
+                                //comparo si la fecha de check in es anterior a la de check out
+                                if (compararFechas(fCheckin, fCheckout)) {
+                                    alert("La fecha de CheckOut no puede ser anterior al CheckIn");
+                                    return false;
+                                }
+
+                                //compruebo si las fechas son iguales
+                                var ingreso = new Date(fCheckin).getTime();
+                                var salida = new Date(fCheckout).getTime();
+                                if (ingreso === salida) {
+                                    alert("La fecha de CheckIn no puede ser igual a la de CheckOut");
+                                    return false;
+                                }
+
+
+                            }
+
+                        </script>
 
                     </div>
                 </div>

@@ -28,6 +28,7 @@ public class ControladoraPersistencia {
         return listaReservas;
     
     }
+    
     public void borrarReserva(int idReserva){
         ReservaJpaController controlReserva = new ReservaJpaController();
         try {
@@ -45,6 +46,24 @@ public class ControladoraPersistencia {
         reserva = controlReserva.findReserva(idReserva);
         
         return reserva;
+    }
+    
+    
+    //busco un huesped por su id
+    public Huesped buscarHuespedxId(int idHuesped){
+        HuespedJpaController controlHuesped = new HuespedJpaController();
+        Huesped huesped = new Huesped();
+        
+        huesped = controlHuesped.findHuesped(idHuesped);
+        
+        return huesped;
+    }
+    
+    //guardo el huesped en la base de datos
+    public void crearHuesped(Huesped huesped){
+        HuespedJpaController controlHuesped = new HuespedJpaController();
+        
+        controlHuesped.create(huesped);
     }
     
     

@@ -25,18 +25,19 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <!--<link rel="stylesheet" href="css/style.css">-->
-        <script src="js/scripts.js"></script>
+        <!-- <script src="js/scripts.js"></script>-->
+        <script src="js/validador.js"></script>
         <title>Gestion de reservas</title>
     </head>
     <body>
         <%
-        HttpSession misesion = request.getSession();
-        String usuario = (String) misesion.getAttribute("usuario");
-      
-            if(usuario == null){
+            HttpSession misesion = request.getSession();
+            String usuario = (String) misesion.getAttribute("usuario");
+
+            if (usuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -44,8 +45,7 @@
                 <span class="site-heading-lower">Integrador</span>
             </h1>
         </header>
-
-          <!-- Menú de navegacion-->
+   <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -75,9 +75,7 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                                 <form action="SvEditarReserva" method="GET">
-                                    <li><a class="SUBMIT dropdown-item" href="SvEditarReserva">Editar Reserva</a></li>
-                                </form>
+                             
                                 
                                 
                             </ul>
@@ -130,35 +128,35 @@
                 <div class="row">
                     <div class="col-xl-9 mx-auto">
                         <div class="cta-inner bg-faded text-center rounded">
-                                 <!-- Formulario de reserva -->
-                            <form name="formAltaHuesped"  class="border p-3 form" action="SvAltaHuesped" method="Post" >
+                            <!-- Formulario de reserva -->
+                            <form name="frmAltaHuesped"  class="border p-3 form" action="SvAltaHuesped" method="Post" >
                                 <!-- Ingreso de datos del huesped -->
                                 <div class="row">
                                     <!-- Ingreso de nombre del huesped -->
                                     <div class="col">
                                         <label for = "nombreHuesped" class="form-label" >Nombre: </label>
-                                        <input type="text" class="form-control" name="nombreHuesped" required>
+                                        <input type="text" class="form-control" name="nombreHuesped">
                                     </div>
 
                                     <!-- Ingreso del apellido -->
                                     <div class="col">
                                         <label for = "apellidoHuesped" class="form-label" >Apellido: </label>
-                                        <input type="text" class="form-control" name="apellidoHuesped" required>
+                                        <input type="text" class="form-control" name="apellidoHuesped">
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="row">
                                     <!-- Ingreso del dni del huesped -->
                                     <div class="col">
                                         <label for = "dniHuesped" class="form-label" >Número de dni: </label>
-                                        <input type="text" class="form-control" name="dniHuesped" required>
+                                        <input type="text" class="form-control" name="dniHuesped" >
                                     </div>
 
                                     <!-- Fecha de nacimiento del huesped -->
                                     <div class="col">
                                         <label for = "fechaNacHuesped" class="form-label">Fecha de nacimiento: </label>
-                                        <input type="date" class="form-control" name="fechaNacHuesped" required>
+                                        <input type="date" class="form-control" name="fechaNacHuesped">
                                     </div>
                                 </div>
 
@@ -166,26 +164,49 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for = "direccionHuesped" class="form-label" >Dirección: </label>
-                                        <input type="text" class="form-control" name="direccionHuesped" required>
+                                        <input type="text" class="form-control" name="direccionHuesped">
                                     </div>
 
                                     <!-- Ingreso de Profesion -->
 
                                     <div class="col">
                                         <label for = "profesionHuesped" class="form-label">Profesión: </label>
-                                        <input type="text" class="form-control"  name="profesionHuesped" required>
+                                        <input type="text" class="form-control"  name="profesionHuesped">
                                     </div>
                                 </div>
 
-                                 <br>
-
+                                <br>
                                 <div class="intro-button mx-auto">
-                                    <input type="submit" name="btnGuardar" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarReserva();"> 
+                                    <input type="submit" class="btn btn-primary btn-xl" value="Guardar" onclick ="return validarHuesped();" > 
                                 </div> 
-                            </form>    
-                                
 
-                            
+                            </form>  
+
+                            <script>
+                                function validarHuesped() {
+                                    var nombre, apellido, dni, fechaNac, direccion, profesion;
+
+                                    nombre = document.frmAltaHuesped.nombreHuesped.value;
+                                    apellido = document.frmAltaHuesped.apellidoHuesped.value;
+                                    dni = document.frmAltaHuesped.dniHuesped.value;
+                                    fechaNac = document.frmAltaHuesped.fechaNacHuesped.value;
+                                    direccion = document.frmAltaHuesped.direccionHuesped.value;
+                                    profesion = document.frmAltaHuesped.profesionHuesped.value;
+
+                                    if (nombre === "" || apellido === "" || dni === "" || fechaNac === "" || direccion === "" || profesion === "") {
+                                        alert("Todos los campos deben estar completos");
+                                        return false;
+                                    }
+
+                                    if (calcularEdad(fechaNac) < 18) {
+                                        alert("Debe tener al menos 18 a\u00f1os para poder ser titular de la reserva");
+                                        return false;
+                                    }
+
+                                }
+                            </script>
+
+
                         </div>
                     </div>
                 </div>
@@ -197,9 +218,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-     <%
-         }   
-     %>   
+        <%         }
+        %>   
     </body>
 </html>
 

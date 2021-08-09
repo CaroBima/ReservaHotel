@@ -33,7 +33,7 @@ public class Reserva implements Serializable {
     
     
     @JoinColumn
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.MERGE)
     private Huesped huesped;
      
     @JoinColumn

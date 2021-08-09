@@ -1,5 +1,5 @@
 function validarEmpleado() {
-    var usuario, contrasenia, nombre, apellido, dni, direccion, fechaNac, cargo, expresion;
+    var usuario, contrasenia, nombre, apellido, dni, direccion, fechaNac, cargo;
 
     //traigo los datos del formulario
     usuario = document.formAltaEmple.usuarioEmpleado.value;
@@ -24,122 +24,6 @@ function validarEmpleado() {
     }
 }
 
-//validacion de los datos del formulario de alta de una reserva
-function validarReserva() {
-    var nombre, apellido, dni, fNacim, direccion, profesion, cantPersonas, habitacion, fCheckin, fCheckout;
-
-    //recupero los datos del jsp de alta de reserva
-    nombre = document.formAltaReserva.nombreHuesped.value;
-    apellido = document.formAltaReserva.apellidoHuesped.value;
-    dni = document.formAltaReserva.dniHuesped.value;
-    fNacim = document.formAltaReserva.fechaNacHuesped.value;
-    direccion = document.formAltaReserva.direccionHuesped.value;
-    profesion = document.formAltaReserva.profesionHuesped.value;
-    cantPersonas = document.formAltaReserva.cantidadPersonas.value;
-    habitacion = document.formAltaReserva.habitacionReserva.value;
-    fCheckin = document.formAltaReserva.fechaCheckIn.value;
-    fCheckout = document.formAltaReserva.fechaCheckOut.value;
-
-    //compruebo que no queden campos vacíos
-    if (nombre === "" || apellido === "" || dni === "" || fNacim === "" || direccion === "" || profesion === "" || cantPersonas === "" || habitacion === "" || fCheckin === "" || fCheckout === "") {
-        alert("Todos los campos deben estar completos");
-        return false;
-    }
-
-    //compruebo que se haya seleccionado una habitación
-    if (habitacion === "-") {
-        alert("Debe seleccionar una habitaci\u00f3n");
-        return false;
-    }
-
-    //compruebo que se encuentre selecionada la cantidad de personas que se van a hospedar
-    if (cantPersonas === "-") {
-        alert("Debe seleccionar la cantidad de personas que se van a hospedar");
-        return false;
-    }
-
-    //verifico si es mayor de 18 años para poder ser titular de la reserva
-    if (calcularEdad(fNacim) < 18) {
-        alert("Debe tener al menos 18 a\u00f1os para poder ser titular de la reserva");
-        return false;
-    }
-
-
-//verifico que la capacidad de la habitacion sea mayor que la cantidad de huespedes
-    var capacidad; //para guardar la capacidad seleccionada
-    var comboCap = document.formAltaReserva.habitacionReserva;
-    var seleccionado = comboCap.options[comboCap.selectedIndex].text; //recupero el texto del select
-
-    //compruebo la capacidad de la habitacion buscando en el string recuperado del 
-    // combo (en el combo se muestra nombre tematico, capacidad y precio)
-    var simple = seleccionado.indexOf('Single');
-    var doble = seleccionado.indexOf('Doble');
-    var triple = seleccionado.indexOf('Triple');
-    var multiple = seleccionado.indexOf('Múltiple');
-
-    //verifico que capacidad tiene, si es !== a -1 quiere decir que esa es la capacidad
-    if (simple !== -1) {
-        capacidad = 1;
-    }
-    if (doble !== -1) {
-        capacidad = 2;
-    }
-    if (triple !== -1) {
-        capacidad = 3;
-    }
-    if (multiple !== -1) {
-        capacidad = 8;
-    }
-
-    var cantpers = parseInt(cantPersonas);
-    var capac = parseInt(capacidad);
-
-    //comparo para ver si la cantidad de personas seleccionada es mayor a la capacidad de la habitacion
-    if (cantpers > capac) {
-        alert('La cantidad de personas supera la capacidad de la habitacion');
-        return false;
-    }
-
-
-
-
-//obtengo la fecha del día para validar la que se esta ingresando de checkin
-    var fechaHoy = new Date();
-    dia = '0' + fechaHoy.getDate();
-    mes = '0' + (fechaHoy.getMonth() + 1);
-    anio = fechaHoy.getFullYear();
-    fHoy = anio + '-' + mes + '-' + dia;
-
-
-    //verifica que la fecha de checkin sea a futuro, que no se cargue una fecha pasada
-    if (compararFechas(fHoy, fCheckin)) {
-        alert("La fecha de CheckIn no puede ser anterior a la fecha de hoy");
-        return false;
-    }
-
-    //comparo si la fecha de check in es anterior a la de check out
-    if (compararFechas(fCheckin, fCheckout)) {
-        alert("La fecha de CheckOut no puede ser anterior al CheckIn");
-        return false;
-    }
-
-    //compruebo si las fechas son iguales
-    var ingreso = new Date(fCheckin).getTime();
-    var salida = new Date(fCheckout).getTime();
-    if (ingreso === salida) {
-        alert("La fecha de CheckIn no puede ser igual a la de CheckOut");
-        return false;
-    }
-
-
-    //calcular el monto total y lo muestra preguntando si se desea guardar la reserva o no
-    if (calcularMontoTotal(fCheckin, fCheckout) === false) {
-        return false;
-    }
-
-
-
-}
 
 
 //validacion de los datos del alta de una nueva habitacion
@@ -206,7 +90,7 @@ function verificarCantHuespXReserva(cantPersonas) {
         alert('La cantidad de personas supera la capacidad de la habitacion');
         return false;
     }
-    if (canPersonas <= capacidad) {
+    if (cantPersonas <= capacidad) {
         return true;
     }
 
@@ -214,17 +98,6 @@ function verificarCantHuespXReserva(cantPersonas) {
 }
 
 
-//permite calcular la edad para verificar si la persona es mayor de 18 años
-function calcularEdad(fechaNac) {
-    let hoy = new Date();
-    let fechaNacimiento = new Date(fechaNac);
-    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-    let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
-    if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-        edad--;
-    }
-    return edad;
-}
 
 //calcula el monto total de la reserva
 function calcularMontoTotal(fCheckin, fCheckout) {
@@ -283,4 +156,22 @@ function compararFechas(fecha, fecha2) {
         } else
             return(false);
     }
+}
+
+
+
+
+
+
+
+//permite calcular la edad para verificar si la persona es mayor de 18 años
+function calcularEdad(fechaNac) {
+    let hoy = new Date();
+    let fechaNacimiento = new Date(fechaNac);
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
+    if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+        edad--;
+    }
+    return edad;
 }

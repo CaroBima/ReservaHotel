@@ -16,7 +16,7 @@ public class Controladora {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
 //Métodos para la reserva
-    public void crearReserva(String nombreHuesped, String apellidoHuesped, String dniHuesped, String fechaNacHuesped, String direccionHuesped, String profesionHuesped, String cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String usuario) {
+    public void crearReserva(String idHuesped, String cantidadPersonas, String habitacionReserva, String fechaCheckIn, String fechaCheckOut, String usuario) {
         Huesped huesped = new Huesped();
         Date fechaNac;
         Date fCheckIn;
@@ -26,15 +26,16 @@ public class Controladora {
         Reserva reserva = new Reserva();
         int cantidadPers;
         double montoTot;
-        int idHab;
+        int idHab, idHues;
         Date fechaHoy = new Date();
+        
 
         //convierto los strings en date y float
         cantidadPers = Integer.parseInt(cantidadPersonas);
         idHab = Integer.parseInt(habitacionReserva);
-
+        idHues = Integer.parseInt(idHuesped);
+        
         //convierto los strings de fechas en Date
-        fechaNac = parseFecha(fechaNacHuesped);
         fCheckIn = parseFecha(fechaCheckIn);
         fCheckOut = parseFecha(fechaCheckOut);
 
@@ -45,12 +46,7 @@ public class Controladora {
         emple = buscarUnEmpleado(usuario);
 
         //guardo los datos correspondientes al huesped 
-        huesped.setNombre(nombreHuesped);
-        huesped.setApellido(apellidoHuesped);
-        huesped.setDni(dniHuesped);
-        huesped.setFechaNac(fechaNac);
-        huesped.setProfesion(profesionHuesped);
-        huesped.setDireccion(direccionHuesped);
+        huesped = buscarHuespedxId(idHues);
 
         //cálculo del monto total de la reserva
         montoTot = calcularMontoTotal(fCheckIn, fCheckOut, habitacion);
@@ -85,6 +81,13 @@ public class Controladora {
         return reser;
     }
 
+    public Huesped buscarHuespedxId(int idHuesped){
+       Huesped huesped = new Huesped();
+       huesped = controlPersis.buscarHuespedxId(idHuesped);
+       
+       return huesped;
+    
+    }
     //verifica si la habitacion está disponible en la fecha seleccionada y si
     //no lo está devuelve una lista de habitaciones que si lo estan
     public List verificarDisponibilidad(String fechaCheckIn, String fechaCheckOut, int habitacionReserva) {
@@ -386,6 +389,20 @@ public class Controladora {
 
     }
 
+    public void crearHuesped(String nombre, String apellido, String dni, String direccion, String fechaNacim, String profesion){
+        Huesped huesped = new Huesped();
+        Date fechaN = parseFecha(fechaNacim);
+        
+        huesped.setNombre(nombre);
+        huesped.setApellido(apellido);
+        huesped.setDni(dni);
+        huesped.setDireccion(direccion);
+        huesped.setFechaNac(fechaN);
+        huesped.setProfesion(profesion);
+        
+        controlPersis.crearHuesped(huesped);
+    }
+    
     //devuelve la lista de huespedes registrados
     public List recuperarHuespedes() {
         List<Huesped> listaHuesped;
@@ -394,6 +411,22 @@ public class Controladora {
         return listaHuesped;
     }
 
+    public Huesped buscarUnHuesped(String nombreHuesped, String apellidoHuesped, String dniHuesped){
+        Huesped huespedBuscado = new Huesped();
+        List<Huesped> listaHuespedes = recuperarHuespedes();
+            for(Huesped h : listaHuespedes){
+                String nombreBD = h.getNombre();
+                String apellidoBD = h.getApellido();
+                String dniBD = h.getDni();
+                        
+                if((nombreHuesped.toLowerCase().equals(nombreBD.toLowerCase())) && (apellidoHuesped.toLowerCase().equals(apellidoBD.toLowerCase())) && (dniHuesped.toLowerCase().equals(dniBD.toLowerCase()))){
+                    huespedBuscado = h;
+                    return huespedBuscado;
+                }
+            }
+    
+        return huespedBuscado;
+    }
 //Métodos para la habitación
     public void crearHabitación(String nombreTematico, int nroHabitacion, int pisoHabitacion, String tipoHabitación, double precio) {
         Habitacion habitacion = new Habitacion();
