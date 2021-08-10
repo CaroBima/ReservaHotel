@@ -204,7 +204,7 @@
                                     return false;
                                 }
 
-//obtengo la fecha del día para validar la que se esta ingresando de checkin
+                                //obtengo la fecha del día para validar la que se esta ingresando de checkin
                                 var fechaHoy = new Date();
                                 dia = '0' + fechaHoy.getDate();
                                 mes = '0' + (fechaHoy.getMonth() + 1);

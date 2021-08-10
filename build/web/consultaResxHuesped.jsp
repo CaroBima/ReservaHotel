@@ -176,7 +176,7 @@
                                         </div>
                                         <div class="col">
                                         <br>
-                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar"> 
+                                        <input type="submit" id="btnBuscarxFecha" name="btnBuscarxFecha" class="btn btn-primary btn-xs" value="Buscar" onclick="return validarResxHuesped();"> 
                                         </div>
                                       
                                     </div>
@@ -247,6 +247,7 @@
                     </div>
                 </div>
         </section>
+                                            
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; Hotel Integrador 2021</p></div>
         </footer>
@@ -254,6 +255,40 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script>
+            function validarResxHuesped(){
+                 huesped = document.frmConsResxHuesped.CboHuesped.value;
+                 
+                 
+                 if(huesped ==="-"){
+                     alert("Debe seleccionar un huesped");
+                     return false;
+                 }
+                 
+                 
+                   //obtengo la fecha del día para validar la que se esta ingresando de checkin
+                                var fechaHoy = new Date();
+                                dia = '0' + fechaHoy.getDate();
+                                mes = '0' + (fechaHoy.getMonth() + 1);
+                                anio = fechaHoy.getFullYear();
+                                fHoy = anio + '-' + mes + '-' + dia;
+                                
+                                  //comparo si la fecha de check in es anterior a la de check out
+                                if (compararFechas(fCheckin, fCheckout)) {
+                                    alert("La fecha de CheckOut no puede ser anterior al CheckIn");
+                                    return false;
+                                }
+
+                                //compruebo si las fechas son iguales
+                                var ingreso = new Date(fCheckin).getTime();
+                                var salida = new Date(fCheckout).getTime();
+                                if (ingreso === salida) {
+                                    alert("La fecha de CheckIn no puede ser igual a la de CheckOut");
+                                    return false;
+                                }
+
+            }
+        </script>
         <%
             }
         %>

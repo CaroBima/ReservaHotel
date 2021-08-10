@@ -227,7 +227,7 @@
                                     var regex = /(\d+)/g; // para obtener solo los numeros del string 
                                     var valorHab = seleccionado.match(regex); //obtengo los numeros del string
 
-//obtendo los tiempos en milisengundos para poder restarlos
+                                    //obtendo los tiempos en milisengundos para poder restarlos
                                     var ingreso = new Date(fCheckin).getTime();
                                     var salida = new Date(fCheckout).getTime();
 
