@@ -171,7 +171,8 @@
                                     </tr>
                                     <tr>
                                         <td>Habitación reservada:</td>
-                                        <td><%= session.getAttribute("habitacionReserva")%></td>
+                                        <td><%=habitacReser %></td>
+                                        <!--<td><%= session.getAttribute("habitacionReserva")%></td>-->
                                     </tr>
                                     <tr>
                                         <td>Fecha de Check In:</td>

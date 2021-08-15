@@ -56,8 +56,6 @@ public class SvGuardarReserva extends HttpServlet {
         
         Controladora control = new Controladora();
         
-     
-        
         control.crearReserva(huesped, cantPers, habitacionReserva, fChekIn, fChekOut, usuario);
         
         
