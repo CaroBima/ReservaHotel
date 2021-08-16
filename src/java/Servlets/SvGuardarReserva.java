@@ -3,7 +3,9 @@
 package Servlets;
 
 import Logica.Controladora;
+import Logica.Habitacion;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,6 +60,11 @@ public class SvGuardarReserva extends HttpServlet {
         
         control.crearReserva(huesped, cantPers, habitacionReserva, fChekIn, fChekOut, usuario);
         
+        //busco la habitacion para mandar los datos a la sesion y mostrarlos
+        int idHabit = parseInt(habitacionReserva);
+        Habitacion habitacion;
+        habitacion = control.buscarUnaHabitacion(idHabit);
+        misesion.setAttribute("habitacion", habitacion);
         
         response.sendRedirect("confirmacionReserva.jsp");
         

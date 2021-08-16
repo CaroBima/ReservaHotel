@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Logica.Habitacion"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -136,7 +137,8 @@
                             <div class="table-responsive">
                                 <%
                                      HttpSession misesion = request.getSession();
-                                     String habitacReser = (String) misesion.getAttribute("habitacionReserva");
+                                     //String habitacReser = (String) misesion.getAttribute("habitacionReserva");
+                                     Habitacion habit = (Habitacion) misesion.getAttribute("habitacion");
                                  %>
                                 <table class="table table-striped">
                                     <tr>
@@ -171,8 +173,7 @@
                                     </tr>
                                     <tr>
                                         <td>Habitación reservada:</td>
-                                        <td><%=habitacReser %></td>
-                                        <!--<td><%= session.getAttribute("habitacionReserva")%></td>-->
+                                        <td><%=habit.getNombreTematica() %></td>
                                     </tr>
                                     <tr>
                                         <td>Fecha de Check In:</td>
