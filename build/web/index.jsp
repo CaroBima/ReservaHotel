@@ -30,13 +30,13 @@
     </head>
     <body>
         <%
-        HttpSession misesion = request.getSession();
-        String usuario = (String) misesion.getAttribute("usuario");
-      
-            if(usuario == null){
+            HttpSession misesion = request.getSession();
+            String usuario = (String) misesion.getAttribute("usuario");
+
+            if (usuario == null) {
                 response.sendRedirect("login.jsp");
-            }else{
-               
+            } else {
+
         %>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
@@ -45,7 +45,7 @@
             </h1>
         </header>
 
-          <!-- Menú de navegacion-->
+        <!-- Menú de navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">Principal</a>
@@ -62,9 +62,9 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                
+
                                 <li><a class="dropdown-item" href="nuevaReserva.jsp">Nueva Reserva</a></li>
-                                
+
                                 <li><a class="dropdown-item" href="consultaReserva.jsp">Listado de reservas</a></li>
                                 <form action="SvConsultaReservaxDia" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsultaReservaxDia">Buscar reserva por fecha</a></li>
@@ -75,9 +75,9 @@
                                 <form action="SvConsResxHuesped" method="GET">
                                     <li><a class="SUBMIT dropdown-item"  href="SvConsResxHuesped">Buscar reserva por huésped</a></li>
                                 </form>
-                             
-                                
-                                
+
+
+
                             </ul>
                         </li>
 
@@ -88,11 +88,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="consultaClientes.jsp">Listado de huéspedes</a></li>
-                               <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
-                                
+                                <!-- <li><a class="dropdown-item" href="modificarCliente.jsp">Editar Clientes</a></li> -->
+
                             </ul>
                         </li>
-                        
+
                         <!-- Menú de Habitaciones-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,15 +100,15 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="altaHabitacion.jsp">Nueva Habitación</a></li>
-                               <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
+                                <li><a class="dropdown-item" href="consultaHabitaciones.jsp">Listado de habitaciones</a></li>
                                 <form action="SvEdicionHabitacion" method="GET">
                                     <li><a class="SUBMIT dropdown-item" href="SvEdicionHabitacion">Editar habitaciones</a></li>
                                 </form>
-                               
+
                             </ul>
                         </li>
-                        
-                           <li class="nav-item dropdown">
+
+                        <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Empleados
@@ -118,6 +118,20 @@
                                 <li><a class="dropdown-item" href="consultaEmpleados.jsp">Lista de Empleados</a></li>
                             </ul>
                         </li>
+
+                        <!-- Logout-->
+                         <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Salir
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <form action="SvCerrarSesion" method="GET">
+                                    <li><a class="dropdown-item" href="SvCerrarSesion">Cerrar Sesión</a></li>
+                                </form>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -133,7 +147,7 @@
                                 <span class="section-heading-lower">Bienvenid@!</span>
                             </h2>
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -145,9 +159,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-     <%
-         }   
-     %>   
+        <%         }
+        %>   
     </body>
 </html>
 
